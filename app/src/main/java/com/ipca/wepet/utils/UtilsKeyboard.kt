@@ -14,9 +14,12 @@ object KeyboardUtils {
     }
 
     private fun showKeyboard(view: View) {
-        val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        view.requestFocus()
-        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+        view.postDelayed({
+            val imm =
+                view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            view.requestFocus()
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+        }, 200) // 200ms delay in order to open keyboard
     }
 
     fun toggleKeyboardVisibility(view: View) {
