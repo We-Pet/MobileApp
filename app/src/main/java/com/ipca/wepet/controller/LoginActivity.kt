@@ -16,7 +16,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ipca.wepet.R
-import com.ipca.wepet.utils.KeyboardUtils
 
 class LoginActivity : AppCompatActivity() {
 
@@ -85,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
         editText3 = dialog.findViewById(R.id.ED_code_3)
         editText4 = dialog.findViewById(R.id.ED_code_4)
 
-        KeyboardUtils.toggleKeyboardVisibility(editText1)
+        //KeyboardUtils.toggleKeyboardVisibility(editText1)
 
         setupTextWatchers(dialog)
 
