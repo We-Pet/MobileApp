@@ -60,7 +60,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/clear_name"
             android:scaleType="fitCenter"
-            android:src="@drawable/close"
+            android:src="@drawable/delete_input_text"
             app:layout_constraintBottom_toBottomOf="@id/ET_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/ET_name" />
@@ -106,7 +106,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/clear_email"
             android:scaleType="fitCenter"
-            android:src="@drawable/close"
+            android:src="@drawable/delete_input_text"
             app:layout_constraintBottom_toBottomOf="@id/ET_email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/ET_email" />
@@ -152,7 +152,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/clear_password"
             android:scaleType="fitCenter"
-            android:src="@drawable/close"
+            android:src="@drawable/delete_input_text"
             app:layout_constraintBottom_toBottomOf="@id/ET_pass"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/ET_pass" />
@@ -196,7 +196,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/clear_password"
             android:scaleType="fitCenter"
-            android:src="@drawable/close"
+            android:src="@drawable/delete_input_text"
             app:layout_constraintBottom_toBottomOf="@id/ET_repeat_pass"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/ET_repeat_pass" />

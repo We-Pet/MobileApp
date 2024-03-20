@@ -31,11 +31,17 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_layout)
 
+        initializeElements()
+        startNewActivities()
+    }
+
+    private fun initializeElements() {
         btnLogin = findViewById(R.id.BTN_login)
         btnCreateAccount = findViewById(R.id.BTN_create_account)
         btnForgotPass = findViewById(R.id.TV_forgot_password)
+    }
 
-
+    private fun startNewActivities() {
         //Login action
         btnLogin.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -51,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
             showBottomDialogForgotPassword()
         }
     }
+
 
     private fun showBottomDialogForgotPassword() {
         val dialog = Dialog(this)
@@ -79,14 +86,9 @@ class LoginActivity : AppCompatActivity() {
         dialog.setContentView(R.layout.bottom_sheet_layout_forgot_password_code)
 
         val btnContinue = dialog.findViewById<Button>(R.id.BTN_continue)
-        editText1 = dialog.findViewById(R.id.ED_code_1)
-        editText2 = dialog.findViewById(R.id.ED_code_2)
-        editText3 = dialog.findViewById(R.id.ED_code_3)
-        editText4 = dialog.findViewById(R.id.ED_code_4)
 
-        //KeyboardUtils.toggleKeyboardVisibility(editText1)
 
-        setupTextWatchers(dialog)
+        setupTextWatchers(dialog, createElementListForgotPasswordCode(dialog))
 
         btnContinue.setOnClickListener {
             dialog.dismiss()
@@ -100,6 +102,14 @@ class LoginActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
         dialog.window?.setGravity(Gravity.BOTTOM)
+    }
+
+    private fun createElementListForgotPasswordCode(dialog: Dialog): List<EditText> {
+        editText1 = dialog.findViewById(R.id.ED_code_1)
+        editText2 = dialog.findViewById(R.id.ED_code_2)
+        editText3 = dialog.findViewById(R.id.ED_code_3)
+        editText4 = dialog.findViewById(R.id.ED_code_4)
+        return listOf(editText1, editText2, editText3, editText4)
     }
 
     private fun showBottomDialogForgotPasswordReset() {
@@ -118,59 +128,40 @@ class LoginActivity : AppCompatActivity() {
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
         )
+
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
         dialog.window?.setGravity(Gravity.BOTTOM)
     }
 
-    private fun setupTextWatchers(dialog: Dialog) {
-        editText1.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+    private fun setupTextWatchers(dialog: Dialog, listEditTexts: List<EditText>) {
+        for ((index, editText) in listEditTexts.withIndex()) {
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s?.length == 1) {
-                    editText2.requestFocus()
+            editText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
                 }
-            }
-        })
 
-        editText2.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s?.length == 1) {
-                    editText3.requestFocus()
+                override fun afterTextChanged(s: Editable?) {
+                    if (s?.length == 1) {
+                        val nextIndex = index + 1
+                        if (nextIndex < listEditTexts.size) {
+                            // Request focus to the next editText
+                            listEditTexts[nextIndex].requestFocus()
+                        } else {
+                            // If is the last show next dialog
+                            dialog.dismiss()
+                            showBottomDialogForgotPasswordReset()
+                        }
+                    }
                 }
-            }
-        })
-
-        editText3.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s?.length == 1) {
-                    editText4.requestFocus()
-                }
-            }
-        })
-
-        editText4.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s?.length == 1) {
-                    dialog.dismiss()
-                    showBottomDialogForgotPasswordReset()
-                }
-            }
-        })
+            })
+        }
     }
 }
