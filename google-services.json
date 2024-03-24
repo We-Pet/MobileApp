@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "184505309318",
+    "project_id": "wepetapp-f686e",
+    "storage_bucket": "wepetapp-f686e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184505309318:android:952867ce6cb83d5e5fd907",
+        "android_client_info": {
+          "package_name": "com.ipca.wepet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKefsUH-UiqvYvbCV3XL2Ofudvmsckz5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
