@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/BTN_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/back_button"
+        android:scaleType="fitCenter"
+        android:src="@drawable/back"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/IV_main_icon"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_marginTop="100dp"
+        android:contentDescription="@string/app_icon"
+        android:src="@drawable/main_logo"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Name edit text with button -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CTL_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@+id/IV_main_icon">
+
+
+        <EditText
+            android:id="@+id/ET_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/name"
+            android:backgroundTint="@color/light_gray"
+            android:hint="@string/name"
+            android:inputType="text"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/IBTN_clear_button_name"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/clear_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_input_text"
+            app:layout_constraintBottom_toBottomOf="@id/ET_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ET_name" />
+
+        <View
+            android:id="@+id/divider_name"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@id/ET_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- Email edit text with button -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CTL_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@+id/CTL_name">
+
+
+        <EditText
+            android:id="@+id/ET_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/email_hint"
+            android:backgroundTint="@color/light_gray"
+            android:hint="@string/email_hint"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/IBTN_clear_button_email"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/clear_email"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_input_text"
+            app:layout_constraintBottom_toBottomOf="@id/ET_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ET_email" />
+
+        <View
+            android:id="@+id/divider_email"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@id/ET_email" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!-- Password edit text with button -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CTL_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@+id/CTL_email">
+
+
+        <EditText
+            android:id="@+id/ET_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/password"
+            android:backgroundTint="@color/light_gray"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_pass"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/IBTN_clear_button_pass"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/clear_password"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_input_text"
+            app:layout_constraintBottom_toBottomOf="@id/ET_pass"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ET_pass" />
+
+        <View
+            android:id="@+id/divider_pass"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@id/ET_pass" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Password edit text with button -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CTL_repeat_pass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@+id/CTL_pass">
+
+
+        <EditText
+            android:id="@+id/ET_repeat_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/confirm_password"
+            android:backgroundTint="@color/light_gray"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_repeat_pass"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/IBTN_clear_button_repeat_pass"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/clear_password"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_input_text"
+            app:layout_constraintBottom_toBottomOf="@id/ET_repeat_pass"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ET_repeat_pass" />
+
+        <View
+            android:id="@+id/divider_repeat_pass"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@id/ET_repeat_pass" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/BTN_submit"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/main_rounded_button"
+        android:text="@string/submit"
+        android:textColor="@color/light_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CTL_repeat_pass" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
