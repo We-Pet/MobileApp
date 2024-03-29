@@ -21,4 +21,6 @@
     <string name="enter_the_new_password_to_access_your_account">Enter the new password to access your account</string>
     <string name="enter_the_4_digit_code_that_was_sent_to_your_email">Enter the 4-digit code that was sent to your email.</string>
     <string name="code">Code</string>
+    <string name="error_empty_email">Insert Email</string>
+    <string name="error_invalid_email">Invalid Email</string>
 </resources>

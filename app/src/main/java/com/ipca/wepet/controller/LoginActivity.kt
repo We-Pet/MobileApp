@@ -8,15 +8,19 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.ipca.wepet.R
 import com.ipca.wepet.views.WePetSplashScreenActivity
+import com.ipca.wepet.utils.EmailUtils
+import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
 
@@ -66,10 +70,21 @@ class LoginActivity : AppCompatActivity() {
         dialog.setContentView(R.layout.bottom_sheet_layout_forgot_password)
 
         val btnContinue = dialog.findViewById<Button>(R.id.BTN_continue)
+        val emailText = dialog.findViewById<EditText>(R.id.ET_email)
+        val emailMissingWarning = dialog.findViewById<TextView>(R.id.insert_email_warning_TV)
 
         btnContinue.setOnClickListener {
-            dialog.dismiss()
-            showBottomDialogForgotPasswordCode()
+
+            val email = emailText.text.toString()
+
+            if (email.isBlank()) {
+                showErrorMessage(emailMissingWarning, R.string.error_empty_email)
+            } else if (!EmailUtils.isEmailValid(email)){
+                showErrorMessage(emailMissingWarning, R.string.error_invalid_email)
+            } else {
+                dialog.dismiss()
+                showBottomDialogForgotPasswordCode()
+            }
         }
 
         dialog.show()
@@ -133,6 +148,11 @@ class LoginActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
         dialog.window?.setGravity(Gravity.BOTTOM)
+    }
+
+    private fun showErrorMessage( errorView: TextView, @StringRes errorMessageId: Int) {
+        errorView.text = getString(errorMessageId)
+        errorView.visibility = View.VISIBLE
     }
 
     private fun setupTextWatchers(dialog: Dialog, listEditTexts: List<EditText>) {
