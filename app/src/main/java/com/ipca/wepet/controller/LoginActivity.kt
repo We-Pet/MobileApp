@@ -16,7 +16,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.ipca.wepet.R
-import com.ipca.wepet.views.WePetSplashScreenActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -45,7 +44,8 @@ class LoginActivity : AppCompatActivity() {
     private fun startNewActivities() {
         //Login action
         btnLogin.setOnClickListener {
-            val intent = Intent(this, WePetSplashScreenActivity::class.java)
+            val intent = Intent(this, HomePageActivity::class.java)
+            //val intent = Intent(this, WePetSplashScreenActivity::class.java)
             startActivity(intent)
         }
         //Create account action

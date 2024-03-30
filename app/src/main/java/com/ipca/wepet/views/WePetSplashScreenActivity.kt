@@ -13,7 +13,7 @@ import com.ipca.wepet.controller.LoginActivity
 
 
 @SuppressLint("CustomSplashScreen")
-class WePetSplashScreenActivity: AppCompatActivity() {
+class WePetSplashScreenActivity : AppCompatActivity() {
 
     private val SPLASH_DELAY: Long = 1000
     private val SPLASH_ANIMATION_DURATION: Long = 3000

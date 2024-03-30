@@ -21,4 +21,9 @@
     <string name="enter_the_new_password_to_access_your_account">Enter the new password to access your account</string>
     <string name="enter_the_4_digit_code_that_was_sent_to_your_email">Enter the 4-digit code that was sent to your email.</string>
     <string name="code">Code</string>
+    <string name="we">we</string>
+    <string name="pet">Pet</string>
+    <string name="animals">Animals</string>
+    <string name="abrigos">Abrigos</string>
+    <string name="eventos">Eventos</string>
 </resources>
