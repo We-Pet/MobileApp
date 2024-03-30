@@ -20,7 +20,9 @@ jobs:
 
       - name: Install ktfmt
         run: |
-          curl -sLO https://github.com/facebookincubator/ktfmt/releases/download/0.21/ktfmt && chmod +x ktfmt
+          wget -O /tmp/ktfmt https://github.com/facebookincubator/ktfmt/releases/download/0.21/ktfmt
+          sudo mv /tmp/ktfmt /usr/local/bin/ktfmt
+          sudo chmod +x /usr/local/bin/ktfmt
 
       - name: Run ktfmt
-        run: ./ktfmt -r .
+        run: ktfmt -r .
