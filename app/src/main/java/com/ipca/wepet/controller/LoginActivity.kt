@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
@@ -49,8 +50,7 @@ class LoginActivity : AppCompatActivity() {
     private fun startNewActivities() {
         //Login action
         btnLogin.setOnClickListener {
-            val intent = Intent(this, WePetSplashScreenActivity::class.java)
-            startActivity(intent)
+            checkLoginFieldsAndValidate()
         }
         //Create account action
         btnCreateAccount.setOnClickListener {
@@ -64,14 +64,39 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
+    private fun checkLoginFieldsAndValidate() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+
+        val btnClearTextEmail = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_email)
+        val btnClearTextPassword = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_password)
+        val btnLogin = dialog.findViewById<Button>(R.id.BTN_login)
+
+        val emailTextField = dialog.findViewById<EditText>(R.id.ET_email)
+        val passwordTextFiled = dialog.findViewById<EditText>(R.id.ET_password)
+
+        btnClearTextEmail.setOnClickListener{emailTextField.text.clear()}
+        btnClearTextPassword.setOnClickListener{passwordTextFiled.text.clear()}
+
+        btnLogin.setOnClickListener {
+            val email = emailTextField.text.toString()
+
+            // TODO
+        }
+
+    }
+
     private fun showBottomDialogForgotPassword() {
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.bottom_sheet_layout_forgot_password)
 
         val btnContinue = dialog.findViewById<Button>(R.id.BTN_continue)
+        val btnClearText = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_email)
         val emailText = dialog.findViewById<EditText>(R.id.ET_email)
         val emailMissingWarning = dialog.findViewById<TextView>(R.id.insert_email_warning_TV)
+
+        btnClearText.setOnClickListener{emailText.text.clear()}
 
         btnContinue.setOnClickListener {
 
