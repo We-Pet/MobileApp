@@ -36,10 +36,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var emailTextField: EditText
     private lateinit var passwordTextField: EditText
-    private lateinit var editText1: EditText
-    private lateinit var editText2: EditText
-    private lateinit var editText3: EditText
-    private lateinit var editText4: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initializeElements() {
+        // login elements
         btnLogin = findViewById(R.id.BTN_login)
         btnCreateAccount = findViewById(R.id.BTN_create_account)
         btnForgotPass = findViewById(R.id.TV_forgot_password)
@@ -84,11 +81,11 @@ class LoginActivity : AppCompatActivity() {
         val password = passwordTextField.text.toString()
 
         if (email.isBlank()){
-            showErrorMessage(badLoginWarning, R.string.error_empty_email)
+            showErrorMessage(R.string.error_empty_email)
         } else if (!EmailUtils.isEmailValid(email)){
-            showErrorMessage(badLoginWarning, R.string.error_invalid_email)
+            showErrorMessage(R.string.error_invalid_email)
         } else if (password.isBlank()){
-            showErrorMessage(badLoginWarning, R.string.error_empty_password)
+            showErrorMessage(R.string.error_empty_password)
         } // TODO: validate login
     }
 
@@ -101,7 +98,6 @@ class LoginActivity : AppCompatActivity() {
         val btnClearText = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_email)
 
         val emailText = dialog.findViewById<EditText>(R.id.ET_email)
-        val emailMissingWarning = dialog.findViewById<TextView>(R.id.insert_email_warning_TV)
 
         btnClearText.setOnClickListener{emailText.text.clear()}
 
@@ -110,9 +106,9 @@ class LoginActivity : AppCompatActivity() {
             val email = emailText.text.toString()
 
             if (email.isBlank()) {
-                showErrorMessage(emailMissingWarning, R.string.error_empty_email)
+                showErrorMessage(R.string.error_empty_email)
             } else if (!EmailUtils.isEmailValid(email)){
-                showErrorMessage(emailMissingWarning, R.string.error_invalid_email)
+                showErrorMessage(R.string.error_invalid_email)
             } else {
                 dialog.dismiss()
                 showBottomDialogForgotPasswordCode()
@@ -135,12 +131,15 @@ class LoginActivity : AppCompatActivity() {
 
         val btnContinue = dialog.findViewById<Button>(R.id.BTN_continue)
 
+        val codeEditTextFieldsList = createElementListForgotPasswordCode(dialog)
 
-        setupTextWatchers(dialog, createElementListForgotPasswordCode(dialog))
+        setupTextWatchers(dialog, codeEditTextFieldsList)
 
         btnContinue.setOnClickListener {
-            dialog.dismiss()
-            showBottomDialogForgotPasswordReset()
+            if (isCodeFieldsNotEmpty(codeEditTextFieldsList)){
+                dialog.dismiss()
+                showBottomDialogForgotPasswordReset()
+            }
         }
 
         dialog.show()
@@ -150,14 +149,6 @@ class LoginActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
         dialog.window?.setGravity(Gravity.BOTTOM)
-    }
-
-    private fun createElementListForgotPasswordCode(dialog: Dialog): List<EditText> {
-        editText1 = dialog.findViewById(R.id.ED_code_1)
-        editText2 = dialog.findViewById(R.id.ED_code_2)
-        editText3 = dialog.findViewById(R.id.ED_code_3)
-        editText4 = dialog.findViewById(R.id.ED_code_4)
-        return listOf(editText1, editText2, editText3, editText4)
     }
 
     private fun showBottomDialogForgotPasswordReset() {
@@ -165,11 +156,25 @@ class LoginActivity : AppCompatActivity() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.bottom_sheet_layout_forgot_password_reset)
 
-        val btnContinue = dialog.findViewById<Button>(R.id.BTN_continue)
+        val btnContinue = dialog.findViewById<Button>(R.id.BTN_submit_confirm_password)
+        val btnClearTextPassword = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_password_reset)
+        val btnClearTextConfirmPassword = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_confirm_password_reset)
+
+        val passwordText = dialog.findViewById<EditText>(R.id.ET_password_reset)
+        val confirmPasswordText = dialog.findViewById<EditText>(R.id.ET_repeat_confirm_password_reset)
+
+        btnClearTextPassword.setOnClickListener{passwordText.text.clear()}
+        btnClearTextConfirmPassword.setOnClickListener{confirmPasswordText.text.clear()}
 
         btnContinue.setOnClickListener {
-            dialog.dismiss()
-            Toast.makeText(this, "Password reset", Toast.LENGTH_SHORT).show()
+            if (passwordText.text.isBlank()){
+                showErrorMessage(R.string.error_empty_password)
+            } else if (confirmPasswordText.text.toString() != passwordText.text.toString()){
+                showErrorMessage(R.string.passwords_do_not_match)
+            }else {
+                dialog.dismiss()
+                Toast.makeText(this, "Password reset", Toast.LENGTH_SHORT).show()
+            }
         }
 
         dialog.show()
@@ -182,9 +187,23 @@ class LoginActivity : AppCompatActivity() {
         dialog.window?.setGravity(Gravity.BOTTOM)
     }
 
-    private fun showErrorMessage( errorView: TextView, @StringRes errorMessageId: Int) {
-        errorView.text = getString(errorMessageId)
-        errorView.visibility = View.VISIBLE
+    private fun createElementListForgotPasswordCode(dialog: Dialog): List<EditText> {
+        val editText1 = dialog.findViewById<EditText>(R.id.ED_code_1)
+        val editText2 = dialog.findViewById<EditText>(R.id.ED_code_2)
+        val editText3 = dialog.findViewById<EditText>(R.id.ED_code_3)
+        val editText4 = dialog.findViewById<EditText>(R.id.ED_code_4)
+        return listOf(editText1, editText2, editText3, editText4)
+    }
+
+    private fun isCodeFieldsNotEmpty(editTextList: List<EditText>): Boolean{
+        for (editText in editTextList){
+            if (editText.text.isNullOrEmpty()) return false
+        }
+        return true
+    }
+
+    private fun showErrorMessage(@StringRes errorMessageId: Int) {
+        Toast.makeText(this, getString(errorMessageId), Toast.LENGTH_SHORT).show()
     }
 
     private fun setupTextWatchers(dialog: Dialog, listEditTexts: List<EditText>) {
