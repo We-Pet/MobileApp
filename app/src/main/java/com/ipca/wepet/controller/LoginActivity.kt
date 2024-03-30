@@ -21,8 +21,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.ipca.wepet.R
 import com.ipca.wepet.utils.FirebaseUtils
-import com.ipca.wepet.utils.FirebaseUtils as Firebase1
-
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var btnLogin: Button
