@@ -1,0 +1,26 @@
+name: Kotlin Format
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  ktfmt:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Install ktfmt
+        run: |
+          curl -sLO https://github.com/facebookincubator/ktfmt/releases/download/0.21/ktfmt && chmod +x ktfmt
+
+      - name: Run ktfmt
+        run: ./ktfmt -r .
