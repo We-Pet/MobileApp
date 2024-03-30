@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.Image
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -28,6 +29,13 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnLogin: Button
     private lateinit var btnCreateAccount: Button
     private lateinit var btnForgotPass: TextView
+    private lateinit var btnClearTextEmail: ImageButton
+    private lateinit var btnClearTextPassword: ImageButton
+
+    private lateinit var badLoginWarning: TextView
+
+    private lateinit var emailTextField: EditText
+    private lateinit var passwordTextField: EditText
     private lateinit var editText1: EditText
     private lateinit var editText2: EditText
     private lateinit var editText3: EditText
@@ -45,6 +53,13 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.BTN_login)
         btnCreateAccount = findViewById(R.id.BTN_create_account)
         btnForgotPass = findViewById(R.id.TV_forgot_password)
+        btnClearTextEmail = findViewById(R.id.IBTN_clear_button_email)
+        btnClearTextPassword = findViewById(R.id.IBTN_clear_button_password)
+        badLoginWarning = findViewById(R.id.bad_login_warning_TV)
+        emailTextField = findViewById(R.id.ET_email)
+        passwordTextField = findViewById(R.id.ET_password)
+        btnClearTextEmail.setOnClickListener{emailTextField.text.clear()}
+        btnClearTextPassword.setOnClickListener{passwordTextField.text.clear()}
     }
 
     private fun startNewActivities() {
@@ -63,27 +78,18 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
     private fun checkLoginFieldsAndValidate() {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-        val btnClearTextEmail = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_email)
-        val btnClearTextPassword = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_password)
-        val btnLogin = dialog.findViewById<Button>(R.id.BTN_login)
+        val email = emailTextField.text.toString()
+        val password = passwordTextField.text.toString()
 
-        val emailTextField = dialog.findViewById<EditText>(R.id.ET_email)
-        val passwordTextFiled = dialog.findViewById<EditText>(R.id.ET_password)
-
-        btnClearTextEmail.setOnClickListener{emailTextField.text.clear()}
-        btnClearTextPassword.setOnClickListener{passwordTextFiled.text.clear()}
-
-        btnLogin.setOnClickListener {
-            val email = emailTextField.text.toString()
-
-            // TODO
-        }
-
+        if (email.isBlank()){
+            showErrorMessage(badLoginWarning, R.string.error_empty_email)
+        } else if (!EmailUtils.isEmailValid(email)){
+            showErrorMessage(badLoginWarning, R.string.error_invalid_email)
+        } else if (password.isBlank()){
+            showErrorMessage(badLoginWarning, R.string.error_empty_password)
+        } // TODO: validate login
     }
 
     private fun showBottomDialogForgotPassword() {
@@ -93,6 +99,7 @@ class LoginActivity : AppCompatActivity() {
 
         val btnContinue = dialog.findViewById<Button>(R.id.BTN_continue)
         val btnClearText = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_email)
+
         val emailText = dialog.findViewById<EditText>(R.id.ET_email)
         val emailMissingWarning = dialog.findViewById<TextView>(R.id.insert_email_warning_TV)
 

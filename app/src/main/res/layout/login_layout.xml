@@ -120,6 +120,19 @@
         app:layout_constraintEnd_toEndOf="@id/CTL_password"
         app:layout_constraintTop_toBottomOf="@id/CTL_password" />
 
+    <TextView
+        android:id="@+id/bad_login_warning_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:fontFamily="@font/comfortaa_light"
+        android:textColor="@color/red"
+        app:layout_constraintTop_toTopOf="@id/TV_forgot_password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/BTN_login"
