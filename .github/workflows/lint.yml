@@ -1,0 +1,26 @@
+name: PR Lint Checks
+
+on:
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  ktlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: adopt
+          java-version: '11'
+
+      - name: Install ktlint
+        run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/0.45.2/ktlint && chmod +x ktlint
+          sudo mv ktlint /usr/local/bin/
+
+      - name: Run ktlint
+        run: ktlint --android src/**/*.kt

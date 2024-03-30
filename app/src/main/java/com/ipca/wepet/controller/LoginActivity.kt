@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.ipca.wepet.R
 import com.ipca.wepet.utils.FirebaseUtils
+import com.ipca.wepet.views.WePetSplashScreenActivity
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var btnLogin: Button
@@ -54,6 +55,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startNewActivities() {
+
         //Login action
         btnLogin.setOnClickListener {
             //get email and password inserted
@@ -66,13 +68,14 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("AUTH", "signInWithEmail:success")
-                        val user = auth.currentUser
+                        //val user = auth.currentUser
                         Toast.makeText(
                             baseContext,
                             "Authentication successful.",
                             Toast.LENGTH_SHORT,
                         ).show()
-                        setContentView(R.layout.main_layout)
+                        val intent = Intent(this, WePetSplashScreenActivity::class.java)
+                        startActivity(intent)
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("AUTH", "signInWithEmail:failure", task.exception)
@@ -84,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
 
                     }
                 }
+
         }
         //Create account action
         btnCreateAccount.setOnClickListener {

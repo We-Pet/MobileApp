@@ -30,9 +30,7 @@ class CreateAccountActivity : AppCompatActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser =  null // auth.currentUser Todo: when logout is implemented
-        if (currentUser != null) {
-            setContentView(R.layout.main_layout)
-        }
+
     }
 
     private fun startNewActivities() {
@@ -70,7 +68,7 @@ class CreateAccountActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("signIn", "createUserWithEmail:success")
                     val user = auth.currentUser
-                    setContentView(R.layout.main_layout)
+                    setContentView(R.layout.login_layout)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("signIn", "createUserWithEmail:failure", task.exception)
