@@ -29,7 +29,7 @@ class CreateAccountActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
+        val currentUser =  null // auth.currentUser Todo: when logout is implemented
         if (currentUser != null) {
             setContentView(R.layout.main_layout)
         }
