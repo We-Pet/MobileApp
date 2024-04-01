@@ -7,37 +7,34 @@
         android:id="@+id/IV_animalPhoto"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:contentDescription="@string/image_for_animal"
         android:src="@drawable/search_search" />
 
-    <LinearLayout
-        android:id="@+id/LL_animalName"
+
+    <TextView
+        android:id="@+id/TV_animalName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/IV_animalPhoto"
+        android:layout_alignBottom="@+id/IV_animalPhoto"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        android:text="@string/animals" />
 
-        <TextView
-            android:id="@+id/TV_animalName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/animals" />
-
-        <ImageView
-            android:id="@+id/IV_animalSex"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="5dp"
-            android:src="@drawable/search_search" />
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/IV_animalSex"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignBottom="@+id/IV_animalPhoto"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/TV_animalName"
+        android:contentDescription="@string/sex"
+        android:src="@drawable/search_search" />
 
     <TextView
         android:id="@+id/TV_animalRace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/LL_animalName"
+        android:layout_below="@+id/TV_animalName"
         android:layout_centerHorizontal="true"
         android:text="@string/animals" />
 

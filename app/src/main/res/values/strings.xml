@@ -27,4 +27,18 @@
     <string name="abrigos">Abrigos</string>
     <string name="eventos">Eventos</string>
     <string name="search">Search</string>
+    <string name="tab_animals">tab animals</string>
+    <string name="tab_for_shelter">tab for shelter</string>
+    <string name="tab_for_events">tab for events</string>
+    <string name="image_for_animal">image for animal</string>
+    <string name="sex">sex</string>
+    <string name="logo">logo</string>
+    <string name="name_of_app">name of app</string>
+    <string name="hamburger_button">hamburger button</string>
+    <string name="search_button">search button</string>
+    <string name="button">... button</string>
+    <string name="home_button">home button</string>
+    <string name="marketplace_button">marketplace button</string>
+    <string name="social_button">social button</string>
+    <string name="profile_button">profile button</string>
 </resources>

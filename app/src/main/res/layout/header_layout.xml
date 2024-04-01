@@ -9,6 +9,7 @@
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="24dp"
+        android:contentDescription="@string/logo"
         android:scaleType="fitCenter"
         android:src="@drawable/main_logo" />
 
@@ -19,6 +20,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
         android:layout_toEndOf="@id/IV_icon"
+        android:contentDescription="@string/name_of_app"
         android:scaleType="fitCenter"
         android:src="@drawable/header_we_pet" />
 
@@ -30,6 +32,7 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="24dp"
         android:background="@color/white"
+        android:contentDescription="@string/hamburger_button"
         android:scaleType="fitCenter"
         android:src="@drawable/header_hamburger" />
 

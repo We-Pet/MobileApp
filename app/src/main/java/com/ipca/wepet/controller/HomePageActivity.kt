@@ -1,13 +1,15 @@
 package com.ipca.wepet.controller
 
-import AnimalAdapter
-import SearchFragment
-import TabsFragment
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ipca.wepet.R
+import com.ipca.wepet.adapter.AnimalAdapter
+import com.ipca.wepet.external.FooterFragment
+import com.ipca.wepet.external.HeaderFragment
+import com.ipca.wepet.external.SearchFragment
+import com.ipca.wepet.external.TabsFragment
 import com.ipca.wepet.models.AnimalModel
 
 class HomePageActivity : AppCompatActivity() {

@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/footer_state_selector"
+        android:contentDescription="@string/home_button"
         android:scaleType="fitCenter"
         android:src="@drawable/footer_home" />
 
@@ -21,6 +22,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/footer_state_selector"
+        android:contentDescription="@string/search_button"
         android:scaleType="fitCenter"
         android:src="@drawable/footer_search" />
 
@@ -30,6 +32,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/footer_state_selector"
+        android:contentDescription="@string/marketplace_button"
         android:scaleType="fitCenter"
         android:src="@drawable/footer_marketplace" />
 
@@ -39,6 +42,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/footer_state_selector"
+        android:contentDescription="@string/social_button"
         android:scaleType="fitCenter"
         android:src="@drawable/footer_social" />
 
@@ -48,6 +52,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@drawable/footer_state_selector"
+        android:contentDescription="@string/profile_button"
         android:scaleType="fitCenter"
         android:src="@drawable/footer_profile" />
 </LinearLayout>

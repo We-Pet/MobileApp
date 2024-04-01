@@ -23,6 +23,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="24dp"
             android:background="@color/light_gray"
+            android:contentDescription="@string/hamburger_button"
             android:scaleType="fitCenter"
             android:src="@drawable/search_hamburger" />
 
@@ -31,6 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_weight="1"
+            android:autofillHints=""
             android:gravity="center_vertical"
             android:hint="@string/search"
             android:inputType="text"
@@ -47,6 +49,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="20dp"
             android:background="@color/light_gray"
+            android:contentDescription="@string/search_button"
             android:scaleType="fitCenter"
             android:src="@drawable/search_search" />
 
@@ -57,6 +60,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="12dp"
             android:background="@color/light_gray"
+            android:contentDescription="@string/button"
             android:scaleType="fitCenter"
             android:src="@drawable/search_dots" />
 
