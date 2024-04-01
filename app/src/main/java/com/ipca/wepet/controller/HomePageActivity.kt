@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ipca.wepet.R
 import com.ipca.wepet.adapter.AnimalAdapter
-import com.ipca.wepet.external.FooterFragment
-import com.ipca.wepet.external.HeaderFragment
-import com.ipca.wepet.external.SearchFragment
-import com.ipca.wepet.external.TabsFragment
+import com.ipca.wepet.frament.FooterFragment
+import com.ipca.wepet.frament.HeaderFragment
+import com.ipca.wepet.frament.SearchFragment
+import com.ipca.wepet.frament.TabsFragment
 import com.ipca.wepet.models.AnimalModel
 
 class HomePageActivity : AppCompatActivity() {
