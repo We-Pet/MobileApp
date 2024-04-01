@@ -23,7 +23,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/BTN_animals"
+                android:id="@+id/IB_animals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/tabs_gray"
@@ -31,14 +31,14 @@
                 android:src="@drawable/tab_animal_icon_black" />
 
             <TextView
-                android:id="@+id/text_animal"
+                android:id="@+id/TV_animal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/animals"
                 android:textColor="@android:color/black" />
 
             <View
-                android:id="@+id/line_animal"
+                android:id="@+id/V_animal"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/main_blue"
@@ -63,7 +63,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/BTN_shelters"
+                android:id="@+id/IB_shelters"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/tabs_gray"
@@ -71,14 +71,14 @@
                 android:src="@drawable/tab_shelter_icon_black" />
 
             <TextView
-                android:id="@+id/text_shelter"
+                android:id="@+id/TV_shelter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/abrigos"
                 android:textColor="@android:color/black" />
 
             <View
-                android:id="@+id/line_shelter"
+                android:id="@+id/V_shelter"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/main_blue"
@@ -103,7 +103,7 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/BTN_events"
+                android:id="@+id/IB_events"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/tabs_gray"
@@ -111,14 +111,14 @@
                 android:src="@drawable/tab_events_icon_black" />
 
             <TextView
-                android:id="@+id/text_events"
+                android:id="@+id/TV_events"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/eventos"
                 android:textColor="@android:color/black" />
 
             <View
-                android:id="@+id/line_event"
+                android:id="@+id/V_event"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/main_blue"

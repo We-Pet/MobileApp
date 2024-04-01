@@ -14,18 +14,10 @@ class HeaderFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.header_layout, container, false)
-        //initializeElements(view)
-        //startNewActivities()
+
         return view
     }
 
-    private fun initializeElements(view: View) {
-    }
-
-    private fun startNewActivities() {
-
-    }
 }
 

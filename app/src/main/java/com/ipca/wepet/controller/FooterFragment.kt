@@ -21,10 +21,11 @@ class FooterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.footer_layout, container, false)
         initializeElements(view)
         startNewActivities()
+
+        btnSearch.callOnClick()
         return view
     }
 

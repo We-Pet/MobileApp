@@ -5,7 +5,7 @@
     android:layout_marginTop="10dp">
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/IV_icon"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_marginStart="24dp"
@@ -13,22 +13,23 @@
         android:src="@drawable/main_logo" />
 
     <ImageView
-        android:id="@+id/we_pet_image"
+        android:id="@+id/IV_wePetImage"
         android:layout_width="125dp"
         android:layout_height="30dp"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/icon"
+        android:layout_toEndOf="@id/IV_icon"
         android:scaleType="fitCenter"
         android:src="@drawable/header_we_pet" />
 
-    <ImageView
-        android:id="@+id/hamburger_button"
+    <ImageButton
+        android:id="@+id/IB_hamburger"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:layout_marginEnd="24dp"
+        android:background="@color/white"
         android:scaleType="fitCenter"
         android:src="@drawable/header_hamburger" />
 

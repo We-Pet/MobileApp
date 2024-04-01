@@ -12,19 +12,19 @@ import com.ipca.wepet.R
 class TabsFragment : Fragment() {
 
     private lateinit var frameAnimals: FrameLayout
-    private lateinit var btnAnimals: ImageButton
-    private lateinit var txtAnimals: TextView
-    private lateinit var animalsLine: View
+    private lateinit var ibAnimals: ImageButton
+    private lateinit var tvAnimals: TextView
+    private lateinit var vAnimals: View
 
     private lateinit var frameShelters: FrameLayout
-    private lateinit var btnShelters: ImageButton
-    private lateinit var txtShelters: TextView
-    private lateinit var sheltersLine: View
+    private lateinit var ibShelters: ImageButton
+    private lateinit var tvShelters: TextView
+    private lateinit var vShelters: View
 
     private lateinit var frameEvents: FrameLayout
-    private lateinit var btnEvents: ImageButton
-    private lateinit var txtEvents: TextView
-    private lateinit var eventsLine: View
+    private lateinit var ibEvents: ImageButton
+    private lateinit var tvEvents: TextView
+    private lateinit var vEvents: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,24 +34,27 @@ class TabsFragment : Fragment() {
         val view = inflater.inflate(R.layout.tabs_layout, container, false)
         initializeElements(view)
         setupButtonListeners()
+
+        // Default
+        frameAnimals.callOnClick()
         return view
     }
 
     private fun initializeElements(view: View) {
         frameAnimals = view.findViewById(R.id.layout_animals)
-        btnAnimals = view.findViewById(R.id.BTN_animals)
-        txtAnimals = view.findViewById(R.id.text_animal)
-        animalsLine = view.findViewById(R.id.line_animal)
+        ibAnimals = view.findViewById(R.id.IB_animals)
+        tvAnimals = view.findViewById(R.id.TV_animal)
+        vAnimals = view.findViewById(R.id.V_animal)
 
         frameShelters = view.findViewById(R.id.layout_shelters)
-        btnShelters = view.findViewById(R.id.BTN_shelters)
-        txtShelters = view.findViewById(R.id.text_shelter)
-        sheltersLine = view.findViewById(R.id.line_shelter)
+        ibShelters = view.findViewById(R.id.IB_shelters)
+        tvShelters = view.findViewById(R.id.TV_shelter)
+        vShelters = view.findViewById(R.id.V_shelter)
 
         frameEvents = view.findViewById(R.id.layout_events)
-        btnEvents = view.findViewById(R.id.BTN_events)
-        txtEvents = view.findViewById(R.id.text_events)
-        eventsLine = view.findViewById(R.id.line_event)
+        ibEvents = view.findViewById(R.id.IB_events)
+        tvEvents = view.findViewById(R.id.TV_events)
+        vEvents = view.findViewById(R.id.V_event)
     }
 
     private fun setButtonProperties(
@@ -71,79 +74,79 @@ class TabsFragment : Fragment() {
         // Animal button action
         frameAnimals.setOnClickListener {
             setButtonProperties(
-                btnAnimals,
-                txtAnimals,
-                animalsLine,
+                ibAnimals,
+                tvAnimals,
+                vAnimals,
                 R.drawable.tab_animals_icon_blue,
                 ContextCompat.getColor(requireContext(), R.color.main_blue),
                 View.VISIBLE
             )
             setButtonProperties(
-                btnShelters,
-                txtShelters,
-                sheltersLine,
+                ibShelters,
+                tvShelters,
+                vShelters,
                 R.drawable.tab_shelter_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnEvents,
-                txtEvents,
-                eventsLine,
+                ibEvents,
+                tvEvents,
+                vEvents,
                 R.drawable.tab_events_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
         }
 
-        btnAnimals.setOnClickListener {
+        ibAnimals.setOnClickListener {
             setButtonProperties(
-                btnAnimals,
-                txtAnimals,
-                animalsLine,
+                ibAnimals,
+                tvAnimals,
+                vAnimals,
                 R.drawable.tab_animals_icon_blue,
                 ContextCompat.getColor(requireContext(), R.color.main_blue),
                 View.VISIBLE
             )
             setButtonProperties(
-                btnShelters,
-                txtShelters,
-                sheltersLine,
+                ibShelters,
+                tvShelters,
+                vShelters,
                 R.drawable.tab_shelter_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnEvents,
-                txtEvents,
-                eventsLine,
+                ibEvents,
+                tvEvents,
+                vEvents,
                 R.drawable.tab_events_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
         }
 
-        txtAnimals.setOnClickListener {
+        tvAnimals.setOnClickListener {
             setButtonProperties(
-                btnAnimals,
-                txtAnimals,
-                animalsLine,
+                ibAnimals,
+                tvAnimals,
+                vAnimals,
                 R.drawable.tab_animals_icon_blue,
                 ContextCompat.getColor(requireContext(), R.color.main_blue),
                 View.VISIBLE
             )
             setButtonProperties(
-                btnShelters,
-                txtShelters,
-                sheltersLine,
+                ibShelters,
+                tvShelters,
+                vShelters,
                 R.drawable.tab_shelter_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnEvents,
-                txtEvents,
-                eventsLine,
+                ibEvents,
+                tvEvents,
+                vEvents,
                 R.drawable.tab_events_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
@@ -153,79 +156,79 @@ class TabsFragment : Fragment() {
         // Shelter button action
         frameShelters.setOnClickListener {
             setButtonProperties(
-                btnAnimals,
-                txtAnimals,
-                animalsLine,
+                ibAnimals,
+                tvAnimals,
+                vAnimals,
                 R.drawable.tab_animal_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnShelters,
-                txtShelters,
-                sheltersLine,
+                ibShelters,
+                tvShelters,
+                vShelters,
                 R.drawable.tab_shelter_icon_blue,
                 ContextCompat.getColor(requireContext(), R.color.main_blue),
                 View.VISIBLE
             )
             setButtonProperties(
-                btnEvents,
-                txtEvents,
-                eventsLine,
+                ibEvents,
+                tvEvents,
+                vEvents,
                 R.drawable.tab_events_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
         }
 
-        btnShelters.setOnClickListener {
+        ibShelters.setOnClickListener {
             setButtonProperties(
-                btnAnimals,
-                txtAnimals,
-                animalsLine,
+                ibAnimals,
+                tvAnimals,
+                vAnimals,
                 R.drawable.tab_animal_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnShelters,
-                txtShelters,
-                sheltersLine,
+                ibShelters,
+                tvShelters,
+                vShelters,
                 R.drawable.tab_shelter_icon_blue,
                 ContextCompat.getColor(requireContext(), R.color.main_blue),
                 View.VISIBLE
             )
             setButtonProperties(
-                btnEvents,
-                txtEvents,
-                eventsLine,
+                ibEvents,
+                tvEvents,
+                vEvents,
                 R.drawable.tab_events_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
         }
 
-        txtShelters.setOnClickListener {
+        tvShelters.setOnClickListener {
             setButtonProperties(
-                btnAnimals,
-                txtAnimals,
-                animalsLine,
+                ibAnimals,
+                tvAnimals,
+                vAnimals,
                 R.drawable.tab_animal_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnShelters,
-                txtShelters,
-                sheltersLine,
+                ibShelters,
+                tvShelters,
+                vShelters,
                 R.drawable.tab_shelter_icon_blue,
                 ContextCompat.getColor(requireContext(), R.color.main_blue),
                 View.VISIBLE
             )
             setButtonProperties(
-                btnEvents,
-                txtEvents,
-                eventsLine,
+                ibEvents,
+                tvEvents,
+                vEvents,
                 R.drawable.tab_events_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
@@ -235,79 +238,79 @@ class TabsFragment : Fragment() {
         // Event button action
         frameEvents.setOnClickListener {
             setButtonProperties(
-                btnAnimals,
-                txtAnimals,
-                animalsLine,
+                ibAnimals,
+                tvAnimals,
+                vAnimals,
                 R.drawable.tab_animal_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnShelters,
-                txtShelters,
-                sheltersLine,
+                ibShelters,
+                tvShelters,
+                vShelters,
                 R.drawable.tab_shelter_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnEvents,
-                txtEvents,
-                eventsLine,
+                ibEvents,
+                tvEvents,
+                vEvents,
                 R.drawable.tab_events_icon_blue,
                 ContextCompat.getColor(requireContext(), R.color.main_blue),
                 View.VISIBLE
             )
         }
 
-        btnEvents.setOnClickListener {
+        ibEvents.setOnClickListener {
             setButtonProperties(
-                btnAnimals,
-                txtAnimals,
-                animalsLine,
+                ibAnimals,
+                tvAnimals,
+                vAnimals,
                 R.drawable.tab_animal_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnShelters,
-                txtShelters,
-                sheltersLine,
+                ibShelters,
+                tvShelters,
+                vShelters,
                 R.drawable.tab_shelter_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnEvents,
-                txtEvents,
-                eventsLine,
+                ibEvents,
+                tvEvents,
+                vEvents,
                 R.drawable.tab_events_icon_blue,
                 ContextCompat.getColor(requireContext(), R.color.main_blue),
                 View.VISIBLE
             )
         }
 
-        txtEvents.setOnClickListener {
+        tvEvents.setOnClickListener {
             setButtonProperties(
-                btnAnimals,
-                txtAnimals,
-                animalsLine,
+                ibAnimals,
+                tvAnimals,
+                vAnimals,
                 R.drawable.tab_animal_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnShelters,
-                txtShelters,
-                sheltersLine,
+                ibShelters,
+                tvShelters,
+                vShelters,
                 R.drawable.tab_shelter_icon_black,
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
             setButtonProperties(
-                btnEvents,
-                txtEvents,
-                eventsLine,
+                ibEvents,
+                tvEvents,
+                vEvents,
                 R.drawable.tab_events_icon_blue,
                 ContextCompat.getColor(requireContext(), R.color.main_blue),
                 View.VISIBLE
