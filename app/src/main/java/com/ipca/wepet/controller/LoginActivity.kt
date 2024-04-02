@@ -8,6 +8,7 @@ import android.media.Image
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.ipca.wepet.R
+import com.ipca.wepet.utils.FirebaseUtils
 import com.ipca.wepet.views.WePetSplashScreenActivity
 import com.ipca.wepet.utils.EmailUtils
 import org.w3c.dom.Text
@@ -29,6 +34,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnLogin: Button
     private lateinit var btnCreateAccount: Button
     private lateinit var btnForgotPass: TextView
+
     private lateinit var btnClearTextEmail: ImageButton
     private lateinit var btnClearTextPassword: ImageButton
 
@@ -36,13 +42,25 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var emailTextField: EditText
     private lateinit var passwordTextField: EditText
+    private lateinit var editText1: EditText
+    private lateinit var editText2: EditText
+    private lateinit var editText3: EditText
+    private lateinit var editText4: EditText
+  
+    private lateinit var auth: FirebaseAuth
+    private lateinit var fireBaseUtils: FirebaseUtils
 
+  
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_layout)
 
         initializeElements()
         startNewActivities()
+
+        /*fireBaseUtils.checkIfUserIsLoggedIn {
+            setContentView(R.layout.main_layout)
+        }*/
     }
 
     private fun initializeElements() {
@@ -50,6 +68,7 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.BTN_login)
         btnCreateAccount = findViewById(R.id.BTN_create_account)
         btnForgotPass = findViewById(R.id.TV_forgot_password)
+
         btnClearTextEmail = findViewById(R.id.IBTN_clear_button_email)
         btnClearTextPassword = findViewById(R.id.IBTN_clear_button_password)
         badLoginWarning = findViewById(R.id.bad_login_warning_TV)
@@ -57,13 +76,18 @@ class LoginActivity : AppCompatActivity() {
         passwordTextField = findViewById(R.id.ET_password)
         btnClearTextEmail.setOnClickListener{emailTextField.text.clear()}
         btnClearTextPassword.setOnClickListener{passwordTextField.text.clear()}
+
+        auth = Firebase.auth
+        fireBaseUtils = FirebaseUtils(auth)
     }
 
     private fun startNewActivities() {
+
         //Login action
         btnLogin.setOnClickListener {
             checkLoginFieldsAndValidate()
         }
+        
         //Create account action
         btnCreateAccount.setOnClickListener {
             val intent = Intent(this, CreateAccountActivity::class.java)
@@ -86,7 +110,37 @@ class LoginActivity : AppCompatActivity() {
             showErrorMessage(R.string.error_invalid_email)
         } else if (password.isBlank()){
             showErrorMessage(R.string.error_empty_password)
-        } // TODO: validate login
+        } else {
+          //get email and password inserted
+            val email = findViewById<EditText>(R.id.ET_email)
+            val password = findViewById<EditText>(R.id.ET_pass)
+
+            //sign in with firebase
+            auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d("AUTH", "signInWithEmail:success")
+                        //val user = auth.currentUser
+                        Toast.makeText(
+                            baseContext,
+                            "Authentication successful.",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                        val intent = Intent(this, WePetSplashScreenActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w("AUTH", "signInWithEmail:failure", task.exception)
+                        Toast.makeText(
+                            baseContext,
+                            "Authentication failed.",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+
+                    }
+                }
+        }
     }
 
     private fun showBottomDialogForgotPassword() {
