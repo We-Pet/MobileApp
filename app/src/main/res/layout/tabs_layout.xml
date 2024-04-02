@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_marginTop="15dp"
+    android:background="@color/tabs_gray"
+    android:baselineAligned="false"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/layout_animals"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:foregroundGravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/IB_animals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/tabs_gray"
+                android:contentDescription="@string/tab_animals"
+                android:scaleType="fitCenter"
+                android:src="@drawable/tab_animal_icon_black" />
+
+            <TextView
+                android:id="@+id/TV_animal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa_light"
+                android:text="@string/animals"
+                android:textColor="@android:color/black" />
+
+            <View
+                android:id="@+id/V_animal"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/main_blue"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_shelters"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:foregroundGravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/IB_shelters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/tabs_gray"
+                android:contentDescription="@string/tab_for_shelter"
+                android:scaleType="fitCenter"
+                android:src="@drawable/tab_shelter_icon_black" />
+
+            <TextView
+                android:id="@+id/TV_shelter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa_light"
+                android:text="@string/shelter"
+                android:textColor="@android:color/black" />
+
+            <View
+                android:id="@+id/V_shelter"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/main_blue"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_events"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:foregroundGravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/IB_events"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/tabs_gray"
+                android:contentDescription="@string/tab_for_events"
+                android:scaleType="fitCenter"
+                android:src="@drawable/tab_events_icon_black" />
+
+            <TextView
+                android:id="@+id/TV_events"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa_light"
+                android:text="@string/events"
+                android:textColor="@android:color/black" />
+
+            <View
+                android:id="@+id/V_event"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/main_blue"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

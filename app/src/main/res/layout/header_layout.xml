@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/IV_icon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="24dp"
+        android:contentDescription="@string/logo"
+        android:scaleType="fitCenter"
+        android:src="@drawable/main_logo" />
+
+    <ImageView
+        android:id="@+id/IV_wePetImage"
+        android:layout_width="125dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@id/IV_icon"
+        android:contentDescription="@string/name_of_app"
+        android:scaleType="fitCenter"
+        android:src="@drawable/header_we_pet" />
+
+    <ImageButton
+        android:id="@+id/IB_hamburger"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="24dp"
+        android:background="@color/background_main"
+        android:contentDescription="@string/hamburger_button"
+        android:scaleType="fitCenter"
+        android:src="@drawable/header_hamburger" />
+
+</RelativeLayout>

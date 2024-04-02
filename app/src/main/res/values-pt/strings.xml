@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome">Bem vindo</string>
+    <string name="login_button">Entrar</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Palavra chave</string>
+    <string name="password">Palavra chave</string>
+    <string name="clear_password">Limpar palavra chave</string>
+    <string name="clear_email">Limpar email</string>
+    <string name="create_account">Criar conta</string>
+    <string name="forgot_password"><u>Esqueceu palavra chave?</u></string>
+    <string name="name">Nome</string>
+    <string name="clear_name">Limpar nome</string>
+    <string name="confirm_password">Confirmar palavra chave</string>
+    <string name="submit">Submeter</string>
+    <string name="forgot_password_question">Esqueceu-se da palavra chave?</string>
+    <string name="enter_your_email_to_begin_the_password_recovery_process">Digite seu e-mail para iniciar o processo de recuperação de palavra chave.</string>
+    <string name="enter_the_new_password_to_access_your_account">Digite a nova palavra chave para acessar sua conta.</string>
+    <string name="enter_the_4_digit_code_that_was_sent_to_your_email">Digite o código de 4 dígitos que foi enviado para seu e-mail.</string>
+    <string name="code">Código</string>
+    <string name="animals">Animais</string>
+    <string name="shelter">Abrigos</string>
+    <string name="events">Eventos</string>
+    <string name="search">Procura</string>
+    <string name="gender">sexo</string>
+    <string name="logo">logo</string>
+    <string name="name_of_app">Nome da app</string>
+    <string name="error_empty_email">Inserir email</string>
+    <string name="error_invalid_email">Email invalido</string>
+    <string name="error_empty_password">inserir palavra chave</string>
+    <string name="passwords_do_not_match">Palavras chave tem que ser iguais</string>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome">Welcome</string>
+    <string name="email_hint">Email</string>
+    <string name="login_button">Login</string>
+    <string name="password_hint">Password</string>
+    <string name="password">Password</string>
+    <string name="clear_password">Clear password</string>
+    <string name="clear_email">Clear email</string>
+    <string name="create_account">Create account</string>
+    <string name="forgot_password"><u>Forgot password?</u></string>
+    <string name="name">Name</string>
+    <string name="clear_name">Clear name</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="submit">Submit</string>
+    <string name="forgot_password_question">Forgot password?</string>
+    <string name="enter_your_email_to_begin_the_password_recovery_process">Enter your email to begin the password recovery process.</string>
+    <string name="enter_the_new_password_to_access_your_account">Enter the new password to access your account</string>
+    <string name="enter_the_4_digit_code_that_was_sent_to_your_email">Enter the 4-digit code that was sent to your email.</string>
+    <string name="code">Code</string>
+    <string name="animals">Animals</string>
+    <string name="shelter">Shelter</string>
+    <string name="events">Events</string>
+    <string name="search">Search</string>
+    <string name="gender">gender</string>
+    <string name="logo">logo</string>
+    <string name="name_of_app">name of app</string>
+    <string name="error_empty_email">insert Email</string>
+    <string name="error_invalid_email">invalid Email</string>
+    <string name="error_empty_password">Insert Password</string>
+    <string name="passwords_do_not_match">Passwords must match</string>
+</resources>

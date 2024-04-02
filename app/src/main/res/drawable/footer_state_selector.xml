@@ -1,0 +1,5 @@
+<!-- button_state_selector.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/footer_rounded_selected" android:state_selected="true" />
+    <item android:drawable="@drawable/footer_rounded" />
+</selector>
