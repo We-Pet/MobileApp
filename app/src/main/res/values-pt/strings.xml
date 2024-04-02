@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="welcome">Bem vindo</string>
-    <string name="email_hint">Email</string>
     <string name="login_button">Entrar</string>
-    <string name="email_hint">Email</string>
-    <string name="email_hint">Email</string>
-    <string name="email_hint">E</string>
-    <string name="email_hint">E</string>
-    <string name="email_hint">Em</string>
-    <string name="email_hint">Ema</string>
-    <string name="email_hint">Emai</string>
-    <string name="email_hint">Emai</string>
-    <string name="email_hint">Email</string>
-    <string name="email_hint">Email</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Palavra chave</string>
     <string name="password">Palavra chave</string>
