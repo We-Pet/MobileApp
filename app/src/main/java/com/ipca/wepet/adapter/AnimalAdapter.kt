@@ -30,7 +30,7 @@ class AnimalAdapter(private val animalList: List<AnimalModel>) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val ivAnimalPhoto: ImageView = itemView.findViewById(R.id.IV_animalPhoto)
         private val tvAnimalName: TextView = itemView.findViewById(R.id.TV_animalName)
-        private val ivAnimalSex: ImageView = itemView.findViewById(R.id.IV_animalSex)
+        private val ivAnimalSex: ImageView = itemView.findViewById(R.id.IV_animalGender)
         private val tvAnimalRace: TextView = itemView.findViewById(R.id.TV_animalRace)
 
         fun bind(animal: AnimalModel) {

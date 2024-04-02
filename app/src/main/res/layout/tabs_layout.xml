@@ -38,6 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/animals"
+                android:fontFamily="@font/comfortaa_light"
                 android:textColor="@android:color/black" />
 
             <View
@@ -80,6 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/abrigos"
+                android:fontFamily="@font/comfortaa_light"
                 android:textColor="@android:color/black" />
 
             <View
@@ -122,6 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/eventos"
+                android:fontFamily="@font/comfortaa_light"
                 android:textColor="@android:color/black" />
 
             <View

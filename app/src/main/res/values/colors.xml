@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="dark_gray">#292B2E</color>
+    <color name="background_main">#fafafa</color>
     <color name="main_blue">#2C91FF</color>
     <color name="light_gray">#ECECEE</color>
     <color name="blue_gray">#ECECEE</color>
