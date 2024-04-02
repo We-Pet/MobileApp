@@ -85,8 +85,6 @@ class LoginActivity : AppCompatActivity() {
 
         //Login action
         btnLogin.setOnClickListener {
-            val intent = Intent(this, HomePageActivity::class.java)
-            startActivity(intent)
             checkLoginFieldsAndValidate()
         }
         
