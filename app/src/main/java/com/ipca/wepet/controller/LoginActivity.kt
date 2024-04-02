@@ -111,12 +111,9 @@ class LoginActivity : AppCompatActivity() {
         } else if (password.isBlank()){
             showErrorMessage(R.string.error_empty_password)
         } else {
-          //get email and password inserted
-            val email = findViewById<EditText>(R.id.ET_email)
-            val password = findViewById<EditText>(R.id.ET_pass)
 
             //sign in with firebase
-            auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+            auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
