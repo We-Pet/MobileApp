@@ -31,6 +31,12 @@
             android:name=".controller.CreateAccountActivity"
             android:label="CreateAccountActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".controller.HomePageActivity"
+            android:label="HomePageActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
