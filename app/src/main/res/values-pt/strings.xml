@@ -25,4 +25,8 @@
     <string name="gender">sexo</string>
     <string name="logo">logo</string>
     <string name="name_of_app">Nome da app</string>
+    <string name="error_empty_email">Inserir email</string>
+    <string name="error_invalid_email">Email invalido</string>
+    <string name="error_empty_password">inserir palavra chave</string>
+    <string name="passwords_do_not_match">Palavras chave tem que ser iguais</string>
 </resources>
