@@ -36,7 +36,7 @@
             android:name=".controller.HomePageActivity"
             android:label="HomePageActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

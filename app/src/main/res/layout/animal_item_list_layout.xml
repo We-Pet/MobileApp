@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -20,7 +21,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/IV_animalPhoto"
         app:layout_constraintStart_toStartOf="@+id/IV_animalPhoto"
-        app:layout_constraintTop_toBottomOf="@+id/IV_animalPhoto">
+        app:layout_constraintTop_toBottomOf="@+id/IV_animalPhoto"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:id="@+id/TV_animalName"
@@ -34,7 +36,7 @@
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginStart="5dp"
-            android:contentDescription="@string/sex"
+            android:contentDescription="@string/gender"
             android:src="@drawable/search_search"
             app:layout_constraintBottom_toBottomOf="@id/TV_animalName"
             app:layout_constraintStart_toEndOf="@+id/TV_animalName"
