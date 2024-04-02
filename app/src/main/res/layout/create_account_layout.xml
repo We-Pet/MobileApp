@@ -5,15 +5,15 @@
     android:layout_height="match_parent">
 
     <ImageButton
-        android:id="@+id/BTN_back"
+        android:id="@+id/BTN_back_to_login_create_account"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:background="@color/white"
         android:contentDescription="@string/back_button"
         android:scaleType="fitCenter"
         android:src="@drawable/back"
-        android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,14 +41,17 @@
 
 
         <EditText
-            android:id="@+id/ET_name"
-            android:layout_width="match_parent"
+            android:id="@+id/ET_name_create_account"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints="@string/name"
             android:backgroundTint="@color/light_gray"
+            android:fontFamily="@font/comfortaa_light"
             android:hint="@string/name"
+            android:paddingLeft="15dp"
             android:inputType="text"
             app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_name"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,23 +64,23 @@
             android:contentDescription="@string/clear_name"
             android:scaleType="fitCenter"
             android:src="@drawable/delete_input_text"
-            app:layout_constraintBottom_toBottomOf="@id/ET_name"
+            app:layout_constraintBottom_toBottomOf="@id/ET_name_create_account"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ET_name" />
+            app:layout_constraintTop_toTopOf="@id/ET_name_create_account" />
 
         <View
             android:id="@+id/divider_name"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/ET_name" />
+            app:layout_constraintTop_toBottomOf="@id/ET_name_create_account" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <!-- Email edit text with button -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/CTL_email"
+        android:id="@+id/CTL_email_create_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="70dp"
@@ -87,13 +90,15 @@
 
 
         <EditText
-            android:id="@+id/ET_email"
-            android:layout_width="match_parent"
+            android:id="@+id/ET_email_create_account"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints="@string/email_hint"
             android:backgroundTint="@color/light_gray"
             android:hint="@string/email_hint"
             android:inputType="textEmailAddress"
+            android:fontFamily="@font/comfortaa_light"
+            android:paddingLeft="15dp"
             app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -107,45 +112,48 @@
             android:contentDescription="@string/clear_email"
             android:scaleType="fitCenter"
             android:src="@drawable/delete_input_text"
-            app:layout_constraintBottom_toBottomOf="@id/ET_email"
+            app:layout_constraintBottom_toBottomOf="@id/ET_email_create_account"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ET_email" />
+            app:layout_constraintTop_toTopOf="@id/ET_email_create_account" />
 
         <View
-            android:id="@+id/divider_email"
+            android:id="@+id/divider_email_create_account"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/ET_email" />
+            app:layout_constraintTop_toBottomOf="@id/ET_email_create_account" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <!-- Password edit text with button -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/CTL_pass"
+        android:id="@+id/CTL_password_create_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="70dp"
         android:layout_marginTop="25dp"
         android:background="@color/light_gray"
-        app:layout_constraintTop_toBottomOf="@+id/CTL_email">
+        app:layout_constraintTop_toBottomOf="@+id/CTL_email_create_account">
 
 
         <EditText
-            android:id="@+id/ET_pass"
-            android:layout_width="match_parent"
+            android:id="@+id/ET_password_create_account"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints="@string/password"
             android:backgroundTint="@color/light_gray"
             android:hint="@string/password"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_pass"
+            android:fontFamily="@font/comfortaa_light"
+            android:paddingLeft="15dp"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_password_create_account"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/IBTN_clear_button_pass"
+            android:id="@+id/IBTN_clear_button_password_create_account"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="8dp"
@@ -153,43 +161,45 @@
             android:contentDescription="@string/clear_password"
             android:scaleType="fitCenter"
             android:src="@drawable/delete_input_text"
-            app:layout_constraintBottom_toBottomOf="@id/ET_pass"
+            app:layout_constraintBottom_toBottomOf="@id/ET_password_create_account"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ET_pass" />
+            app:layout_constraintTop_toTopOf="@id/ET_password_create_account" />
 
         <View
             android:id="@+id/divider_pass"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/ET_pass" />
+            app:layout_constraintTop_toBottomOf="@id/ET_password_create_account" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Password edit text with button -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/CTL_repeat_pass"
+        android:id="@+id/CTL_confirm_password_create_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="70dp"
         android:layout_marginTop="25dp"
         android:background="@color/light_gray"
-        app:layout_constraintTop_toBottomOf="@+id/CTL_pass">
+        app:layout_constraintTop_toBottomOf="@+id/CTL_password_create_account">
 
 
         <EditText
-            android:id="@+id/ET_repeat_pass"
-            android:layout_width="match_parent"
+            android:id="@+id/ET_confirm_password_create_account"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints="@string/confirm_password"
             android:backgroundTint="@color/light_gray"
             android:hint="@string/confirm_password"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_repeat_pass"
+            android:fontFamily="@font/comfortaa_light"
+            android:paddingLeft="15dp"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_confirm_password_create_account"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/IBTN_clear_button_repeat_pass"
+            android:id="@+id/IBTN_clear_button_confirm_password_create_account"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="8dp"
@@ -197,20 +207,20 @@
             android:contentDescription="@string/clear_password"
             android:scaleType="fitCenter"
             android:src="@drawable/delete_input_text"
-            app:layout_constraintBottom_toBottomOf="@id/ET_repeat_pass"
+            app:layout_constraintBottom_toBottomOf="@id/ET_confirm_password_create_account"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ET_repeat_pass" />
+            app:layout_constraintTop_toTopOf="@id/ET_confirm_password_create_account" />
 
         <View
-            android:id="@+id/divider_repeat_pass"
+            android:id="@+id/divider_confirm_password_create_account"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/ET_repeat_pass" />
+            app:layout_constraintTop_toBottomOf="@id/ET_confirm_password_create_account" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/BTN_submit"
+        android:id="@+id/BTN_submit_create_account"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
@@ -219,6 +229,6 @@
         android:textColor="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CTL_repeat_pass" />
+        app:layout_constraintTop_toBottomOf="@+id/CTL_confirm_password_create_account" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
