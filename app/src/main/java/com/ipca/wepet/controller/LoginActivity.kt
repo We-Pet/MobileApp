@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import android.view.Window
@@ -15,9 +16,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.ipca.wepet.R
+import com.ipca.wepet.utils.FirebaseUtils
 import com.ipca.wepet.views.WePetSplashScreenActivity
-
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var btnLogin: Button
@@ -27,26 +31,63 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var editText2: EditText
     private lateinit var editText3: EditText
     private lateinit var editText4: EditText
-
+    private lateinit var auth: FirebaseAuth
+    private lateinit var fireBaseUtils: FirebaseUtils
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_layout)
 
         initializeElements()
         startNewActivities()
+
+        /*fireBaseUtils.checkIfUserIsLoggedIn {
+            setContentView(R.layout.main_layout)
+        }*/
     }
 
     private fun initializeElements() {
         btnLogin = findViewById(R.id.BTN_login)
         btnCreateAccount = findViewById(R.id.BTN_create_account)
         btnForgotPass = findViewById(R.id.TV_forgot_password)
+
+        auth = Firebase.auth
+        fireBaseUtils = FirebaseUtils(auth)
     }
 
     private fun startNewActivities() {
+
         //Login action
         btnLogin.setOnClickListener {
-            val intent = Intent(this, WePetSplashScreenActivity::class.java)
-            startActivity(intent)
+            //get email and password inserted
+            val email = findViewById<EditText>(R.id.ET_email)
+            val password = findViewById<EditText>(R.id.ET_pass)
+
+            //sign in with firebase
+            auth.signInWithEmailAndPassword(email.text.toString(), password.text.toString())
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d("AUTH", "signInWithEmail:success")
+                        //val user = auth.currentUser
+                        Toast.makeText(
+                            baseContext,
+                            "Authentication successful.",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+                        val intent = Intent(this, WePetSplashScreenActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w("AUTH", "signInWithEmail:failure", task.exception)
+                        Toast.makeText(
+                            baseContext,
+                            "Authentication failed.",
+                            Toast.LENGTH_SHORT,
+                        ).show()
+
+                    }
+                }
+
         }
         //Create account action
         btnCreateAccount.setOnClickListener {
