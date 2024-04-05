@@ -24,9 +24,14 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.ipca.wepet.R
+import com.ipca.wepet.interfaces.IFirebaseService
 import com.ipca.wepet.utils.FirebaseUtils
 import com.ipca.wepet.views.WePetSplashScreenActivity
 import com.ipca.wepet.utils.EmailUtils
+import org.koin.android.ext.android.inject
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
+import org.koin.dsl.module
 import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
@@ -49,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
   
     private lateinit var auth: FirebaseAuth
     private lateinit var fireBaseUtils: FirebaseUtils
-
+    private val firebaseService: IFirebaseService by inject()
   
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +63,14 @@ class LoginActivity : AppCompatActivity() {
         initializeElements()
         startNewActivities()
 
+        val appModule = module {
+            single<IFirebaseService>{FirebaseUtils(auth = Firebase.auth) }
+            factory {FirebaseUtils(get())}
+        }
+        startKoin{
+            androidContext(this@LoginActivity)
+            modules(appModule)
+        }
         /*fireBaseUtils.checkIfUserIsLoggedIn {
             setContentView(R.layout.main_layout)
         }*/
@@ -161,6 +174,10 @@ class LoginActivity : AppCompatActivity() {
             } else if (!EmailUtils.isEmailValid(email)){
                 showErrorMessage(R.string.error_invalid_email)
             } else {
+                //Send email result validation
+                firebaseService.sendEmailResetPassword(email) {
+                    Toast.makeText(this, "Email sent", Toast.LENGTH_SHORT).show()
+                }
                 dialog.dismiss()
                 showBottomDialogForgotPasswordCode()
             }

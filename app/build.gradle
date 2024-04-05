@@ -61,4 +61,7 @@ dependencies {
 
     // Add the dependencies for any other desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
+
+    //Koin (dependency injection framework)
+    implementation("io.insert-koin:koin-android:3.6.0-wasm-alpha2")
 }
