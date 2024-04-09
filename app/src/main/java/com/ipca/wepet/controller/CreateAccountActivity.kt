@@ -6,16 +6,32 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.ipca.wepet.R
+import com.ipca.wepet.utils.EmailUtils
+import com.ipca.wepet.utils.ToastHandler
 
 class CreateAccountActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var btnSubmit: Button
+
+    private lateinit var nameEditText: EditText
+    private lateinit var emailEditText: EditText
+    private lateinit var passwordEditText: EditText
+    private lateinit var confirmPasswordEditText: EditText
+
+    private lateinit var clearNameButton: ImageButton
+    private lateinit var clearEmailButton: ImageButton
+    private lateinit var clearPasswordButton: ImageButton
+    private lateinit var clearConfirmPasswordButton: ImageButton
+    private lateinit var backToLoginButton: ImageButton
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.create_account_layout)
@@ -33,32 +49,68 @@ class CreateAccountActivity : AppCompatActivity() {
 
     }
 
+    private fun initializeElements(){
+        nameEditText = findViewById(R.id.ET_name_create_account)
+        emailEditText = findViewById(R.id.ET_email_create_account)
+        passwordEditText = findViewById(R.id.ET_password_create_account)
+        confirmPasswordEditText = findViewById(R.id.ET_confirm_password_create_account)
+        btnSubmit = findViewById(R.id.BTN_submit_create_account)
+
+        clearNameButton = findViewById(R.id.IBTN_clear_button_name)
+        clearEmailButton = findViewById(R.id.IBTN_clear_button_email)
+        clearPasswordButton = findViewById(R.id.IBTN_clear_button_password_create_account)
+        clearConfirmPasswordButton = findViewById(R.id.IBTN_clear_button_confirm_password_create_account)
+
+        backToLoginButton = findViewById(R.id.BTN_back_to_login_create_account)
+    }
+
+    private fun setupOnClickListeners() {
+        clearNameButton.setOnClickListener{clearText(nameEditText)}
+        clearEmailButton.setOnClickListener{clearText(emailEditText)}
+        clearPasswordButton.setOnClickListener{clearText(passwordEditText)}
+        clearConfirmPasswordButton.setOnClickListener{clearText(confirmPasswordEditText)}
+    }
+
     private fun startNewActivities() {
-        //Back action
-        val btnLogin = findViewById<View>(R.id.BTN_back)
-        btnLogin.setOnClickListener {
+        // Go back to Login
+        backToLoginButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
 
-        btnSubmit.setOnClickListener{
-            val name = findViewById<EditText>(R.id.ET_name)
-            val email = findViewById<EditText>(R.id.ET_email)
-            val password = findViewById<EditText>(R.id.ET_pass)
-            val repeatPassword = findViewById<EditText>(R.id.ET_repeat_pass)
+        setupOnClickListeners()
 
-            if(password.text.toString() != repeatPassword.text.toString()){
-                Toast.makeText(this, "Passwords don't match!", Toast.LENGTH_SHORT).show()
+        btnSubmit.setOnClickListener{
+
+            val password = passwordEditText.text.toString()
+            val repeatPassword = confirmPasswordEditText.text.toString()
+            val email = emailEditText.text.toString()
+
+            if (email.isBlank()) {
+                ToastHandler.showToast(this, R.string.error_empty_email)
+                return@setOnClickListener
+            } else if (!EmailUtils.isEmailValid(email)) {
+                ToastHandler.showToast(this, R.string.error_invalid_email)
+                return@setOnClickListener
+            } else if (!password.equals(repeatPassword)){
+                ToastHandler.showToast(this, R.string.passwords_do_not_match)
                 return@setOnClickListener
             }
-
-            signInUserToFirebase(email.text.toString(), password.text.toString())
+            signInUserToFirebase(email, password)
+            ToastHandler.showToast(this, R.string.account_created_successfully)
+            goToLoginActivity()
             //auth.createUserWithEmailAndPassword()
+
         }
     }
 
-    private fun initializeElements(){
-        btnSubmit = findViewById<Button>(R.id.BTN_submit)
+    private fun goToLoginActivity(){
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun clearText(editText: EditText){
+        editText.text.clear()
     }
 
     private fun signInUserToFirebase(email: String, password: String){

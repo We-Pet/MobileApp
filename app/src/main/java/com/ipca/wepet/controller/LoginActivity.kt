@@ -32,6 +32,7 @@ import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import com.ipca.wepet.utils.ToastHandler
 import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
@@ -47,10 +48,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var emailTextField: EditText
     private lateinit var passwordTextField: EditText
-    private lateinit var editText1: EditText
-    private lateinit var editText2: EditText
-    private lateinit var editText3: EditText
-    private lateinit var editText4: EditText
   
     private lateinit var auth: FirebaseAuth
     private lateinit var fireBaseUtils: FirebaseUtils
@@ -77,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initializeElements() {
-        // login elements
+
         btnLogin = findViewById(R.id.BTN_login)
         btnCreateAccount = findViewById(R.id.BTN_create_account)
         btnForgotPass = findViewById(R.id.TV_forgot_password)
@@ -118,11 +115,12 @@ class LoginActivity : AppCompatActivity() {
         val password = passwordTextField.text.toString()
 
         if (email.isBlank()){
-            showErrorMessage(R.string.error_empty_email)
+            ToastHandler.showToast(this, R.string.error_empty_email)
+            return
         } else if (!EmailUtils.isEmailValid(email)){
-            showErrorMessage(R.string.error_invalid_email)
+            ToastHandler.showToast(this, R.string.error_empty_email)
         } else if (password.isBlank()){
-            showErrorMessage(R.string.error_empty_password)
+            ToastHandler.showToast(this, R.string.error_empty_password)
         } else {
 
             //sign in with firebase
@@ -170,9 +168,11 @@ class LoginActivity : AppCompatActivity() {
             val email = emailText.text.toString()
 
             if (email.isBlank()) {
-                showErrorMessage(R.string.error_empty_email)
+                ToastHandler.showToast(this, R.string.error_empty_email)
+                return@setOnClickListener
             } else if (!EmailUtils.isEmailValid(email)){
-                showErrorMessage(R.string.error_invalid_email)
+                ToastHandler.showToast(this, R.string.error_invalid_email)
+                return@setOnClickListener
             } else {
                 //Send email result validation
                 firebaseService.sendEmailResetPassword(email) {
@@ -236,9 +236,11 @@ class LoginActivity : AppCompatActivity() {
 
         btnContinue.setOnClickListener {
             if (passwordText.text.isBlank()){
-                showErrorMessage(R.string.error_empty_password)
+                ToastHandler.showToast(this, R.string.error_empty_password)
+                return@setOnClickListener
             } else if (confirmPasswordText.text.toString() != passwordText.text.toString()){
-                showErrorMessage(R.string.passwords_do_not_match)
+                ToastHandler.showToast(this, R.string.passwords_do_not_match)
+                return@setOnClickListener
             }else {
                 dialog.dismiss()
                 Toast.makeText(this, "Password reset", Toast.LENGTH_SHORT).show()
@@ -268,10 +270,6 @@ class LoginActivity : AppCompatActivity() {
             if (editText.text.isNullOrEmpty()) return false
         }
         return true
-    }
-
-    private fun showErrorMessage(@StringRes errorMessageId: Int) {
-        Toast.makeText(this, getString(errorMessageId), Toast.LENGTH_SHORT).show()
     }
 
     private fun setupTextWatchers(dialog: Dialog, listEditTexts: List<EditText>) {
