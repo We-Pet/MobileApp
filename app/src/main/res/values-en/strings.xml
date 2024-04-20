@@ -29,4 +29,8 @@
     <string name="error_invalid_email">invalid Email</string>
     <string name="error_empty_password">Insert Password</string>
     <string name="passwords_do_not_match">Passwords must match</string>
+    <string name="my_animals">My animals</string>
+    <string name="desative_account">Desative account</string>
+    <string name="edit_profil">Edit profil</string>
+    <string name="shelters">Shelters</string>
 </resources>

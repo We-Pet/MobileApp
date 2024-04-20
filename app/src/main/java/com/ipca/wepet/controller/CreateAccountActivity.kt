@@ -29,7 +29,7 @@ class CreateAccountActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser =  null // auth.currentUser Todo: when logout is implemented
+        val currentUser = null // auth.currentUser Todo: when logout is implemented
 
     }
 
@@ -41,13 +41,13 @@ class CreateAccountActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        btnSubmit.setOnClickListener{
+        btnSubmit.setOnClickListener {
             val name = findViewById<EditText>(R.id.ET_name)
             val email = findViewById<EditText>(R.id.ET_email)
             val password = findViewById<EditText>(R.id.ET_pass)
             val repeatPassword = findViewById<EditText>(R.id.ET_repeat_pass)
 
-            if(password.text.toString() != repeatPassword.text.toString()){
+            if (password.text.toString() != repeatPassword.text.toString()) {
                 Toast.makeText(this, "Passwords don't match!", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -57,11 +57,11 @@ class CreateAccountActivity : AppCompatActivity() {
         }
     }
 
-    private fun initializeElements(){
+    private fun initializeElements() {
         btnSubmit = findViewById<Button>(R.id.BTN_submit)
     }
 
-    private fun signInUserToFirebase(email: String, password: String){
+    private fun signInUserToFirebase(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {

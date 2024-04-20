@@ -29,4 +29,8 @@
     <string name="error_invalid_email">Email invalido</string>
     <string name="error_empty_password">inserir palavra chave</string>
     <string name="passwords_do_not_match">Palavras chave tem que ser iguais</string>
+    <string name="my_animals">Meus animais</string>
+    <string name="desative_account">Desativar conta</string>
+    <string name="edit_profil">Editar perfil</string>
+    <string name="shelters">Abrigos</string>
 </resources>
