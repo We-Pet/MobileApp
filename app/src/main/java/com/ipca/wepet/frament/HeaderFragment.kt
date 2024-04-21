@@ -1,5 +1,6 @@
 package com.ipca.wepet.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import android.widget.ImageButton
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import com.ipca.wepet.R
+import com.ipca.wepet.controller.ProfilActivity
+import com.ipca.wepet.controller.ShelterActivity
 
 class HeaderFragment : Fragment() {
     private lateinit var ibHamburger: ImageButton
@@ -48,6 +51,8 @@ class HeaderFragment : Fragment() {
 
                 R.id.IT_edit_profil -> {
                     // Handle menu edit profil click
+                    val intent = Intent(context, ProfilActivity::class.java)
+                    startActivity(intent)
                     true
                 }
 

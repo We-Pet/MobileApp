@@ -33,4 +33,8 @@
     <string name="desative_account">Desative account</string>
     <string name="edit_profil">Edit profil</string>
     <string name="shelters">Shelters</string>
+    <string name="save">Save</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
 </resources>

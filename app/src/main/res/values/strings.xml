@@ -52,4 +52,9 @@
     <string name="event_photo" translatable="false">Event photo</string>
     <string name="photo_for_shelter" translatable="false">Photo for shelter</string>
     <string name="shelters">Shelters</string>
+    <string name="profil_photo" translatable="false">Profil photo</string>
+    <string name="save">Save</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
 </resources>

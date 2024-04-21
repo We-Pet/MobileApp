@@ -33,4 +33,8 @@
     <string name="desative_account">Desativar conta</string>
     <string name="edit_profil">Editar perfil</string>
     <string name="shelters">Abrigos</string>
+    <string name="save">Guardar</string>
+    <string name="email">Email</string>
+    <string name="address">Morada</string>
+    <string name="phone">Telemóvel</string>
 </resources>
