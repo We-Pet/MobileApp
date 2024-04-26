@@ -1,16 +1,21 @@
 package com.ipca.wepet.fragment
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import com.ipca.wepet.R
 import com.ipca.wepet.controller.ProfilActivity
-import com.ipca.wepet.controller.ShelterActivity
 
 class HeaderFragment : Fragment() {
     private lateinit var ibHamburger: ImageButton
@@ -58,6 +63,7 @@ class HeaderFragment : Fragment() {
 
                 R.id.IT_desative_account -> {
                     // Handle menu desative account click
+                    showBottomDialogDeleteAccount()
                     true
                 }
 
@@ -66,4 +72,25 @@ class HeaderFragment : Fragment() {
         }
         popup.show()
     }
+
+    private fun showBottomDialogDeleteAccount() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.bottom_sheet_layout_delete_account)
+
+        val btnContinue = dialog.findViewById<Button>(R.id.BTN_continue)
+
+        btnContinue.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
+        dialog.window?.setGravity(Gravity.BOTTOM)
+    }
+
 }

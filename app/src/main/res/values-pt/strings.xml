@@ -22,7 +22,7 @@
     <string name="shelter">Abrigos</string>
     <string name="events">Eventos</string>
     <string name="search">Procura</string>
-    <string name="gender">sexo</string>
+    <string name="gender">género</string>
     <string name="logo">logo</string>
     <string name="name_of_app">Nome da app</string>
     <string name="error_empty_email">Inserir email</string>
@@ -37,4 +37,15 @@
     <string name="email">Email</string>
     <string name="address">Morada</string>
     <string name="phone">Telemóvel</string>
+    <string name="deactivate_account">Desativar conta</string>
+    <string name="to_deactivate_your_account_you_will_have_to_confirm_your_email">Para desativar a sua conta terá que confirmar o seu email.</string>
+    <string name="txtContinue">Continuar</string>
+    <string name="arrange_a_visit">Agendar visita</string>
+    <string name="age">Idade</string>
+    <string name="status">Estado</string>
+    <string name="genderBig">Género</string>
+    <string name="location">Localização</string>
+    <string name="description">Descrição</string>
+    <string name="contact">Contactar</string>
+    <string name="open_list_of_animals">Ver lista de animais</string>
 </resources>

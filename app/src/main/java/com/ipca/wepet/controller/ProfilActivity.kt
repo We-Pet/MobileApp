@@ -20,7 +20,7 @@ class ProfilActivity : AppCompatActivity() {
     private lateinit var etPassword: EditText
     private lateinit var etPhone: EditText
     private lateinit var btnSave: Button
-    private lateinit var btnBack : ImageButton
+    private lateinit var btnBack: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

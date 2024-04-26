@@ -57,4 +57,19 @@
     <string name="email">Email</string>
     <string name="address">Address</string>
     <string name="phone">Phone</string>
+    <string name="deactivate_account">Deactivate account</string>
+    <string name="to_deactivate_your_account_you_will_have_to_confirm_your_email">To deactivate your account you will have to confirm your email.</string>
+    <string name="txtContinue">Continue</string>
+    <string name="like_button" translatable="false">Like button</string>
+    <string name="arrange_a_visit">Arrange a visit</string>
+    <string name="age">Age</string>
+    <string name="status">Status</string>
+    <string name="genderBig">Gender</string>
+    <string name="location">Location</string>
+    <string name="description">Description</string>
+    <string name="visit_image" translatable="false">visit image</string>
+    <string name="arrow" translatable="false"><![CDATA[<]]></string>
+    <string name="visit" translatable="false">visit</string>
+    <string name="contact">Contact</string>
+    <string name="open_list_of_animals">Open list of animals</string>
 </resources>
