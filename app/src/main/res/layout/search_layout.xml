@@ -33,7 +33,7 @@
             android:layout_height="56dp"
             android:layout_weight="1"
             android:autofillHints=""
-            android:fontFamily="@font/comfortaa_light"
+            android:fontFamily="@font/comfortaa_regular"
             android:gravity="center_vertical"
             android:hint="@string/search"
             android:inputType="text"

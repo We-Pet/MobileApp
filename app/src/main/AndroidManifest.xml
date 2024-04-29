@@ -49,22 +49,32 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".controller.AnimalActivity"
-            android:label="HomePageActivity"
+            android:label="AnimalActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".controller.ShelterActivity"
-            android:label="HomePageActivity"
+            android:label="ShelterActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".controller.EventActivity"
-            android:label="HomePageActivity"
+            android:label="EventActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".controller.ProfilActivity"
-            android:label="HomePageActivity"
+            android:label="ProfilActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".controller.ContactUsActivity"
+            android:label="ContactUsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".controller.AboutUsActivity"
+            android:label="AboutUsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
     </application>

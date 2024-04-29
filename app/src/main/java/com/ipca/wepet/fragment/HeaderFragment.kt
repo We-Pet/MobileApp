@@ -15,6 +15,8 @@ import android.widget.ImageButton
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import com.ipca.wepet.R
+import com.ipca.wepet.controller.AboutUsActivity
+import com.ipca.wepet.controller.ContactUsActivity
 import com.ipca.wepet.controller.ProfilActivity
 
 class HeaderFragment : Fragment() {
@@ -64,6 +66,20 @@ class HeaderFragment : Fragment() {
                 R.id.IT_desative_account -> {
                     // Handle menu desative account click
                     showBottomDialogDeleteAccount()
+                    true
+                }
+
+                R.id.IT_about_us -> {
+                    // Handle menu about us click
+                    val intent = Intent(context, AboutUsActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+
+                R.id.IT_support -> {
+                    // Handle menu support click
+                    val intent = Intent(context, ContactUsActivity::class.java)
+                    startActivity(intent)
                     true
                 }
 

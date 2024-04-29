@@ -48,4 +48,13 @@
     <string name="description">Description</string>
     <string name="contact">Contact</string>
     <string name="open_list_of_animals">Open list of animals</string>
+    <string name="about_us">About us</string>
+    <string name="support">Support</string>
+    <string name="number_of_users">Number of users</string>
+    <string name="number_of_animals">Number of animals</string>
+    <string name="we_are_a_group_of_programmers_living_in_braga_whose_goal_is_to_implement_new_features_that_contribute_to_a_better_world">We are a group of programmers living in Braga whose goal is to implement new features that contribute to a better world.</string>
+    <string name="braga_portugal">Braga, Portugal</string>
+    <string name="send">Send</string>
+    <string name="matter">Subject</string>
+    <string name="message">Message</string>
 </resources>

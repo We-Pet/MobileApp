@@ -4,10 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ipca.wepet.R
+import com.ipca.wepet.fragment.FooterFragment
 import com.ipca.wepet.fragment.HeaderFragment
-import com.ipca.wepet.frament.FooterFragment
-import com.ipca.wepet.frament.SearchFragment
-import com.ipca.wepet.frament.TabsFragment
+import com.ipca.wepet.fragment.SearchFragment
+import com.ipca.wepet.fragment.TabsFragment
 
 class HomePageActivity : AppCompatActivity() {
 

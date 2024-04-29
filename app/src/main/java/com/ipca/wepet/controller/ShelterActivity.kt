@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.ipca.wepet.R
-import com.ipca.wepet.frament.FooterFragment
+import com.ipca.wepet.fragment.FooterFragment
 import com.ipca.wepet.models.ShelterModel
 
 class ShelterActivity : AppCompatActivity() {

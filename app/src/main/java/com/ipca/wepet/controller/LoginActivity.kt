@@ -9,6 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
+import android.view.KeyEvent
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
@@ -24,7 +25,7 @@ import com.google.firebase.auth.auth
 import com.ipca.wepet.R
 import com.ipca.wepet.utils.EmailUtils
 import com.ipca.wepet.utils.FirebaseUtils
-import com.ipca.wepet.views.WePetSplashScreenActivity
+import com.ipca.wepet.utils.KeyboardUtils
 
 class LoginActivity : AppCompatActivity() {
 
@@ -39,10 +40,6 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var emailTextField: EditText
     private lateinit var passwordTextField: EditText
-    private lateinit var editText1: EditText
-    private lateinit var editText2: EditText
-    private lateinit var editText3: EditText
-    private lateinit var editText4: EditText
 
     private lateinit var auth: FirebaseAuth
     private lateinit var fireBaseUtils: FirebaseUtils
@@ -82,8 +79,6 @@ class LoginActivity : AppCompatActivity() {
 
         //Login action
         btnLogin.setOnClickListener {
-            val intent = Intent(this, HomePageActivity::class.java)
-            startActivity(intent)
             checkLoginFieldsAndValidate()
         }
 
@@ -95,6 +90,16 @@ class LoginActivity : AppCompatActivity() {
         //Forgot pass action
         btnForgotPass.setOnClickListener {
             showBottomDialogForgotPassword()
+        }
+
+        // Trigger login action on Enter press
+        passwordTextField.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                KeyboardUtils.hideKeyboard(this)
+                checkLoginFieldsAndValidate()
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
         }
     }
 
@@ -123,7 +128,7 @@ class LoginActivity : AppCompatActivity() {
                             "Authentication successful.",
                             Toast.LENGTH_SHORT,
                         ).show()
-                        val intent = Intent(this, WePetSplashScreenActivity::class.java)
+                        val intent = Intent(this, HomePageActivity::class.java)
                         startActivity(intent)
                     } else {
                         // If sign in fails, display a message to the user.
@@ -133,7 +138,6 @@ class LoginActivity : AppCompatActivity() {
                             "Authentication failed.",
                             Toast.LENGTH_SHORT,
                         ).show()
-
                     }
                 }
         }

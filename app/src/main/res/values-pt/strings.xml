@@ -48,4 +48,13 @@
     <string name="description">Descrição</string>
     <string name="contact">Contactar</string>
     <string name="open_list_of_animals">Ver lista de animais</string>
+    <string name="about_us">Sobre nós</string>
+    <string name="support">Suporte</string>
+    <string name="number_of_users">Numero de utilizadores</string>
+    <string name="number_of_animals">Numero de animais</string>
+    <string name="we_are_a_group_of_programmers_living_in_braga_whose_goal_is_to_implement_new_features_that_contribute_to_a_better_world">Somos um grupo de programadores residentes em Braga cujo o objetivo é implementar novas funcionalidades que contribuam para um mundo melhor.</string>
+    <string name="braga_portugal">Braga, Portugal</string>
+    <string name="send">Enviar</string>
+    <string name="matter">Assunto</string>
+    <string name="message">Mensagem</string>
 </resources>

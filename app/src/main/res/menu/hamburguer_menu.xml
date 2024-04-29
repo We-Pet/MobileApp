@@ -12,4 +12,16 @@
         android:id="@+id/IT_desative_account"
         android:fontFamily="@font/comfortaa_light"
         android:title="@string/desative_account" />
+
+    <item
+        android:id="@+id/IT_about_us"
+        android:fontFamily="@font/comfortaa_light"
+        android:title="@string/about_us" />
+
+    <item
+        android:id="@+id/IT_support"
+        android:fontFamily="@font/comfortaa_light"
+        android:title="@string/support" />
 </menu>
+
+
