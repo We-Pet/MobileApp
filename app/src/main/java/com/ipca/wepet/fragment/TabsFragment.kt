@@ -221,7 +221,7 @@ class TabsFragment(private val recyclerView: RecyclerView) : Fragment(),
     private fun generateAnimalData(): List<AnimalModel> {
         val animalList = mutableListOf<AnimalModel>()
         for (i in 1..12) {
-            val animal = AnimalModel("Id $i", "Animal $i", "Race $i", "Sex $i")
+            val animal = AnimalModel("Id $i", "Animal $i", "Race $i", "gender $i")
             animalList.add(animal)
         }
         return animalList
@@ -239,7 +239,7 @@ class TabsFragment(private val recyclerView: RecyclerView) : Fragment(),
     private fun generateShelterData(): List<ShelterModel> {
         val shelterList = mutableListOf<ShelterModel>()
         for (i in 1..12) {
-            val shelter = ShelterModel("Id $i", "Shelter $i", "Race $i", "Sex $i")
+            val shelter = ShelterModel("Id $i", "Shelter $i", "Race $i", "gender $i")
             shelterList.add(shelter)
         }
         return shelterList
@@ -257,7 +257,7 @@ class TabsFragment(private val recyclerView: RecyclerView) : Fragment(),
     private fun generateEventData(): List<EventModel> {
         val eventList = mutableListOf<EventModel>()
         for (i in 1..12) {
-            val event = EventModel("Id $i", "Event $i", "Race $i", "Sex $i")
+            val event = EventModel("Id $i", "Event $i", "Race $i", "gender $i")
             eventList.add(event)
         }
         return eventList

@@ -31,7 +31,7 @@ class AnimalAdapter(
         View.OnClickListener {
         private val ivAnimalPhoto: ImageView = itemView.findViewById(R.id.IV_animalPhoto)
         private val tvAnimalName: TextView = itemView.findViewById(R.id.TV_animalName)
-        private val ivAnimalSex: ImageView = itemView.findViewById(R.id.IV_animalGender)
+        private val ivAnimalgender: ImageView = itemView.findViewById(R.id.IV_animalGender)
         private val tvAnimalRace: TextView = itemView.findViewById(R.id.TV_animalRace)
 
         init {

@@ -32,7 +32,7 @@ class ShelterAdapter(
         View.OnClickListener {
         private val ivShelterPhoto: ImageView = itemView.findViewById(R.id.IV_shelter_photo)
         private val tvShelterName: TextView = itemView.findViewById(R.id.TV_shelter_name)
-        private val ivShelterSex: ImageView = itemView.findViewById(R.id.IV_shelter_gender)
+        private val ivSheltergender: ImageView = itemView.findViewById(R.id.IV_shelter_gender)
         private val tvShelterRace: TextView = itemView.findViewById(R.id.TV_shelter_race)
 
         init {

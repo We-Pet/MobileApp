@@ -1,17 +1,25 @@
 package com.ipca.wepet.controller
 
+import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.ipca.wepet.R
 
 class ProfilActivity : AppCompatActivity() {
-
+    private val CAMERA_REQUEST = 1888
     private lateinit var ivMainPhoto: ImageView
     private lateinit var tvMainName: TextView
     private lateinit var etName: EditText
@@ -28,6 +36,21 @@ class ProfilActivity : AppCompatActivity() {
 
         initializeElements()
         startNewActivities()
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_REQUEST) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Camera permission granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun initializeElements() {
@@ -43,10 +66,9 @@ class ProfilActivity : AppCompatActivity() {
     }
 
     private fun startNewActivities() {
-
         // Login action
         btnSave.setOnClickListener {
-            //Call databse
+            //Call database
             Toast.makeText(this, "Data saved successfully!", Toast.LENGTH_SHORT).show()
         }
 
@@ -54,6 +76,19 @@ class ProfilActivity : AppCompatActivity() {
         btnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+
+        ivMainPhoto.setOnClickListener{
+            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            cameraLauncher.launch(cameraIntent)
+        }
     }
 
+    private var cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val photo = result.data?.extras?.get("data") as Bitmap?
+            ivMainPhoto.setImageBitmap(photo)
+        } else if (result.resultCode == RESULT_CANCELED) {
+            Toast.makeText(this, "Camera operation canceled", Toast.LENGTH_SHORT).show()
+        }
+    }
 }

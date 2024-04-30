@@ -17,7 +17,6 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -27,7 +26,6 @@ import com.ipca.wepet.utils.EmailUtils
 import com.ipca.wepet.utils.FirebaseUtils
 import com.ipca.wepet.utils.KeyboardUtils
 import com.ipca.wepet.utils.ToastHandler
-import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
 

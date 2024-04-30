@@ -1,5 +1,6 @@
 package com.ipca.wepet.controller
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -109,6 +110,15 @@ class AnimalActivity : AppCompatActivity() {
         // Back action
         ibBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        tvAnimalLocation.setOnClickListener{
+            val intent = Intent(this, GoogleMapsActivity::class.java)
+            //TODO: get lat and long from database
+            intent.putExtra("latitude", 41.5369644)
+            intent.putExtra("longitude", -8.6286399,)
+            intent.putExtra("name", tvAnimalLocation.text)
+            startActivity(intent)
         }
     }
 }
