@@ -45,6 +45,7 @@
     <string name="error_invalid_email">Invalid Email</string>
     <string name="error_empty_password">Insert Password</string>
     <string name="passwords_do_not_match">Passwords must match</string>
+    <string name="account_created_successfully">Account created</string>
     <string name="title_activity_google_maps" translatable="false">GoogleMapsActivity</string>
     <string name="my_animals">My animals</string>
     <string name="desative_account">Desative account</string>
