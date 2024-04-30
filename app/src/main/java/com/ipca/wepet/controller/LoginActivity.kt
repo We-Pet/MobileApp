@@ -4,13 +4,12 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.media.Image
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.Gravity
-import android.view.View
+import android.view.KeyEvent
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
@@ -18,17 +17,15 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
 import com.ipca.wepet.R
-import com.ipca.wepet.utils.FirebaseUtils
-import com.ipca.wepet.views.WePetSplashScreenActivity
 import com.ipca.wepet.utils.EmailUtils
+import com.ipca.wepet.utils.FirebaseUtils
+import com.ipca.wepet.utils.KeyboardUtils
 import com.ipca.wepet.utils.ToastHandler
-import org.w3c.dom.Text
 
 class LoginActivity : AppCompatActivity() {
 
@@ -43,11 +40,11 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var emailTextField: EditText
     private lateinit var passwordTextField: EditText
-  
+
     private lateinit var auth: FirebaseAuth
     private lateinit var fireBaseUtils: FirebaseUtils
 
-  
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_layout)
@@ -71,8 +68,8 @@ class LoginActivity : AppCompatActivity() {
         badLoginWarning = findViewById(R.id.bad_login_warning_TV)
         emailTextField = findViewById(R.id.ET_email)
         passwordTextField = findViewById(R.id.ET_password)
-        btnClearTextEmail.setOnClickListener{emailTextField.text.clear()}
-        btnClearTextPassword.setOnClickListener{passwordTextField.text.clear()}
+        btnClearTextEmail.setOnClickListener { emailTextField.text.clear() }
+        btnClearTextPassword.setOnClickListener { passwordTextField.text.clear() }
 
         auth = Firebase.auth
         fireBaseUtils = FirebaseUtils(auth)
@@ -84,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
         btnLogin.setOnClickListener {
             checkLoginFieldsAndValidate()
         }
-        
+
         //Create account action
         btnCreateAccount.setOnClickListener {
             val intent = Intent(this, CreateAccountActivity::class.java)
@@ -93,6 +90,16 @@ class LoginActivity : AppCompatActivity() {
         //Forgot pass action
         btnForgotPass.setOnClickListener {
             showBottomDialogForgotPassword()
+        }
+
+        // Trigger login action on Enter press
+        passwordTextField.setOnKeyListener { _, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                KeyboardUtils.hideKeyboard(this)
+                checkLoginFieldsAndValidate()
+                return@setOnKeyListener true
+            }
+            return@setOnKeyListener false
         }
     }
 
@@ -122,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
                             "Authentication successful.",
                             Toast.LENGTH_SHORT,
                         ).show()
-                        val intent = Intent(this, WePetSplashScreenActivity::class.java)
+                        val intent = Intent(this, HomePageActivity::class.java)
                         startActivity(intent)
                     } else {
                         // If sign in fails, display a message to the user.
@@ -132,7 +139,6 @@ class LoginActivity : AppCompatActivity() {
                             "Authentication failed.",
                             Toast.LENGTH_SHORT,
                         ).show()
-
                     }
                 }
         }
@@ -148,7 +154,7 @@ class LoginActivity : AppCompatActivity() {
 
         val emailText = dialog.findViewById<EditText>(R.id.ET_email)
 
-        btnClearText.setOnClickListener{emailText.text.clear()}
+        btnClearText.setOnClickListener { emailText.text.clear() }
 
         btnContinue.setOnClickListener {
 
@@ -187,7 +193,7 @@ class LoginActivity : AppCompatActivity() {
         setupTextWatchers(dialog, codeEditTextFieldsList)
 
         btnContinue.setOnClickListener {
-            if (isCodeFieldsNotEmpty(codeEditTextFieldsList)){
+            if (isCodeFieldsNotEmpty(codeEditTextFieldsList)) {
                 dialog.dismiss()
                 showBottomDialogForgotPasswordReset()
             }
@@ -208,14 +214,17 @@ class LoginActivity : AppCompatActivity() {
         dialog.setContentView(R.layout.bottom_sheet_layout_forgot_password_reset)
 
         val btnContinue = dialog.findViewById<Button>(R.id.BTN_submit_confirm_password)
-        val btnClearTextPassword = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_password_reset)
-        val btnClearTextConfirmPassword = dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_confirm_password_reset)
+        val btnClearTextPassword =
+            dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_password_reset)
+        val btnClearTextConfirmPassword =
+            dialog.findViewById<ImageButton>(R.id.IBTN_clear_button_confirm_password_reset)
 
         val passwordText = dialog.findViewById<EditText>(R.id.ET_password_reset)
-        val confirmPasswordText = dialog.findViewById<EditText>(R.id.ET_repeat_confirm_password_reset)
+        val confirmPasswordText =
+            dialog.findViewById<EditText>(R.id.ET_repeat_confirm_password_reset)
 
-        btnClearTextPassword.setOnClickListener{passwordText.text.clear()}
-        btnClearTextConfirmPassword.setOnClickListener{confirmPasswordText.text.clear()}
+        btnClearTextPassword.setOnClickListener { passwordText.text.clear() }
+        btnClearTextConfirmPassword.setOnClickListener { confirmPasswordText.text.clear() }
 
         btnContinue.setOnClickListener {
             if (passwordText.text.isBlank()){
@@ -248,8 +257,8 @@ class LoginActivity : AppCompatActivity() {
         return listOf(editText1, editText2, editText3, editText4)
     }
 
-    private fun isCodeFieldsNotEmpty(editTextList: List<EditText>): Boolean{
-        for (editText in editTextList){
+    private fun isCodeFieldsNotEmpty(editTextList: List<EditText>): Boolean {
+        for (editText in editTextList) {
             if (editText.text.isNullOrEmpty()) return false
         }
         return true

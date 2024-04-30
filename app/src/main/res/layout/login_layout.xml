@@ -33,9 +33,9 @@
             android:layout_height="wrap_content"
             android:autofillHints="@string/email_hint"
             android:backgroundTint="@color/light_gray"
+            android:fontFamily="@font/comfortaa_regular"
             android:hint="@string/email_hint"
             android:inputType="textEmailAddress"
-            android:fontFamily="@font/comfortaa_light"
             android:paddingLeft="15dp"
             app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_email"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,9 +80,9 @@
             android:layout_height="wrap_content"
             android:autofillHints="@string/password"
             android:backgroundTint="@color/light_gray"
+            android:fontFamily="@font/comfortaa_regular"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:fontFamily="@font/comfortaa_light"
             android:paddingLeft="15dp"
             app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_password"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,9 +114,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/comfortaa_regular"
         android:text="@string/forgot_password"
         android:textColor="@color/main_blue"
-        android:fontFamily="@font/comfortaa_light"
         app:layout_constraintEnd_toEndOf="@id/CTL_password"
         app:layout_constraintTop_toBottomOf="@id/CTL_password" />
 
@@ -125,14 +125,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/comfortaa_regular"
         android:paddingTop="10dp"
-        android:fontFamily="@font/comfortaa_light"
         android:textColor="@color/red"
-        app:layout_constraintTop_toTopOf="@id/TV_forgot_password"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="20dp"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toTopOf="@id/TV_forgot_password" />
 
     <Button
         android:id="@+id/BTN_login"
@@ -140,9 +140,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="75dp"
         android:background="@drawable/main_rounded_button"
+        android:fontFamily="@font/comfortaa_regular"
         android:text="@string/login_button"
         android:textColor="@color/light_gray"
-        android:fontFamily="@font/comfortaa_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CTL_password" />
@@ -153,9 +153,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="25dp"
         android:background="@drawable/main_rounded_button"
+        android:fontFamily="@font/comfortaa_regular"
         android:text="@string/create_account"
         android:textColor="@color/light_gray"
-        android:fontFamily="@font/comfortaa_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BTN_login" />

@@ -1,4 +1,4 @@
-package com.ipca.wepet.frament
+package com.ipca.wepet.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater

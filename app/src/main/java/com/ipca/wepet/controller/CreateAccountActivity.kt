@@ -45,7 +45,7 @@ class CreateAccountActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser =  null // auth.currentUser Todo: when logout is implemented
+        val currentUser = null // auth.currentUser Todo: when logout is implemented
 
     }
 
@@ -113,7 +113,7 @@ class CreateAccountActivity : AppCompatActivity() {
         editText.text.clear()
     }
 
-    private fun signInUserToFirebase(email: String, password: String){
+    private fun signInUserToFirebase(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {

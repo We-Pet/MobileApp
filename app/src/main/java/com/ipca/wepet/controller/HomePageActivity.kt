@@ -2,20 +2,14 @@ package com.ipca.wepet.controller
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ipca.wepet.R
-import com.ipca.wepet.adapter.AnimalAdapter
-import com.ipca.wepet.frament.FooterFragment
-import com.ipca.wepet.frament.HeaderFragment
-import com.ipca.wepet.frament.SearchFragment
-import com.ipca.wepet.frament.TabsFragment
-import com.ipca.wepet.models.AnimalModel
+import com.ipca.wepet.fragment.FooterFragment
+import com.ipca.wepet.fragment.HeaderFragment
+import com.ipca.wepet.fragment.SearchFragment
+import com.ipca.wepet.fragment.TabsFragment
 
 class HomePageActivity : AppCompatActivity() {
-    private lateinit var animalsView: RecyclerView
-    private lateinit var animalAdapter: AnimalAdapter
-    private lateinit var animalList: List<AnimalModel>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,35 +25,16 @@ class HomePageActivity : AppCompatActivity() {
             .replace(R.id.FL_header, HeaderFragment())
             .commit()
 
-        // Get the tabs
+        // Get the recyclerview to pass to the tabs fragment
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         supportFragmentManager.beginTransaction()
-            .replace(R.id.FL_tabs, TabsFragment())
+            .replace(R.id.FL_tabs, TabsFragment(recyclerView))
             .commit()
 
         // Get the search
         supportFragmentManager.beginTransaction()
             .replace(R.id.FL_search, SearchFragment())
             .commit()
-
-
-
-        animalsView = findViewById(R.id.recyclerView)
-        animalList = generateData()
-        animalAdapter = AnimalAdapter(animalList)
-
-        animalsView.layoutManager = GridLayoutManager(this, 3)
-        animalsView.adapter = animalAdapter
     }
-
-
-    private fun generateData(): List<AnimalModel> {
-        val animalList = mutableListOf<AnimalModel>()
-        for (i in 1..12) {
-            val animal = AnimalModel("Animal $i", "Race $i", "Sex $i")
-            animalList.add(animal)
-        }
-        return animalList
-    }
-
 
 }
