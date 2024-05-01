@@ -32,9 +32,7 @@ class CodePanelActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.code_panel_layout)
 
-
         pin = intent.getStringExtra("pin").toString()
-        Toast.makeText(this, pin, Toast.LENGTH_SHORT).show()
 
         initializeElements()
         startNewActivities()

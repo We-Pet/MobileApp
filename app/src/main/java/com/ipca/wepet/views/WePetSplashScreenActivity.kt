@@ -40,12 +40,18 @@ class WePetSplashScreenActivity : AppCompatActivity() {
                 val intent = Intent(this, CodePanelActivity::class.java)
                 intent.putExtra("pin", pin)
                 startActivity(intent)
-                overridePendingTransition(R.anim.in_out_activities_enter, R.anim.in_out_activities_exit)
+                overridePendingTransition(
+                    R.anim.in_out_activities_enter,
+                    R.anim.in_out_activities_exit
+                )
                 finish()
             } else {
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
-                overridePendingTransition(R.anim.in_out_activities_enter, R.anim.in_out_activities_exit)
+                overridePendingTransition(
+                    R.anim.in_out_activities_enter,
+                    R.anim.in_out_activities_exit
+                )
                 finish()
             }
         }, SPLASH_DELAY + SPLASH_ANIMATION_DURATION)

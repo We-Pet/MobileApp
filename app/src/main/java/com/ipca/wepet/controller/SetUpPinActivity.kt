@@ -38,7 +38,6 @@ class SetUpPinActivity : AppCompatActivity() {
 
     private lateinit var btnBack: ImageButton
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.set_up_pin_layout)

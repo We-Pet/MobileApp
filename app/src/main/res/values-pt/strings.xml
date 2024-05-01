@@ -28,6 +28,8 @@
     <string name="error_empty_email">Inserir email</string>
     <string name="error_invalid_email">Email invalido</string>
     <string name="error_empty_password">inserir palavra chave</string>
+    <string name="error_empty_PIN">Inserir pin</string>
+    <string name="error_size_PIN">Pin precisa de ter 6 digitos</string>
     <string name="passwords_do_not_match">Palavras chave tem que ser iguais</string>
     <string name="account_created_successfully">Conta criada</string>
     <string name="my_animals">Meus animais</string>
@@ -58,5 +60,11 @@
     <string name="send">Enviar</string>
     <string name="matter">Assunto</string>
     <string name="message">Mensagem</string>
-    <string name="set_up_pin">Criar PIN</string>
+    <string name="set_up_pin">Criar código</string>
+    <string name="pin">Código</string>
+    <string name="forgot_code">Esqueceu código?</string>
+    <string name="confirm_action">Confirmar ação</string>
+    <string name="confirm_delete_account">Tem a certeza que deseja eliminar a sua conta?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
 </resources>

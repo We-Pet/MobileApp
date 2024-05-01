@@ -86,19 +86,23 @@
     <string name="send">Send</string>
     <string name="matter">Matter</string>
     <string name="message">Message</string>
-    <string name="set_up_pin">Set up PIN</string>
-    <string name="pin">PIN</string>
-    <string name="_1">1</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="_6">6</string>
-    <string name="_7">7</string>
-    <string name="_8">8</string>
-    <string name="_9">9</string>
-    <string name="_0">0</string>
+    <string name="set_up_pin">Set up code</string>
+    <string name="pin">Code</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="_4" translatable="false">4</string>
+    <string name="_5" translatable="false">5</string>
+    <string name="_6" translatable="false">6</string>
+    <string name="_7" translatable="false">7</string>
+    <string name="_8" translatable="false">8</string>
+    <string name="_9" translatable="false">9</string>
+    <string name="_0" translatable="false">0</string>
     <string name="forgot_code">Forgot code?</string>
-    <string name="enter_button">Enter button</string>
-    <string name="delete_text_button">Delete text button</string>
+    <string name="enter_button" translatable="false">Enter button</string>
+    <string name="delete_text_button" translatable="false">Delete text button</string>
+    <string name="confirm_action">Confirm Action</string>
+    <string name="confirm_delete_account">Are you sure you want to delete your account?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

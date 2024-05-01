@@ -120,6 +120,7 @@
             android:layout_height="1dp"
             android:background="@android:color/black"
             app:layout_constraintTop_toBottomOf="@id/ET_password" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- PIN edit text with button -->

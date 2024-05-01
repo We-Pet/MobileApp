@@ -32,9 +32,9 @@
 
     <LinearLayout
         android:id="@+id/LL_code_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_weight="1"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,8 +43,8 @@
 
         <TextView
             android:id="@+id/TV_code_1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:background="@drawable/code_square_selector"
             android:gravity="center"
@@ -54,8 +54,8 @@
 
         <TextView
             android:id="@+id/TV_code_2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
@@ -67,8 +67,8 @@
 
         <TextView
             android:id="@+id/TV_code_3"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:background="@drawable/code_square_selector"
             android:gravity="center"
@@ -78,8 +78,8 @@
 
         <TextView
             android:id="@+id/TV_code_4"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
@@ -91,8 +91,8 @@
 
         <TextView
             android:id="@+id/TV_code_5"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:background="@drawable/code_square_selector"
             android:gravity="center"
@@ -102,8 +102,8 @@
 
         <TextView
             android:id="@+id/TV_code_6"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:background="@drawable/code_square_selector"
@@ -118,7 +118,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="20dp"
+        android:paddingTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LL_code_view">
