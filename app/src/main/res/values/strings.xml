@@ -44,6 +44,8 @@
     <string name="error_empty_email">Insert Email</string>
     <string name="error_invalid_email">Invalid Email</string>
     <string name="error_empty_password">Insert Password</string>
+    <string name="error_empty_PIN">Insert pin</string>
+    <string name="error_size_PIN">Pin needs to have 6 digits</string>
     <string name="passwords_do_not_match">Passwords must match</string>
     <string name="account_created_successfully">Account created</string>
     <string name="title_activity_google_maps" translatable="false">GoogleMapsActivity</string>
@@ -84,4 +86,19 @@
     <string name="send">Send</string>
     <string name="matter">Matter</string>
     <string name="message">Message</string>
+    <string name="set_up_pin">Set up PIN</string>
+    <string name="pin">PIN</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="_0">0</string>
+    <string name="forgot_code">Forgot code?</string>
+    <string name="enter_button">Enter button</string>
+    <string name="delete_text_button">Delete text button</string>
 </resources>

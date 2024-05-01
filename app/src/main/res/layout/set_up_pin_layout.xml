@@ -16,6 +16,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Back button -->
+    <ImageButton
+        android:id="@+id/IB_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/back_button"
+        android:scaleType="fitCenter"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!-- Email edit text with button -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/CTL_email"
@@ -108,27 +122,52 @@
             app:layout_constraintTop_toBottomOf="@id/ET_password" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/TV_forgot_password"
-        android:layout_width="wrap_content"
+    <!-- PIN edit text with button -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CTL_pin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/comfortaa_regular"
-        android:text="@string/forgot_password"
-        android:textColor="@color/main_blue"
-        app:layout_constraintEnd_toEndOf="@id/CTL_password"
-        app:layout_constraintTop_toBottomOf="@id/CTL_password" />
+        android:layout_marginHorizontal="70dp"
+        android:layout_marginTop="25dp"
+        android:background="@color/light_gray"
+        app:layout_constraintTop_toBottomOf="@+id/CTL_password">
 
-    <TextView
-        android:id="@+id/TV_setup_pin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/comfortaa_regular"
-        android:text="@string/set_up_pin"
-        android:textColor="@color/main_blue"
-        app:layout_constraintStart_toStartOf="@id/CTL_password"
-        app:layout_constraintTop_toBottomOf="@id/CTL_password" />
+
+        <EditText
+            android:id="@+id/ET_pin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/password"
+            android:backgroundTint="@color/light_gray"
+            android:fontFamily="@font/comfortaa_regular"
+            android:hint="@string/pin"
+            android:inputType="numberPassword"
+            android:maxLength="6"
+            android:paddingLeft="15dp"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_pin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageButton
+            android:id="@+id/IBTN_clear_button_pin"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/clear_password"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_input_text"
+            app:layout_constraintBottom_toBottomOf="@id/ET_pin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ET_pin" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/black"
+            app:layout_constraintTop_toBottomOf="@id/ET_pin" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/bad_login_warning_TV"
@@ -142,7 +181,7 @@
         android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/TV_forgot_password" />
+        app:layout_constraintTop_toTopOf="@id/BTN_login" />
 
     <Button
         android:id="@+id/BTN_login"
@@ -155,19 +194,7 @@
         android:textColor="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CTL_password" />
+        app:layout_constraintTop_toBottomOf="@+id/CTL_pin" />
 
-    <Button
-        android:id="@+id/BTN_create_account"
-        android:layout_width="190dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/main_rounded_button"
-        android:fontFamily="@font/comfortaa_regular"
-        android:text="@string/create_account"
-        android:textColor="@color/light_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BTN_login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

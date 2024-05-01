@@ -112,11 +112,11 @@ class AnimalActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        tvAnimalLocation.setOnClickListener{
+        tvAnimalLocation.setOnClickListener {
             val intent = Intent(this, GoogleMapsActivity::class.java)
             //TODO: get lat and long from database
             intent.putExtra("latitude", 41.5369644)
-            intent.putExtra("longitude", -8.6286399,)
+            intent.putExtra("longitude", -8.6286399)
             intent.putExtra("name", tvAnimalLocation.text)
             startActivity(intent)
         }

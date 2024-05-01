@@ -3,12 +3,10 @@ package com.ipca.wepet.controller
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -49,7 +47,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
     }
 
-    private fun initializeElements(){
+    private fun initializeElements() {
         nameEditText = findViewById(R.id.ET_name_create_account)
         emailEditText = findViewById(R.id.ET_email_create_account)
         passwordEditText = findViewById(R.id.ET_password_create_account)
@@ -59,16 +57,17 @@ class CreateAccountActivity : AppCompatActivity() {
         clearNameButton = findViewById(R.id.IBTN_clear_button_name)
         clearEmailButton = findViewById(R.id.IBTN_clear_button_email)
         clearPasswordButton = findViewById(R.id.IBTN_clear_button_password_create_account)
-        clearConfirmPasswordButton = findViewById(R.id.IBTN_clear_button_confirm_password_create_account)
+        clearConfirmPasswordButton =
+            findViewById(R.id.IBTN_clear_button_confirm_password_create_account)
 
         backToLoginButton = findViewById(R.id.BTN_back_to_login_create_account)
     }
 
     private fun setupOnClickListeners() {
-        clearNameButton.setOnClickListener{clearText(nameEditText)}
-        clearEmailButton.setOnClickListener{clearText(emailEditText)}
-        clearPasswordButton.setOnClickListener{clearText(passwordEditText)}
-        clearConfirmPasswordButton.setOnClickListener{clearText(confirmPasswordEditText)}
+        clearNameButton.setOnClickListener { clearText(nameEditText) }
+        clearEmailButton.setOnClickListener { clearText(emailEditText) }
+        clearPasswordButton.setOnClickListener { clearText(passwordEditText) }
+        clearConfirmPasswordButton.setOnClickListener { clearText(confirmPasswordEditText) }
     }
 
     private fun startNewActivities() {
@@ -80,7 +79,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
         setupOnClickListeners()
 
-        btnSubmit.setOnClickListener{
+        btnSubmit.setOnClickListener {
 
             val password = passwordEditText.text.toString()
             val repeatPassword = confirmPasswordEditText.text.toString()
@@ -92,7 +91,7 @@ class CreateAccountActivity : AppCompatActivity() {
             } else if (!EmailUtils.isEmailValid(email)) {
                 ToastHandler.showToast(this, R.string.error_invalid_email)
                 return@setOnClickListener
-            } else if (!password.equals(repeatPassword)){
+            } else if (!password.equals(repeatPassword)) {
                 ToastHandler.showToast(this, R.string.passwords_do_not_match)
                 return@setOnClickListener
             }
@@ -104,12 +103,12 @@ class CreateAccountActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToLoginActivity(){
+    private fun goToLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
 
-    private fun clearText(editText: EditText){
+    private fun clearText(editText: EditText) {
         editText.text.clear()
     }
 

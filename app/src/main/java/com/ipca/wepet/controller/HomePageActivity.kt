@@ -1,6 +1,7 @@
 package com.ipca.wepet.controller
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.ipca.wepet.R
@@ -35,6 +36,15 @@ class HomePageActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.FL_search, SearchFragment())
             .commit()
+
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
+    }
+
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+        }
     }
 
 }
