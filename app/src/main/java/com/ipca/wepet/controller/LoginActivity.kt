@@ -17,6 +17,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -32,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnLogin: Button
     private lateinit var btnCreateAccount: Button
     private lateinit var btnForgotPass: TextView
+    private lateinit var tvSetupPin: TextView
 
     private lateinit var btnClearTextEmail: ImageButton
     private lateinit var btnClearTextPassword: ImageButton
@@ -52,6 +54,9 @@ class LoginActivity : AppCompatActivity() {
         initializeElements()
         startNewActivities()
 
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
+
         /*fireBaseUtils.checkIfUserIsLoggedIn {
             setContentView(R.layout.main_layout)
         }*/
@@ -62,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
         btnLogin = findViewById(R.id.BTN_login)
         btnCreateAccount = findViewById(R.id.BTN_create_account)
         btnForgotPass = findViewById(R.id.TV_forgot_password)
+        tvSetupPin = findViewById(R.id.TV_setup_pin)
 
         btnClearTextEmail = findViewById(R.id.IBTN_clear_button_email)
         btnClearTextPassword = findViewById(R.id.IBTN_clear_button_password)
@@ -101,6 +107,12 @@ class LoginActivity : AppCompatActivity() {
             }
             return@setOnKeyListener false
         }
+
+        // Set up pin to authenticate
+        tvSetupPin.setOnClickListener {
+            val intent = Intent(this, SetUpPinActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun checkLoginFieldsAndValidate() {
@@ -108,39 +120,49 @@ class LoginActivity : AppCompatActivity() {
         val email = emailTextField.text.toString()
         val password = passwordTextField.text.toString()
 
-        if (email.isBlank()){
+        if (email.isBlank()) {
             ToastHandler.showToast(this, R.string.error_empty_email)
             return
-        } else if (!EmailUtils.isEmailValid(email)){
+        } else if (!EmailUtils.isEmailValid(email)) {
             ToastHandler.showToast(this, R.string.error_empty_email)
-        } else if (password.isBlank()){
+        } else if (password.isBlank()) {
             ToastHandler.showToast(this, R.string.error_empty_password)
         } else {
+            loginFireBase(email, password)
+        }
+    }
 
-            //sign in with firebase
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("AUTH", "signInWithEmail:success")
-                        //val user = auth.currentUser
-                        Toast.makeText(
-                            baseContext,
-                            "Authentication successful.",
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                        val intent = Intent(this, HomePageActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("AUTH", "signInWithEmail:failure", task.exception)
-                        Toast.makeText(
-                            baseContext,
-                            "Authentication failed.",
-                            Toast.LENGTH_SHORT,
-                        ).show()
-                    }
+    private fun loginFireBase(email: String, password: String) {
+
+        //sign in with firebase
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("AUTH", "signInWithEmail:success")
+                    //val user = auth.currentUser
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication successful.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+
+                    val intent = Intent(this, HomePageActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("AUTH", "signInWithEmail:failure", task.exception)
+                    Toast.makeText(
+                        baseContext,
+                        "Authentication failed.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
                 }
+            }
+    }
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
         }
     }
 
@@ -163,7 +185,7 @@ class LoginActivity : AppCompatActivity() {
             if (email.isBlank()) {
                 ToastHandler.showToast(this, R.string.error_empty_email)
                 return@setOnClickListener
-            } else if (!EmailUtils.isEmailValid(email)){
+            } else if (!EmailUtils.isEmailValid(email)) {
                 ToastHandler.showToast(this, R.string.error_invalid_email)
                 return@setOnClickListener
             } else {
@@ -227,13 +249,13 @@ class LoginActivity : AppCompatActivity() {
         btnClearTextConfirmPassword.setOnClickListener { confirmPasswordText.text.clear() }
 
         btnContinue.setOnClickListener {
-            if (passwordText.text.isBlank()){
+            if (passwordText.text.isBlank()) {
                 ToastHandler.showToast(this, R.string.error_empty_password)
                 return@setOnClickListener
-            } else if (confirmPasswordText.text.toString() != passwordText.text.toString()){
+            } else if (confirmPasswordText.text.toString() != passwordText.text.toString()) {
                 ToastHandler.showToast(this, R.string.passwords_do_not_match)
                 return@setOnClickListener
-            }else {
+            } else {
                 dialog.dismiss()
                 Toast.makeText(this, "Password reset", Toast.LENGTH_SHORT).show()
             }

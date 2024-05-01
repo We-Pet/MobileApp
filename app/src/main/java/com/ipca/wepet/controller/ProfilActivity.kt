@@ -37,12 +37,24 @@ class ProfilActivity : AppCompatActivity() {
         initializeElements()
         startNewActivities()
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST)
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                CAMERA_REQUEST
+            )
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_REQUEST) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -77,18 +89,19 @@ class ProfilActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
 
-        ivMainPhoto.setOnClickListener{
+        ivMainPhoto.setOnClickListener {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             cameraLauncher.launch(cameraIntent)
         }
     }
 
-    private var cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val photo = result.data?.extras?.get("data") as Bitmap?
-            ivMainPhoto.setImageBitmap(photo)
-        } else if (result.resultCode == RESULT_CANCELED) {
-            Toast.makeText(this, "Camera operation canceled", Toast.LENGTH_SHORT).show()
+    private var cameraLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val photo = result.data?.extras?.get("data") as Bitmap?
+                ivMainPhoto.setImageBitmap(photo)
+            } else if (result.resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "Camera operation canceled", Toast.LENGTH_SHORT).show()
+            }
         }
-    }
 }

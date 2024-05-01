@@ -28,7 +28,10 @@
     <string name="error_empty_email">insert Email</string>
     <string name="error_invalid_email">invalid Email</string>
     <string name="error_empty_password">Insert Password</string>
+    <string name="error_empty_PIN">Insert pin</string>
+    <string name="error_size_PIN">Pin needs to have 6 digits</string>
     <string name="passwords_do_not_match">Passwords must match</string>
+    <string name="account_created_successfully">Account created</string>
     <string name="my_animals">My animals</string>
     <string name="desative_account">Desative account</string>
     <string name="edit_profil">Edit profil</string>
@@ -57,4 +60,11 @@
     <string name="send">Send</string>
     <string name="matter">Subject</string>
     <string name="message">Message</string>
+    <string name="set_up_pin">Set up code</string>
+    <string name="pin">Code</string>
+    <string name="forgot_code">Forgot code?</string>
+    <string name="confirm_action">Confirm Action</string>
+    <string name="confirm_delete_account">Are you sure you want to delete your account?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

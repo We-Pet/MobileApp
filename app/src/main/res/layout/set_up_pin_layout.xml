@@ -5,19 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/BTN_back_to_login_create_account"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:contentDescription="@string/back_button"
-        android:scaleType="fitCenter"
-        android:src="@drawable/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/IV_main_icon"
         android:layout_width="170dp"
@@ -30,69 +17,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Name edit text with button -->
+    <!-- Back button -->
+    <ImageButton
+        android:id="@+id/IB_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/back_button"
+        android:scaleType="fitCenter"
+        android:src="@drawable/back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Email edit text with button -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/CTL_name"
+        android:id="@+id/CTL_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="70dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="35dp"
         android:background="@color/light_gray"
         app:layout_constraintTop_toBottomOf="@+id/IV_main_icon">
 
 
         <EditText
-            android:id="@+id/ET_name_create_account"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="@string/name"
-            android:backgroundTint="@color/light_gray"
-            android:fontFamily="@font/comfortaa_regular"
-            android:hint="@string/name"
-            android:inputType="text"
-            android:paddingStart="15dp"
-            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_name"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry" />
-
-        <ImageButton
-            android:id="@+id/IBTN_clear_button_name"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/clear_name"
-            android:scaleType="fitCenter"
-            android:src="@drawable/delete_input_text"
-            app:layout_constraintBottom_toBottomOf="@id/ET_name_create_account"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ET_name_create_account" />
-
-        <View
-            android:id="@+id/divider_name"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/ET_name_create_account" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <!-- Email edit text with button -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/CTL_email_create_account"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="70dp"
-        android:layout_marginTop="25dp"
-        android:background="@color/light_gray"
-        app:layout_constraintTop_toBottomOf="@+id/CTL_name">
-
-
-        <EditText
-            android:id="@+id/ET_email_create_account"
+            android:id="@+id/ET_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints="@string/email_hint"
@@ -115,33 +66,32 @@
             android:contentDescription="@string/clear_email"
             android:scaleType="fitCenter"
             android:src="@drawable/delete_input_text"
-            app:layout_constraintBottom_toBottomOf="@id/ET_email_create_account"
+            app:layout_constraintBottom_toBottomOf="@id/ET_email"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ET_email_create_account" />
+            app:layout_constraintTop_toTopOf="@id/ET_email" />
 
         <View
-            android:id="@+id/divider_email_create_account"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/ET_email_create_account" />
+            app:layout_constraintTop_toBottomOf="@id/ET_email" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <!-- Password edit text with button -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/CTL_password_create_account"
+        android:id="@+id/CTL_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="70dp"
         android:layout_marginTop="25dp"
         android:background="@color/light_gray"
-        app:layout_constraintTop_toBottomOf="@+id/CTL_email_create_account">
+        app:layout_constraintTop_toBottomOf="@+id/CTL_email">
 
 
         <EditText
-            android:id="@+id/ET_password_create_account"
+            android:id="@+id/ET_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:autofillHints="@string/password"
@@ -150,14 +100,13 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:paddingStart="15dp"
-            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_password_create_account"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RtlSymmetry" />
 
         <ImageButton
-            android:id="@+id/IBTN_clear_button_password_create_account"
+            android:id="@+id/IBTN_clear_button_password"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="8dp"
@@ -165,46 +114,48 @@
             android:contentDescription="@string/clear_password"
             android:scaleType="fitCenter"
             android:src="@drawable/delete_input_text"
-            app:layout_constraintBottom_toBottomOf="@id/ET_password_create_account"
+            app:layout_constraintBottom_toBottomOf="@id/ET_password"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ET_password_create_account" />
+            app:layout_constraintTop_toTopOf="@id/ET_password" />
 
         <View
-            android:id="@+id/divider_pass"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/ET_password_create_account" />
+            app:layout_constraintTop_toBottomOf="@id/ET_password" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Password edit text with button -->
+    <!-- PIN edit text with button -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/CTL_confirm_password_create_account"
+        android:id="@+id/CTL_pin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="70dp"
         android:layout_marginTop="25dp"
         android:background="@color/light_gray"
-        app:layout_constraintTop_toBottomOf="@+id/CTL_password_create_account">
+        app:layout_constraintTop_toBottomOf="@+id/CTL_password">
 
 
         <EditText
-            android:id="@+id/ET_confirm_password_create_account"
+            android:id="@+id/ET_pin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:autofillHints="@string/confirm_password"
+            android:autofillHints="@string/password"
             android:backgroundTint="@color/light_gray"
             android:fontFamily="@font/comfortaa_regular"
-            android:hint="@string/confirm_password"
-            android:inputType="textPassword"
+            android:hint="@string/pin"
+            android:inputType="numberPassword"
+            android:maxLength="6"
             android:paddingStart="15dp"
-            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_confirm_password_create_account"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_pin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RtlSymmetry" />
 
+
         <ImageButton
-            android:id="@+id/IBTN_clear_button_confirm_password_create_account"
+            android:id="@+id/IBTN_clear_button_pin"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginEnd="8dp"
@@ -212,28 +163,43 @@
             android:contentDescription="@string/clear_password"
             android:scaleType="fitCenter"
             android:src="@drawable/delete_input_text"
-            app:layout_constraintBottom_toBottomOf="@id/ET_confirm_password_create_account"
+            app:layout_constraintBottom_toBottomOf="@id/ET_pin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/ET_confirm_password_create_account" />
+            app:layout_constraintTop_toTopOf="@id/ET_pin" />
 
         <View
-            android:id="@+id/divider_confirm_password_create_account"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@id/ET_confirm_password_create_account" />
+            app:layout_constraintTop_toBottomOf="@id/ET_pin" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/bad_login_warning_TV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/comfortaa_regular"
+        android:paddingTop="10dp"
+        android:textColor="@color/red"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/BTN_login" />
+
     <Button
-        android:id="@+id/BTN_submit_create_account"
-        android:layout_width="170dp"
+        android:id="@+id/BTN_login"
+        android:layout_width="190dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="75dp"
         android:background="@drawable/main_rounded_button"
-        android:text="@string/submit"
+        android:fontFamily="@font/comfortaa_regular"
+        android:text="@string/login_button"
         android:textColor="@color/light_gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CTL_confirm_password_create_account" />
+        app:layout_constraintTop_toBottomOf="@+id/CTL_pin" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
