@@ -15,22 +15,25 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:icon="@drawable/main_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
+        android:name=".WePetApplication"
         tools:targetApi="31">
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDM9lbjkATmlMpH4socA7CyLJxzCXeZ_xg" />
 
         <activity
-            android:name=".controller.GoogleMapsActivity"
+            android:name=".presentation.controller.GoogleMapsActivity"
             android:exported="false"
             android:label="@string/title_activity_google_maps" />
         <activity
-            android:name=".views.WePetSplashScreenActivity"
+            android:name=".presentation.views.WePetSplashScreenActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -40,55 +43,55 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".controller.LoginActivity"
+            android:name=".presentation.controller.LoginActivity"
             android:label="LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".controller.CreateAccountActivity"
+            android:name=".presentation.controller.CreateAccountActivity"
             android:label="CreateAccountActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".controller.HomePageActivity"
+            android:name=".presentation.controller.HomePageActivity"
             android:label="HomePageActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".controller.AnimalActivity"
+            android:name=".presentation.controller.AnimalActivity"
             android:label="AnimalActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".controller.ShelterActivity"
+            android:name=".presentation.controller.ShelterActivity"
             android:label="ShelterActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".controller.EventActivity"
+            android:name=".presentation.controller.EventActivity"
             android:label="EventActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".controller.ProfilActivity"
+            android:name=".presentation.controller.ProfilActivity"
             android:label="ProfilActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".controller.ContactUsActivity"
+            android:name=".presentation.controller.ContactUsActivity"
             android:label="ContactUsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".controller.AboutUsActivity"
+            android:name=".presentation.controller.AboutUsActivity"
             android:label="AboutUsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".controller.SetUpPinActivity"
+            android:name=".presentation.controller.SetUpPinActivity"
             android:label="AboutUsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".controller.CodePanelActivity"
+            android:name=".presentation.controller.CodePanelActivity"
             android:label="AboutUsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
