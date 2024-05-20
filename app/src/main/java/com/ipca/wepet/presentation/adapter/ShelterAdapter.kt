@@ -41,7 +41,7 @@ class ShelterAdapter(
 
         fun bind(shelter: ShelterModel) {
             tvShelterName.text = shelter.name
-            tvShelterRace.text = shelter.race
+            tvShelterRace.text = shelter.city
         }
 
         override fun onClick(view: View?) {

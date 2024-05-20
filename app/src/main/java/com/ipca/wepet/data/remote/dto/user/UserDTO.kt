@@ -1,7 +1,6 @@
 package com.ipca.wepet.data.remote.dto.user
 
 import com.squareup.moshi.Json
-import java.time.LocalDateTime
 
 data class UserDTO(
     @field:Json(name = "_id") val id: String,

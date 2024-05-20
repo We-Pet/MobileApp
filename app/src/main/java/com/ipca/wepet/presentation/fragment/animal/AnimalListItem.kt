@@ -13,9 +13,9 @@ import com.ipca.wepet.domain.model.AnimalModel
 fun AnimalListItem(animal: AnimalModel) {
     animal.name?.let {
         Text(
-        text = it,
-        style = TextStyle(fontSize = 18.sp),
-        modifier = Modifier.padding(8.dp)
-    )
+            text = it,
+            style = TextStyle(fontSize = 18.sp),
+            modifier = Modifier.padding(8.dp)
+        )
     }
 }

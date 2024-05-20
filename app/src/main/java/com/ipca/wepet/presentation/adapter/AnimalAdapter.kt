@@ -3,7 +3,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ipca.wepet.R
 import com.ipca.wepet.domain.model.AnimalModel

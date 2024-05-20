@@ -26,6 +26,8 @@ import com.ipca.wepet.presentation.controller.EventActivity
 import com.ipca.wepet.presentation.controller.ShelterActivity
 import com.ipca.wepet.presentation.fragment.animal.AnimalListState
 import com.ipca.wepet.presentation.fragment.animal.AnimalViewModel
+import com.ipca.wepet.presentation.fragment.event.EventViewModel
+import com.ipca.wepet.presentation.fragment.shelter.ShelterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,6 +37,9 @@ class TabsFragment(private val recyclerView: RecyclerView) : Fragment(),
     EventAdapter.OnEventClickListener {
 
     private val animalViewModel: AnimalViewModel by viewModels()
+    private val shelterViewModel: ShelterViewModel by viewModels()
+    private val eventViewModel: EventViewModel by viewModels()
+
 
     private lateinit var animalState: AnimalListState
 
@@ -66,17 +71,17 @@ class TabsFragment(private val recyclerView: RecyclerView) : Fragment(),
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return ComposeView(requireContext()).apply {
             setContent {
-                AnimalListScreen(viewModel = animalViewModel)
+                ListScreen(animalViewModel, shelterViewModel, eventViewModel)
             }
         }
     }
 
 
     private fun setAnimalList() {
-        //animalViewModel.onEvent(AnimalListEvent.Refresh)
+        //animalViewModel.onEvent(EventListEvent.Refresh)
 
         animalList = animalState.animals
         animalAdapter = AnimalAdapter(animalList, this)
@@ -181,7 +186,6 @@ class TabsFragment(private val recyclerView: RecyclerView) : Fragment(),
                 ContextCompat.getColor(requireContext(), R.color.black),
                 View.INVISIBLE
             )
-            setShelterList()
         }
 
         ibShelters.setOnClickListener {
@@ -218,7 +222,6 @@ class TabsFragment(private val recyclerView: RecyclerView) : Fragment(),
                 ContextCompat.getColor(requireContext(), R.color.main_blue),
                 View.VISIBLE
             )
-            setEventList()
         }
 
         ibEvents.setOnClickListener {
@@ -228,42 +231,6 @@ class TabsFragment(private val recyclerView: RecyclerView) : Fragment(),
         tvEvents.setOnClickListener {
             frameEvents.callOnClick()
         }
-    }
-
-    private fun setShelterList() {
-        shelterList = generateShelterData()
-        shelterAdapter = ShelterAdapter(shelterList, this)
-        recyclerView.apply {
-            layoutManager = GridLayoutManager(requireContext(), 3)
-            adapter = shelterAdapter
-        }
-    }
-
-    private fun generateShelterData(): List<ShelterModel> {
-        val shelterList = mutableListOf<ShelterModel>()
-        for (i in 1..12) {
-            val shelter = ShelterModel("Id $i", "Shelter $i", "Race $i", "gender $i")
-            shelterList.add(shelter)
-        }
-        return shelterList
-    }
-
-    private fun setEventList() {
-        eventList = generateEventData()
-        eventAdapter = EventAdapter(eventList, this)
-        recyclerView.apply {
-            layoutManager = GridLayoutManager(requireContext(), 3)
-            adapter = eventAdapter
-        }
-    }
-
-    private fun generateEventData(): List<EventModel> {
-        val eventList = mutableListOf<EventModel>()
-        for (i in 1..12) {
-            val event = EventModel("Id $i", "Event $i", "Race $i", "gender $i")
-            eventList.add(event)
-        }
-        return eventList
     }
 
     override fun onAnimalClick(position: Int) {

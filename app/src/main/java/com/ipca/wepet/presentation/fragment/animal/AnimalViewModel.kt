@@ -1,6 +1,8 @@
 package com.ipca.wepet.presentation.fragment.animal
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ipca.wepet.domain.repository.AnimalRepository
@@ -10,8 +12,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 
 @HiltViewModel
 class AnimalViewModel @Inject constructor(
@@ -27,10 +27,11 @@ class AnimalViewModel @Inject constructor(
     }
 
     fun onEvent(event: AnimalListEvent) {
-        when(event) {
+        when (event) {
             is AnimalListEvent.Refresh -> {
                 getAnimalList(fetchFromRemote = true)
             }
+
             is AnimalListEvent.OnSearchQueryChange -> {
                 state = state.copy(searchQuery = event.query)
                 searchJob?.cancel()
@@ -50,7 +51,7 @@ class AnimalViewModel @Inject constructor(
             animalRepository
                 .getAnimals(fetchFromRemote, query)
                 .collect { result ->
-                    when(result) {
+                    when (result) {
                         is Resource.Success -> {
                             result.data?.let { listings ->
                                 state = state.copy(
@@ -58,6 +59,7 @@ class AnimalViewModel @Inject constructor(
                                 )
                             }
                         }
+
                         is Resource.Error -> Unit
                         is Resource.Loading -> {
                             state = state.copy(isLoading = result.isLoading)

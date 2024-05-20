@@ -1,11 +1,11 @@
-package com.ipca.wepet.data.repository
+package com.ipca.wepet.data.repository.animal
 
 import android.util.Log
 import com.google.gson.Gson
 import com.ipca.wepet.data.local.animal.AnimalDao
 import com.ipca.wepet.data.local.animal.AnimalDatabase
-import com.ipca.wepet.data.mapper.user.toAnimalEntity
-import com.ipca.wepet.data.mapper.user.toAnimalModel
+import com.ipca.wepet.data.mapper.animal.toAnimalEntity
+import com.ipca.wepet.data.mapper.animal.toAnimalModel
 import com.ipca.wepet.data.remote.WePetApi
 import com.ipca.wepet.domain.model.AnimalModel
 import com.ipca.wepet.domain.model.AnimalResponse
@@ -19,7 +19,7 @@ import javax.inject.Singleton
 @Singleton
 class AnimalRepositoryImpl @Inject constructor(
     private val api: WePetApi,
-    private val db: AnimalDatabase
+    db: AnimalDatabase
 ) : AnimalRepository {
     private val dao: AnimalDao = db.animalDao()
 
@@ -49,9 +49,6 @@ class AnimalRepositoryImpl @Inject constructor(
                 val gson = Gson()
                 val animalResponse = gson.fromJson(jsonString, AnimalResponse::class.java)
                 val animalList = animalResponse.data
-                for (animal in animalList) {
-                    Log.i("Animal in list", animal.toString())
-                }
                 animalList
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -63,8 +60,7 @@ class AnimalRepositoryImpl @Inject constructor(
             remoteListings?.let { listings ->
                 Log.i("Database animal count", dao.getAnimalCount().toString())
                 dao.clearAnimals()
-                Log.i("ClearDatabase", "Animal")
-                Log.i("Database animal count", dao.getAnimalCount().toString())
+                Log.i("ClearDatabase animal count", dao.getAnimalCount().toString())
                 dao.insertAnimals(
                     listings.map { it.toAnimalEntity() }
                 )

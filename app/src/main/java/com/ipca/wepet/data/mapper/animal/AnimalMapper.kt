@@ -1,8 +1,7 @@
-package com.ipca.wepet.data.mapper.user
+package com.ipca.wepet.data.mapper.animal
 
 import com.ipca.wepet.data.local.animal.AnimalEntity
 import com.ipca.wepet.domain.model.AnimalModel
-import java.util.Date
 
 fun AnimalEntity.toAnimalModel(): AnimalModel {
     return AnimalModel(
@@ -18,7 +17,7 @@ fun AnimalEntity.toAnimalModel(): AnimalModel {
         animalType = animalType ?: "",
         breed = breed ?: "",
         createdAt = createdAt ?: String(),
-        deleted = deleted ?: 0
+        deleted = deleted
     )
 }
 
@@ -26,7 +25,7 @@ fun AnimalModel.toAnimalEntity(): AnimalEntity {
     return AnimalEntity(
         id = id ?: "",
         name = name ?: "",
-        birthDate = birthDate?: String(),
+        birthDate = birthDate ?: String(),
         description = description ?: "",
         gender = gender ?: "",
         userId = userId ?: "",
@@ -35,7 +34,7 @@ fun AnimalModel.toAnimalEntity(): AnimalEntity {
         size = size ?: "",
         animalType = animalType ?: "",
         breed = breed ?: "",
-        createdAt = createdAt?: String(),
+        createdAt = createdAt ?: String(),
         deleted = deleted ?: 0
     )
 }

@@ -1,9 +1,6 @@
 package com.ipca.wepet.domain.model
 
 import com.google.gson.annotations.SerializedName
-import com.squareup.moshi.Json
-import java.time.LocalDateTime
-import java.util.Date
 
 data class AnimalModel(
     @SerializedName("_id")

@@ -1,12 +1,14 @@
 package com.ipca.wepet.di
 
-import com.ipca.wepet.data.repository.AnimalRepositoryImpl
+import com.ipca.wepet.data.repository.animal.AnimalRepositoryImpl
+import com.ipca.wepet.data.repository.event.EventRepositoryImpl
+import com.ipca.wepet.data.repository.shelter.ShelterRepositoryImpl
 import com.ipca.wepet.domain.repository.AnimalRepository
+import com.ipca.wepet.domain.repository.EventRepository
+import com.ipca.wepet.domain.repository.ShelterRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -19,4 +21,16 @@ abstract class RepositoryModule {
     abstract fun bindAnimalRepository(
         animalRepositoryImpl: AnimalRepositoryImpl
     ): AnimalRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindShelterRepository(
+        shelterRepositoryImpl: ShelterRepositoryImpl
+    ): ShelterRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindEventRepository(
+        eventRepositoryImpl: EventRepositoryImpl
+    ): EventRepository
 }

@@ -9,9 +9,11 @@ import com.ipca.wepet.domain.model.EventModel
 
 @Composable
 fun EventListItem(event: EventModel) {
-    Text(
-        text = event.name,
+    event.id?.let {
+        Text(
+        text = it,
         style = TextStyle(fontSize = 18.sp),
         modifier = Modifier.padding(8.dp)
     )
+    }
 }

@@ -1,7 +1,5 @@
 package com.ipca.wepet.domain.model
 
-import java.time.LocalDateTime
-
 data class UserModel(
     val id: String,
     val name: String,

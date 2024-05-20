@@ -1,3 +1,39 @@
 package com.ipca.wepet.domain.model
 
-class ShelterModel(val id: String, val name: String, val race: String, val gender: String)
+import com.google.gson.annotations.SerializedName
+
+data class ShelterModel(
+    @SerializedName("_id")
+    val id: String?,
+    @SerializedName("name")
+    val name: String?,
+    @SerializedName("description")
+    val description: String?,
+    @SerializedName("email")
+    val email: String?,
+    @SerializedName("birth_date")
+    val birthDate: String?,
+    @SerializedName("phone_number")
+    val phoneNumber: String?,
+    @SerializedName("country")
+    val country: String?,
+    @SerializedName("city")
+    val city: String?,
+    @SerializedName("postal_code")
+    val postalCode: String?,
+    @SerializedName("address")
+    val address: String?,
+    @SerializedName("is_verified")
+    val isVerified: Boolean?,
+    @SerializedName("createdAt")
+    val createdAt: String?,
+    @SerializedName("user_id")
+    val userId: String?,
+    @SerializedName("__v")
+    val deleted: Int?
+)
+
+data class ShelterResponse(
+    @SerializedName("data")
+    val data: List<ShelterModel>
+)

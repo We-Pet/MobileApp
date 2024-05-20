@@ -40,8 +40,7 @@ class EventAdapter(
         }
 
         fun bind(event: EventModel) {
-            tvEventName.text = event.name
-            tvEventRace.text = event.race
+            tvEventName.text = event.id
         }
 
         override fun onClick(view: View?) {

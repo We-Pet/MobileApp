@@ -9,9 +9,11 @@ import com.ipca.wepet.domain.model.ShelterModel
 
 @Composable
 fun ShelterListItem(shelter: ShelterModel) {
-    Text(
-        text = shelter.name,
-        style = TextStyle(fontSize = 18.sp),
-        modifier = Modifier.padding(8.dp)
-    )
+    shelter.name?.let {
+        Text(
+            text = it,
+            style = TextStyle(fontSize = 18.sp),
+            modifier = Modifier.padding(8.dp)
+        )
+    }
 }

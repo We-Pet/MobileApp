@@ -1,18 +1,27 @@
 package com.ipca.wepet.data.remote
 
-import com.ipca.wepet.domain.model.UserModel
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 
 interface WePetApi {
-    @GET(":3002/users")
+    @GET("users")
     suspend fun getAllUsers(
     ): ResponseBody
 
     @GET("animals")
     suspend fun getAllAnimals(
     ): ResponseBody
+
+    @GET("shelters")
+    suspend fun getAllShelters(
+    ): ResponseBody
+
+    @GET("events")
+    suspend fun getAllEvents(
+    ): ResponseBody
+
+
     companion object {
-        const val BASE_URL = "http://ec2-16-171-132-76.eu-north-1.compute.amazonaws.com:3003"
+        const val BASE_URL = "http://ec2-16-171-132-76.eu-north-1.compute.amazonaws.com:3000"
     }
 }

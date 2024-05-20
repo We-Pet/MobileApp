@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
     version = 1,
     exportSchema = false
 )
-abstract class UserDatabase : RoomDatabase(){
+abstract class UserDatabase : RoomDatabase() {
     abstract val dao: UserDao
 
 }

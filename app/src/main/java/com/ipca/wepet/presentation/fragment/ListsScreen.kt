@@ -1,6 +1,11 @@
 package com.ipca.wepet.presentation.fragment
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
@@ -15,10 +20,14 @@ import com.ipca.wepet.presentation.fragment.animal.AnimalList
 import com.ipca.wepet.presentation.fragment.animal.AnimalListEvent
 import com.ipca.wepet.presentation.fragment.animal.AnimalViewModel
 import com.ipca.wepet.presentation.fragment.event.EventList
+import com.ipca.wepet.presentation.fragment.event.EventListEvent
+import com.ipca.wepet.presentation.fragment.event.EventViewModel
 import com.ipca.wepet.presentation.fragment.shelter.ShelterList
+import com.ipca.wepet.presentation.fragment.shelter.ShelterListEvent
+import com.ipca.wepet.presentation.fragment.shelter.ShelterViewModel
 
 @Composable
-fun AnimalListScreen(
+fun ListScreen(
     animalViewModel: AnimalViewModel,
     shelterViewModel: ShelterViewModel,
     eventViewModel: EventViewModel
@@ -68,9 +77,9 @@ fun AnimalListScreen(
         }
 
         when (selectedList) {
-            0 -> AnimalList(animalViewModel.state.animals ?: emptyList())
-            1 -> ShelterList(shelterViewModel.state.shelters ?: emptyList())
-            2 -> EventList(eventViewModel.state.events ?: emptyList())
+            0 -> AnimalList(animalViewModel.state.animals)
+            1 -> ShelterList(shelterViewModel.state.shelters)
+            2 -> EventList(eventViewModel.state.events)
         }
     }
 }

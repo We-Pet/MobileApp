@@ -18,9 +18,11 @@ fun ShelterList(shelters: List<ShelterModel>) {
             .fillMaxSize()
             .padding(vertical = 16.dp)
     ) {
-        LazyColumn {
-            items(shelters) { shelter ->
-                ShelterListItem(shelter = shelter)
+        shelters.let { shelterList ->
+            LazyColumn {
+                items(shelterList) { shelter ->
+                    ShelterListItem(shelter = shelter)
+                }
             }
         }
     }

@@ -1,7 +1,6 @@
 package com.ipca.wepet.data.remote.dto.animal
 
 import com.squareup.moshi.Json
-import java.time.LocalDateTime
 
 data class AnimalDTO(
     @field:Json(name = "_id") val id: String,

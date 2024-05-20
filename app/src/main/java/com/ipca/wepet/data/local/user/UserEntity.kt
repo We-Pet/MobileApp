@@ -2,7 +2,6 @@ package com.ipca.wepet.data.local.user
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.LocalDateTime
 
 @Entity
 data class UserEntity(

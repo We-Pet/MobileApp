@@ -1,3 +1,13 @@
 package com.ipca.wepet.domain.model
 
-class EventModel(val id: String, val name: String, val race: String, val gender: String)
+import com.google.gson.annotations.SerializedName
+
+data class EventModel(
+    @SerializedName("_id")
+    val id: String?
+)
+
+data class EventResponse(
+    @SerializedName("data")
+    val data: List<EventModel>
+)

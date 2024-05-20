@@ -1,4 +1,4 @@
-package com.ipca.wepet.data.repository
+package com.ipca.wepet.data.repository.user
 
 import com.google.gson.Gson
 import com.ipca.wepet.data.local.user.UserDatabase

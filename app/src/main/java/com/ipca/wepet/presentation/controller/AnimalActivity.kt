@@ -9,9 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.ipca.wepet.R
-import com.ipca.wepet.presentation.fragment.FooterFragment
 import com.ipca.wepet.domain.model.AnimalModel
-import com.ipca.wepet.domain.model.ShelterModel
+import com.ipca.wepet.presentation.fragment.FooterFragment
 
 class AnimalActivity : AppCompatActivity() {
     private lateinit var ivAnimalPhoto: ImageView
@@ -74,20 +73,8 @@ class AnimalActivity : AppCompatActivity() {
     }
 
 
-    private fun getShelterInfo(shelterId: String) {
-        // Get shelter from database
-
-        val shelter = ShelterModel(shelterId, "Tom", "Cat", "Male")
-        showShelterDetails(shelter)
-    }
-
     private fun showAnimalDetails(animal: AnimalModel) {
         //tvAnimalId.text = "Id: ${animal.id}"
-    }
-
-    private fun showShelterDetails(shelter: ShelterModel) {
-        //ivShelterIcon.image
-        tvShelterName.text = "Shelter: ${shelter.name}"
     }
 
     private fun startNewActivities() {
