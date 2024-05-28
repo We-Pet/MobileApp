@@ -5,8 +5,11 @@ import com.ipca.wepet.util.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
-    suspend fun getUsers(
-        fetchFromRemote: Boolean,
-        query: String
-    ): Flow<Resource<List<UserModel>>>
+    suspend fun getUser(
+        email: String
+    ): Flow<Resource<UserModel>>
+
+    suspend fun changeUser(
+        user: UserModel
+    ): Flow<Resource<UserModel>>
 }

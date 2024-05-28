@@ -1,11 +1,23 @@
 package com.ipca.wepet.data.remote
 
+import androidx.room.Update
+import com.ipca.wepet.domain.model.UserModel
 import okhttp3.ResponseBody
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface WePetApi {
-    @GET("users")
-    suspend fun getAllUsers(
+    @GET("users/{email}")
+    suspend fun getUserByEmail(
+        @Path("email") email: String
+    ): ResponseBody
+
+    @PUT("users/{email}")
+    suspend fun updateUserByEmail(
+        @Path("email") email: String,
+        @Body user: UserModel
     ): ResponseBody
 
     @GET("animals")

@@ -1,10 +1,12 @@
 package com.ipca.wepet.di
 
 import android.app.Application
+import android.service.autofill.UserData
 import androidx.room.Room
 import com.ipca.wepet.data.local.animal.AnimalDatabase
 import com.ipca.wepet.data.local.event.EventDatabase
 import com.ipca.wepet.data.local.shelter.ShelterDatabase
+import com.ipca.wepet.data.local.user.UserDatabase
 import com.ipca.wepet.data.remote.WePetApi
 import com.ipca.wepet.util.DateAdapter
 import com.squareup.moshi.Moshi
@@ -81,6 +83,18 @@ object AppModule {
             app,
             EventDatabase::class.java,
             "eventdb.db"
+        )
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserDatabase(app: Application): UserDatabase {
+        return Room.databaseBuilder(
+            app,
+            UserDatabase::class.java,
+            "userdb.db"
         )
             .fallbackToDestructiveMigration()
             .build()

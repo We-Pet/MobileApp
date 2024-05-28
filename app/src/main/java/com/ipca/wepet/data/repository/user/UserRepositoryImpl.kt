@@ -18,32 +18,31 @@ class UserRepositoryImpl @Inject constructor(
     private val api: WePetApi,
     private val db: UserDatabase
 ) : UserRepository {
-    private val dao = db.dao
+    private val dao = db.userDao()
 
-    override suspend fun getUsers(
-        fetchFromRemote: Boolean,
-        query: String
-    ): Flow<Resource<List<UserModel>>> {
+    override suspend fun getUser(
+        email: String
+    ): Flow<Resource<UserModel>> {
         return flow {
             emit(Resource.Loading(true))
-            val localListings = dao.searchUserList(query)
-            emit(Resource.Success(
-                data = localListings.map { it.toUserModel() }
-            ))
+            val localUser = dao.getUserByEmail(email)
+            emit(
+                Resource.Success(
+                    data = localUser?.toUserModel()
+                )
+            )
 
             // Check if database is empty
-            val isDbEmpty = localListings.isEmpty() && query.isBlank()
-            val shouldJustLoadFromCache = !isDbEmpty && !fetchFromRemote
-            if (shouldJustLoadFromCache) {
+            val isDbEmpty = localUser == null
+            if (!isDbEmpty ) {
                 emit(Resource.Loading(false))
                 return@flow
             }
             val remoteListings = try {
-                val response = api.getAllUsers()
+                val response = api.getUserByEmail(email)
                 val jsonString = response.string()
-                val listings = Gson().fromJson(jsonString, Array<UserModel>::class.java).toList()
-                listings
-
+                val user = Gson().fromJson(jsonString, UserModel::class.java)
+                user
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(Resource.Error("Couldn't load data"))
@@ -51,17 +50,54 @@ class UserRepositoryImpl @Inject constructor(
             }
 
             // Clear, insert in database, and search from database
-            remoteListings?.let { listings ->
+            remoteListings?.let { user ->
                 dao.clearUsers()
                 dao.insertUsers(
-                    listings.map { it.toUserEntity() }
+                    user.toUserEntity()
                 )
-                emit(Resource.Success(
-                    data = dao
-                        .searchUserList("")
-                        .map { it.toUserModel() }
-                ))
+                emit(Resource.Success(data = user))
 
+                emit(Resource.Loading(false))
+            }
+        }
+    }
+
+    override suspend fun changeUser(
+        userModel: UserModel
+    ): Flow<Resource<UserModel>> {
+        return flow {
+            emit(Resource.Loading(true))
+            val localUser = userModel.email?.let { dao.getUserByEmail(it) }
+            emit(
+                Resource.Success(
+                    data = localUser?.toUserModel()
+                )
+            )
+
+            // Check if database is empty
+            val isDbEmpty = localUser == null
+            if (isDbEmpty) {
+                emit(Resource.Error("Database is empty!"))
+                return@flow
+            }
+            val remoteListings = try {
+                val response = userModel.email?.let { api.updateUserByEmail(it, userModel) }
+                val jsonString = response?.string()
+                val user = Gson().fromJson(jsonString, UserModel::class.java)
+                user
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emit(Resource.Error("Couldn't load data"))
+                null
+            }
+
+            // Clear, insert in database, and search from database
+            remoteListings?.let { user ->
+                dao.clearUsers()
+                dao.insertUsers(
+                    user.toUserEntity()
+                )
+                emit(Resource.Success(data = user))
                 emit(Resource.Loading(false))
             }
         }

@@ -29,6 +29,7 @@ interface AnimalDao {
                 LOWER(city) LIKE '%' || LOWER(:query) || '%' OR
                 LOWER(gender) LIKE '%' || LOWER(:query) || '%' OR
                 LOWER(size) LIKE '%' || LOWER(:query) || '%' OR
+                LOWER(name) LIKE '%' || LOWER(:query) || '%' OR
                 :query = ''
 
         """
