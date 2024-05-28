@@ -11,9 +11,9 @@ import com.ipca.wepet.domain.model.EventModel
 fun EventListItem(event: EventModel) {
     event.id?.let {
         Text(
-        text = it,
-        style = TextStyle(fontSize = 18.sp),
-        modifier = Modifier.padding(8.dp)
-    )
+            text = it,
+            style = TextStyle(fontSize = 18.sp),
+            modifier = Modifier.padding(8.dp)
+        )
     }
 }

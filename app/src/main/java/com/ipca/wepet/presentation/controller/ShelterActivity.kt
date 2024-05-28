@@ -1,6 +1,8 @@
 package com.ipca.wepet.presentation.controller
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -9,7 +11,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.ipca.wepet.R
+import com.ipca.wepet.domain.model.ShelterModel
 import com.ipca.wepet.presentation.fragment.FooterFragment
+import java.io.Serializable
 
 class ShelterActivity : AppCompatActivity() {
     private lateinit var ivShelterPhoto: ImageView
@@ -35,7 +39,24 @@ class ShelterActivity : AppCompatActivity() {
         initializeElements()
         startNewActivities()
 
-        val shelterId = intent.getStringExtra("shelter")
+        val shelter = intent.getSerializableExtra("shelter") as? ShelterModel
+        if (shelter != null) {
+            showAnimalDetails(shelter)
+        }
+    }
+
+    inline fun <reified T : Serializable> Bundle.serializable(key: String): T? = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> getSerializable(key, T::class.java)
+        else -> @Suppress("DEPRECATION") getSerializable(key) as? T
+    }
+
+    inline fun <reified T : Serializable> Intent.serializable(key: String): T? = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> getSerializableExtra(
+            key,
+            T::class.java
+        )
+
+        else -> @Suppress("DEPRECATION") getSerializableExtra(key) as? T
     }
 
     private fun initializeElements() {
@@ -47,6 +68,13 @@ class ShelterActivity : AppCompatActivity() {
         tvShelterDescription = findViewById(R.id.TV_shelterDescription)
         contactCard = findViewById(R.id.contact_card)
         animalCard = findViewById(R.id.animal_card)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun showAnimalDetails(shelter: ShelterModel) {
+        tvShelterName.text = "${shelter.name}"
+        tvShelterLocation.text = "${shelter.city} , ${shelter.address}"
+        tvShelterDescription.text = "${shelter.description}"
     }
 
 

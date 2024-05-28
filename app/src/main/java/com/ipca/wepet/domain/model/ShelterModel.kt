@@ -1,6 +1,7 @@
 package com.ipca.wepet.domain.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ShelterModel(
     @SerializedName("_id")
@@ -31,7 +32,7 @@ data class ShelterModel(
     val userId: String?,
     @SerializedName("__v")
     val deleted: Int?
-)
+) : Serializable
 
 data class ShelterResponse(
     @SerializedName("data")

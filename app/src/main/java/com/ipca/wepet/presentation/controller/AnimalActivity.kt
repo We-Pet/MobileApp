@@ -1,6 +1,7 @@
 package com.ipca.wepet.presentation.controller
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -11,6 +12,7 @@ import androidx.cardview.widget.CardView
 import com.ipca.wepet.R
 import com.ipca.wepet.domain.model.AnimalModel
 import com.ipca.wepet.presentation.fragment.FooterFragment
+import java.io.Serializable
 
 class AnimalActivity : AppCompatActivity() {
     private lateinit var ivAnimalPhoto: ImageView
@@ -41,9 +43,25 @@ class AnimalActivity : AppCompatActivity() {
         initializeElements()
         startNewActivities()
 
-        val animalId = intent.getStringExtra("animal")
-        animalId?.let { getAnimalInfo(animalId) }
+        val animal = intent.getSerializableExtra("animal") as? AnimalModel
+        if (animal != null) {
+            showAnimalDetails(animal)
+        }
 
+    }
+
+    inline fun <reified T : Serializable> Bundle.serializable(key: String): T? = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> getSerializable(key, T::class.java)
+        else -> @Suppress("DEPRECATION") getSerializable(key) as? T
+    }
+
+    inline fun <reified T : Serializable> Intent.serializable(key: String): T? = when {
+        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> getSerializableExtra(
+            key,
+            T::class.java
+        )
+
+        else -> @Suppress("DEPRECATION") getSerializableExtra(key) as? T
     }
 
     private fun initializeElements() {
@@ -64,17 +82,13 @@ class AnimalActivity : AppCompatActivity() {
         tvAnimalDescription = findViewById(R.id.TV_animalDescription)
     }
 
-    private fun getAnimalInfo(animalId: String) {
-        // Get animal from database
-
-//        val animal = AnimalModel(animalId, "Tom", "Cat", "Male")
-//        showAnimalDetails(animal)
-//        getShelterInfo(animal.id)
-    }
-
-
     private fun showAnimalDetails(animal: AnimalModel) {
-        //tvAnimalId.text = "Id: ${animal.id}"
+        tvAnimalName.text = "${animal.name}"
+        tvAnimalAge.text = "${animal.name}"
+        tvAnimalStatus.text = "${animal.name}"
+        tvAnimalGender.text = "${animal.gender}"
+        tvAnimalLocation.text = "${animal.city}"
+        tvAnimalDescription.text = "${animal.description}"
     }
 
     private fun startNewActivities() {

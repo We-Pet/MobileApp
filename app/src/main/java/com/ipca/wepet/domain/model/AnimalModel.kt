@@ -1,6 +1,7 @@
 package com.ipca.wepet.domain.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class AnimalModel(
     @SerializedName("_id")
@@ -29,7 +30,7 @@ data class AnimalModel(
     val createdAt: String?,
     @SerializedName("__v")
     val deleted: Int?
-)
+) : Serializable
 
 data class AnimalResponse(
     @SerializedName("data")

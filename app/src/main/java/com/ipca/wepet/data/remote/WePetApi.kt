@@ -22,6 +22,6 @@ interface WePetApi {
 
 
     companion object {
-        const val BASE_URL = "http://ec2-16-171-132-76.eu-north-1.compute.amazonaws.com:3000"
+        const val BASE_URL = "http://ec2-13-48-58-106.eu-north-1.compute.amazonaws.com:3000"
     }
 }
