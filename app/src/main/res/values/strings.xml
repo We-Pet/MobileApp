@@ -24,6 +24,7 @@
     <string name="we" translatable="false">we</string>
     <string name="pet" translatable="false">Pet</string>
     <string name="animals">Animals</string>
+    <string name="camera_cancel">Camera operation canceled</string>
     <string name="shelter">Shelter</string>
     <string name="events">Events</string>
     <string name="search">Search</string>

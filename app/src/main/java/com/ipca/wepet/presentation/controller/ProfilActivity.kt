@@ -101,7 +101,7 @@ class ProfilActivity : AppCompatActivity() {
                 val photo = result.data?.extras?.get("data") as Bitmap?
                 ivMainPhoto.setImageBitmap(photo)
             } else if (result.resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Camera operation canceled", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.camera_cancel, Toast.LENGTH_SHORT).show()
             }
         }
 }

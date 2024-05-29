@@ -13,8 +13,6 @@ import com.ipca.wepet.R
 import com.ipca.wepet.databinding.GoogleMapsLayoutBinding
 
 class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
-
-
     private lateinit var mMap: GoogleMap
     private lateinit var binding: GoogleMapsLayoutBinding
 
@@ -28,6 +26,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = GoogleMapsLayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Get info in intent
         latitude = intent.getDoubleExtra("latitude", 0.0)
         longitude = intent.getDoubleExtra("longitude", 0.0)
         name = intent.getStringExtra("name") ?: ""

@@ -19,6 +19,7 @@
     <string name="enter_the_4_digit_code_that_was_sent_to_your_email">Enter the 4-digit code that was sent to your email.</string>
     <string name="code">Code</string>
     <string name="animals">Animals</string>
+    <string name="camera_cancel">Camera operation canceled.</string>
     <string name="shelter">Shelter</string>
     <string name="events">Events</string>
     <string name="search">Search</string>
