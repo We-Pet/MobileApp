@@ -36,7 +36,7 @@ class UserViewModel @Inject constructor(
     }
 
     private fun getUserByEmail(
-        email: String = state.email.lowercase() ?: ""
+        email: String = state.email.lowercase()
     ) {
         viewModelScope.launch {
             userRepository.getUser(email).collect { result ->

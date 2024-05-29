@@ -104,7 +104,7 @@ class HeaderFragment : Fragment() {
         popup.show()
     }
 
-    fun clearAuthPreferences() {
+    private fun clearAuthPreferences() {
         val sharedPreferences = requireActivity().getSharedPreferences("AUTH", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.clear()

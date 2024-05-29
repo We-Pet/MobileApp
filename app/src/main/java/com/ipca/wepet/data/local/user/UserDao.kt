@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.ipca.wepet.domain.model.UserModel
 
 @Dao
 interface UserDao {
@@ -22,7 +21,8 @@ interface UserDao {
     @Query("SELECT * FROM userEntity WHERE email = :email LIMIT 1")
     suspend fun getUserByEmail(email: String): UserEntity?
 
-    @Query("""
+    @Query(
+        """
         UPDATE userEntity 
         SET name = :name, 
             email = :newEmail, 
@@ -30,7 +30,8 @@ interface UserDao {
             password = :password, 
             phoneNumber = :phone 
         WHERE email = :currentEmail
-    """)
+    """
+    )
     suspend fun updateUserDetails(
         currentEmail: String,
         name: String,

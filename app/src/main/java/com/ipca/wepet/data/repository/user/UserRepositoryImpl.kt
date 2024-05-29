@@ -34,7 +34,7 @@ class UserRepositoryImpl @Inject constructor(
 
             // Check if database is empty
             val isDbEmpty = localUser == null
-            if (!isDbEmpty ) {
+            if (!isDbEmpty) {
                 emit(Resource.Loading(false))
                 return@flow
             }

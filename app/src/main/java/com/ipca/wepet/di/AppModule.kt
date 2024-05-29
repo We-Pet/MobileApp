@@ -1,7 +1,6 @@
 package com.ipca.wepet.di
 
 import android.app.Application
-import android.service.autofill.UserData
 import androidx.room.Room
 import com.ipca.wepet.data.local.animal.AnimalDatabase
 import com.ipca.wepet.data.local.event.EventDatabase

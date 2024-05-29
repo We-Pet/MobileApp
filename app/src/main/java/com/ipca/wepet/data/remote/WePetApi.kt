@@ -1,6 +1,5 @@
 package com.ipca.wepet.data.remote
 
-import androidx.room.Update
 import com.ipca.wepet.domain.model.UserModel
 import okhttp3.ResponseBody
 import retrofit2.http.Body

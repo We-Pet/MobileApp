@@ -5,16 +5,16 @@ import com.ipca.wepet.domain.model.UserModel
 
 fun UserEntity.toUserModel(): UserModel {
     return UserModel(
-        id = id ?: "",
-        name = name ?: "",
-        email = email ?: "",
-        city = city ?: "",
-        deleted = deleted ?: 0,
-        birthDate = birthDate ?: "",
-        phoneNumber = phoneNumber ?: "",
-        createdAt = createdAt ?: String(),
-        address = address ?: "",
-        password = password ?: ""
+        id = id,
+        name = name,
+        email = email,
+        city = city,
+        deleted = deleted,
+        birthDate = birthDate,
+        phoneNumber = phoneNumber,
+        createdAt = createdAt,
+        address = address,
+        password = password
     )
 }
 
