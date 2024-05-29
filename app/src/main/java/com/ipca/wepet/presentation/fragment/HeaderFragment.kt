@@ -2,6 +2,7 @@ package com.ipca.wepet.presentation.fragment
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -20,6 +21,7 @@ import com.ipca.wepet.presentation.controller.AboutUsActivity
 import com.ipca.wepet.presentation.controller.ContactUsActivity
 import com.ipca.wepet.presentation.controller.LoginActivity
 import com.ipca.wepet.presentation.controller.ProfilActivity
+import com.ipca.wepet.util.ToastHandler
 
 class HeaderFragment : Fragment() {
     private lateinit var ibHamburger: ImageButton
@@ -85,10 +87,28 @@ class HeaderFragment : Fragment() {
                     true
                 }
 
+                R.id.IT_log_out -> {
+                    // Handle menu log out click
+                    clearAuthPreferences()
+
+                    val intent = Intent(context, LoginActivity::class.java)
+                    startActivity(intent)
+                    context?.let { ToastHandler.showToast(it, R.string.logged_out) }
+
+                    true
+                }
+
                 else -> false
             }
         }
         popup.show()
+    }
+
+    fun clearAuthPreferences() {
+        val sharedPreferences = requireActivity().getSharedPreferences("AUTH", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
     }
 
     private fun showBottomDialogDeleteAccount() {
