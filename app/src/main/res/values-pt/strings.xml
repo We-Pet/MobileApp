@@ -19,6 +19,7 @@
     <string name="enter_the_4_digit_code_that_was_sent_to_your_email">Digite o código de 4 dígitos que foi enviado para seu e-mail.</string>
     <string name="code">Código</string>
     <string name="animals">Animais</string>
+    <string name="camera_cancel">Operação da camera cancelada.</string>
     <string name="shelter">Abrigos</string>
     <string name="events">Eventos</string>
     <string name="search">Procura</string>
@@ -26,6 +27,7 @@
     <string name="logo">logo</string>
     <string name="name_of_app">Nome da app</string>
     <string name="error_empty_email">Inserir email</string>
+    <string name="logged_out">Desconectado</string>
     <string name="error_invalid_email">Email invalido</string>
     <string name="error_empty_password">inserir palavra chave</string>
     <string name="error_empty_PIN">Inserir pin</string>
@@ -67,4 +69,5 @@
     <string name="confirm_delete_account">Tem a certeza que deseja eliminar a sua conta?</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+    <string name="log_out">Sair</string>
 </resources>
