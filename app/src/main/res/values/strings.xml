@@ -108,4 +108,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="log_out">Log out</string>
+    <string name="token" translatable="false">token</string>
+    <string name="tittle" translatable="false">Tittle</string>
+    <string name="this_is_the_description" translatable="false">This is the description</string>
 </resources>
