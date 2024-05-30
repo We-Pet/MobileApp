@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
         android:allowBackup="true"
@@ -25,10 +26,12 @@
         android:name=".WePetApplication"
         tools:targetApi="31">
 
-
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDM9lbjkATmlMpH4socA7CyLJxzCXeZ_xg" />
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/main_icon" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/black" />
 
         <activity
             android:name=".presentation.controller.GoogleMapsActivity"
@@ -40,7 +43,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -97,6 +99,13 @@
             android:label="AboutUsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".presentation.pushnotifications.PushNotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
