@@ -1,6 +1,7 @@
 package com.ipca.wepet.presentation.controller
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -18,6 +19,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -188,8 +190,9 @@ class LoginActivity : AppCompatActivity() {
                 ToastHandler.showToast(this, R.string.error_invalid_email)
                 return@setOnClickListener
             } else {
-                dialog.dismiss()
-                showBottomDialogForgotPasswordCode()
+                fireBaseUtils.sendEmailResetPassword(email) {
+                    showPasswordResetDialog(this, email, dialog)
+                }
             }
         }
 
@@ -314,5 +317,20 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun showPasswordResetDialog(context: Context, email: String, openedDialog: Dialog){
+        val message = "An email with a link to reset your password was sent to $email."
+
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Password Reset Request")
+        builder.setMessage(message)
+        builder.setPositiveButton("OK") { dialog, _ ->
+            dialog.dismiss()
+            openedDialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 }

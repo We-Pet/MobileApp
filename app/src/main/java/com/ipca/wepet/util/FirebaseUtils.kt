@@ -1,5 +1,6 @@
 package com.ipca.wepet.util
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 
 class FirebaseUtils(auth: FirebaseAuth) {
@@ -11,5 +12,19 @@ class FirebaseUtils(auth: FirebaseAuth) {
         if (currentUser != null) {
             callBack()
         }
+    }
+
+    fun sendEmailResetPassword(emailAddress: String, callBack: () -> Unit) {
+        if(checkIfUserExists(emailAddress)){
+            _auth.sendPasswordResetEmail(emailAddress)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        Log.d("EMAIL", "Email sent.")
+                    }
+                }
+        }
+    }
+     fun checkIfUserExists(email: String): Boolean{
+        return true //TODO
     }
 }
