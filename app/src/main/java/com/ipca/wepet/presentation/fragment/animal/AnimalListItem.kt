@@ -12,11 +12,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberImagePainter
 import com.ipca.wepet.R
 import com.ipca.wepet.domain.model.AnimalModel
 import com.ipca.wepet.presentation.controller.AnimalActivity
@@ -37,15 +39,20 @@ fun AnimalListItem(animal: AnimalModel, modifier: Modifier = Modifier) {
             .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        animal.id?.let { resourceId ->
-            Image(
-                painter = painterResource(id = R.drawable.unknown_gender),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(80.dp)
-                    .padding(bottom = 8.dp)
-            )
+        val painter = if (animal.profileImageUrl != null) {
+            rememberImagePainter(animal.profileImageUrl)
+        } else {
+            painterResource(id = R.drawable.unknown_gender)
         }
+
+        Image(
+            painter = painter,
+            contentDescription = null,
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .size(80.dp)
+                .padding(bottom = 8.dp)
+        )
         animal.name?.let {
             Text(
                 text = it,

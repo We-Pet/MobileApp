@@ -30,6 +30,14 @@ data class ShelterModel(
     val createdAt: String?,
     @SerializedName("user_id")
     val userId: String?,
+    @SerializedName("latitude")
+    val latitude: String?,
+    @SerializedName("longitude")
+    val longitude: String?,
+    @SerializedName("profileImage")
+    val profileImage: String?,
+    @SerializedName("profileImageUrl")
+    val profileImageUrl: String?,
     @SerializedName("__v")
     val deleted: Int?
 ) : Serializable

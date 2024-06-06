@@ -10,6 +10,7 @@ import com.ipca.wepet.domain.repository.UserRepository
 import com.ipca.wepet.util.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import okhttp3.MultipartBody
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -63,11 +64,12 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun changeUser(
-        userModel: UserModel
+        userId: String,
+        image: MultipartBody.Part
     ): Flow<Resource<UserModel>> {
         return flow {
             emit(Resource.Loading(true))
-            val localUser = userModel.email?.let { dao.getUserByEmail(it) }
+            val localUser = dao.getUserById(userId)
             emit(
                 Resource.Success(
                     data = localUser?.toUserModel()
@@ -81,7 +83,7 @@ class UserRepositoryImpl @Inject constructor(
                 return@flow
             }
             val remoteListings = try {
-                val response = userModel.email?.let { api.updateUserByEmail(it, userModel) }
+                val response = api.updateUserImage(userId, image)
                 val jsonString = response?.string()
                 val user = Gson().fromJson(jsonString, UserModel::class.java)
                 user

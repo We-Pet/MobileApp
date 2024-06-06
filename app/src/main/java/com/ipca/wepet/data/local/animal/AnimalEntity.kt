@@ -18,5 +18,10 @@ data class AnimalEntity(
     val animalType: String?,
     val breed: String?,
     val createdAt: String?,
+    val latitude: String?,
+    val longitude: String?,
+    val status: String?,
+    val profileImage: String?,
+    val profileImageUrl: String?,
     val deleted: Int = 0
 )

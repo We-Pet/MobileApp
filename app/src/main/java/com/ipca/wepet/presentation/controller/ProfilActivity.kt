@@ -13,10 +13,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.ipca.wepet.R
+import com.ipca.wepet.domain.model.UserModel
+import com.ipca.wepet.presentation.fragment.user.UserEvent
+import com.ipca.wepet.presentation.fragment.user.UserState
+import com.ipca.wepet.presentation.fragment.user.UserViewModel
 
 class ProfilActivity : AppCompatActivity() {
     private val CAMERA_REQUEST = 1888
@@ -29,7 +34,7 @@ class ProfilActivity : AppCompatActivity() {
     private lateinit var etPhone: EditText
     private lateinit var btnSave: Button
     private lateinit var btnBack: ImageButton
-
+    private val userViewModel: UserViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profil_layout)
@@ -48,6 +53,10 @@ class ProfilActivity : AppCompatActivity() {
                 CAMERA_REQUEST
             )
         }
+
+
+        userViewModel.onEvent(UserEvent.GetUser("a16951@alunos.ipca.pt"));
+        val user = userViewModel.state.user;
     }
 
     override fun onRequestPermissionsResult(

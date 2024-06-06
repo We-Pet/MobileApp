@@ -17,7 +17,12 @@ fun AnimalEntity.toAnimalModel(): AnimalModel {
         animalType = animalType ?: "",
         breed = breed ?: "",
         createdAt = createdAt ?: String(),
-        deleted = deleted
+        deleted = deleted,
+        latitude = latitude ?: "",
+        longitude = longitude ?: "",
+        status = status ?: "",
+        profileImage = profileImage ?: "",
+        profileImageUrl = profileImageUrl ?: "",
     )
 }
 
@@ -35,7 +40,12 @@ fun AnimalModel.toAnimalEntity(): AnimalEntity {
         animalType = animalType ?: "",
         breed = breed ?: "",
         createdAt = createdAt ?: String(),
-        deleted = deleted ?: 0
+        deleted = deleted ?: 0,
+        latitude = latitude ?: "",
+        longitude = longitude ?: "",
+        status = status ?: "",
+        profileImage = profileImage ?: "",
+        profileImageUrl = profileImageUrl ?: "",
     )
 }
 
