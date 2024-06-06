@@ -27,6 +27,7 @@
     <string name="logo">logo</string>
     <string name="name_of_app">name of app</string>
     <string name="error_empty_email">insert Email</string>
+    <string name="latitude_longitude_error">Invalid latitude or longitude</string>
     <string name="logged_out">Logged out</string>
     <string name="error_invalid_email">invalid Email</string>
     <string name="error_empty_password">Insert Password</string>
@@ -70,4 +71,5 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="log_out">Log out</string>
+    <string name="no_internet">No internet connection</string>
 </resources>
