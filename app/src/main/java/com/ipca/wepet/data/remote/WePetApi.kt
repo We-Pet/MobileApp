@@ -1,22 +1,24 @@
 package com.ipca.wepet.data.remote
 
-import com.ipca.wepet.domain.model.UserModel
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.PUT
+import retrofit2.http.Multipart
+import retrofit2.http.PATCH
+import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface WePetApi {
-    @GET("users/{email}")
+    @GET("users/getUserIDByEmail/{email}")
     suspend fun getUserByEmail(
         @Path("email") email: String
     ): ResponseBody
 
-    @PUT("users/{email}")
-    suspend fun updateUserByEmail(
-        @Path("email") email: String,
-        @Body user: UserModel
+    @Multipart
+    @PATCH("users/upload/image/{userId}")
+    suspend fun updateUserImage(
+        @Path("userId") userId: String,
+        @Part image: MultipartBody.Part
     ): ResponseBody
 
     @GET("animals")
@@ -33,6 +35,6 @@ interface WePetApi {
 
 
     companion object {
-        const val BASE_URL = "http://ec2-13-48-58-106.eu-north-1.compute.amazonaws.com:3000"
+        const val BASE_URL = "http://ec2-13-60-88-160.eu-north-1.compute.amazonaws.com:3000"
     }
 }

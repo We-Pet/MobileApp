@@ -24,6 +24,10 @@ data class UserModel(
     val createdAt: String? = null,
     @SerializedName("user_id")
     val userId: String? = null,
+    @SerializedName("profileImage")
+    val profileImage: String? = null,
+    @SerializedName("profileImageUrl")
+    val profileImageUrl: String? = null,
     @SerializedName("__v")
     val deleted: Int? = null
 ) : Serializable

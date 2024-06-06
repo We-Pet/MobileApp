@@ -43,6 +43,7 @@
     <string name="social_button" translatable="false">social button</string>
     <string name="profile_button" translatable="false">profile button</string>
     <string name="error_empty_email">Insert Email</string>
+    <string name="latitude_longitude_error">Invalid latitude or longitude</string>
     <string name="logged_out">Logged out</string>
     <string name="error_invalid_email">Invalid Email</string>
     <string name="error_empty_password">Insert Password</string>
@@ -110,5 +111,6 @@
     <string name="log_out">Log out</string>
     <string name="token" translatable="false">token</string>
     <string name="tittle" translatable="false">Tittle</string>
+    <string name="no_internet">No internet connection</string>
     <string name="this_is_the_description" translatable="false">This is the description</string>
 </resources>

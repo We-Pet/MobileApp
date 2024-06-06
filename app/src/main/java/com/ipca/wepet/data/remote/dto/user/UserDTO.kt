@@ -11,6 +11,8 @@ data class UserDTO(
     @field:Json(name = "birth_date") val birthDate: String,
     @field:Json(name = "phoneNumber") val phoneNumber: String,
     @field:Json(name = "updatedAt") val updatedAt: String,
-    @field:Json(name = "createdAt") val createdAt: String
+    @field:Json(name = "createdAt") val createdAt: String,
+    @field:Json(name = "profileImage") val profileImage: String,
+    @field:Json(name = "profileImageUrl") val profileImageUrl: String
 )
 

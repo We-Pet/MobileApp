@@ -14,5 +14,7 @@ data class UserEntity(
     val deleted: Int,
     val birthDate: String,
     val phoneNumber: String,
-    val createdAt: String
+    val createdAt: String,
+    val profileImage: String,
+    val profileImageUrl: String,
 )

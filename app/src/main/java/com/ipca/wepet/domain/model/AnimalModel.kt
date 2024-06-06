@@ -28,6 +28,16 @@ data class AnimalModel(
     val breed: String?,
     @SerializedName("createdAt")
     val createdAt: String?,
+    @SerializedName("latitude")
+    val latitude: String?,
+    @SerializedName("longitude")
+    val longitude: String?,
+    @SerializedName("status")
+    val status: String?,
+    @SerializedName("profileImage")
+    val profileImage: String?,
+    @SerializedName("profileImageUrl")
+    val profileImageUrl: String?,
     @SerializedName("__v")
     val deleted: Int?
 ) : Serializable

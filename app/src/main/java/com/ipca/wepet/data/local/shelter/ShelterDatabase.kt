@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [ShelterEntity::class],
-    version = 2,
+    version = 3,
 )
 abstract class ShelterDatabase : RoomDatabase() {
     abstract fun shelterDao(): ShelterDao

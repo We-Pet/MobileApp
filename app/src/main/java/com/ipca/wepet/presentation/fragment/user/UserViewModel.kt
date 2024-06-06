@@ -5,11 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ipca.wepet.domain.model.UserModel
 import com.ipca.wepet.domain.repository.UserRepository
 import com.ipca.wepet.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +30,7 @@ class UserViewModel @Inject constructor(
             }
 
             is UserEvent.UpdateUser -> {
-                changeUserByEmail(state.user)
+                state.image?.let { changeUserByEmail(state.userId, it) }
             }
         }
     }
@@ -60,23 +60,26 @@ class UserViewModel @Inject constructor(
     }
 
     private fun changeUserByEmail(
-        user: UserModel = state.user
+        user: String = state.userId,
+        image: MultipartBody.Part? = state.image
     ) {
         viewModelScope.launch {
-            userRepository.changeUser(user).collect { result ->
-                when (result) {
-                    is Resource.Success -> {
-                        result.data?.let { user ->
-                            state = state.copy(
-                                user = user
-                            )
+            if (image != null) {
+                userRepository.changeUser(user, image).collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            result.data?.let { user ->
+                                state = state.copy(
+                                    user = user
+                                )
+                            }
                         }
-                    }
 
-                    is Resource.Error -> Unit
+                        is Resource.Error -> Unit
 
-                    is Resource.Loading -> {
-                        state = state.copy(isLoading = result.isLoading)
+                        is Resource.Loading -> {
+                            state = state.copy(isLoading = result.isLoading)
+                        }
                     }
                 }
             }

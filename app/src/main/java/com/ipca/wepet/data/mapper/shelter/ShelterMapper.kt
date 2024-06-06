@@ -18,7 +18,11 @@ fun ShelterEntity.toShelterModel(): ShelterModel {
         isVerified = isVerified ?: false,
         createdAt = createdAt ?: "",
         userId = userId ?: String(),
-        deleted = deleted
+        deleted = deleted,
+        latitude = latitude ?: "",
+        longitude = longitude ?: "",
+        profileImage = profileImage ?: "",
+        profileImageUrl = profileImageUrl ?: ""
     )
 }
 
@@ -37,6 +41,10 @@ fun ShelterModel.toShelterEntity(): ShelterEntity {
         isVerified = isVerified ?: false,
         createdAt = createdAt,
         userId = userId ?: String(),
-        deleted = deleted ?: 0
+        deleted = deleted ?: 0,
+        latitude = latitude ?: "",
+        longitude = longitude ?: "",
+        profileImage = profileImage ?: "",
+        profileImageUrl = profileImageUrl ?: ""
     )
 }

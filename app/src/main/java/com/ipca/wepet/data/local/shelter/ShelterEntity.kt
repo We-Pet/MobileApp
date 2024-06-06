@@ -19,5 +19,9 @@ data class ShelterEntity(
     val isVerified: Boolean?,
     val createdAt: String?,
     val userId: String?,
+    val latitude: String?,
+    val longitude: String?,
+    val profileImage: String?,
+    val profileImageUrl: String?,
     val deleted: Int = 0
 )

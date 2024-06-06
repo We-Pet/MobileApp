@@ -14,7 +14,9 @@ fun UserEntity.toUserModel(): UserModel {
         phoneNumber = phoneNumber,
         createdAt = createdAt,
         address = address,
-        password = password
+        password = password,
+        profileImage = profileImage,
+        profileImageUrl = profileImageUrl
     )
 }
 
@@ -29,6 +31,8 @@ fun UserModel.toUserEntity(): UserEntity {
         phoneNumber = phoneNumber ?: "",
         createdAt = createdAt ?: String(),
         address = address ?: "",
-        password = password ?: ""
+        password = password ?: "",
+        profileImage = profileImage ?: "",
+        profileImageUrl = profileImageUrl ?: ""
     )
 }

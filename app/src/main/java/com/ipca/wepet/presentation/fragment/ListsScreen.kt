@@ -18,6 +18,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -25,12 +26,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.ipca.wepet.R
 import com.ipca.wepet.presentation.fragment.animal.AnimalList
 import com.ipca.wepet.presentation.fragment.animal.AnimalListEvent
@@ -38,9 +42,11 @@ import com.ipca.wepet.presentation.fragment.animal.AnimalViewModel
 import com.ipca.wepet.presentation.fragment.event.EventList
 import com.ipca.wepet.presentation.fragment.event.EventListEvent
 import com.ipca.wepet.presentation.fragment.event.EventViewModel
+import com.ipca.wepet.presentation.fragment.internet.rememberConnectivityState
 import com.ipca.wepet.presentation.fragment.shelter.ShelterList
 import com.ipca.wepet.presentation.fragment.shelter.ShelterListEvent
 import com.ipca.wepet.presentation.fragment.shelter.ShelterViewModel
+import com.ipca.wepet.util.ToastHandler
 
 
 @Composable
@@ -52,8 +58,34 @@ fun ListScreen(
     var selectedList by remember { mutableIntStateOf(0) }
     val comfortaaFontFamily = FontFamily(Font(R.font.comfortaa_regular))
     val mainBlue = colorResource(id = R.color.main_blue)
+    val isConnected by rememberConnectivityState()
+    val context = LocalContext.current
+
+
+    val isRefreshing = if (isConnected) {
+        when (selectedList) {
+            0 -> animalViewModel.state.isRefreshing
+            1 -> shelterViewModel.state.isRefreshing
+            else -> eventViewModel.state.isRefreshing
+        }
+    } else {
+        false
+    }
+
+    val swipeRefreshState = rememberSwipeRefreshState(isRefreshing)
 
     LaunchedEffect(Unit) {
+        // Initial load when the screen is first composed
+        if (isConnected) {
+
+            animalViewModel.onEvent(AnimalListEvent.Refresh)
+        } else {
+            ToastHandler.showToast(context, R.string.no_internet)
+        }
+    }
+
+    SideEffect {
+        // Reload the list whenever selectedList changes
         when (selectedList) {
             0 -> animalViewModel.onEvent(AnimalListEvent.Refresh)
             1 -> shelterViewModel.onEvent(ShelterListEvent.Refresh)
@@ -62,8 +94,7 @@ fun ListScreen(
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.fillMaxSize()
     ) {
         Box(
             modifier = Modifier.weight(1f)
@@ -190,10 +221,25 @@ fun ListScreen(
                     singleLine = true
                 )
 
-                when (selectedList) {
-                    0 -> AnimalList(animalViewModel.state.animals)
-                    1 -> ShelterList(shelterViewModel.state.shelters)
-                    2 -> EventList(eventViewModel.state.events)
+                SwipeRefresh(
+                    state = swipeRefreshState,
+                    onRefresh = {
+                        if (isConnected) {
+                            when (selectedList) {
+                                0 -> animalViewModel.onEvent(AnimalListEvent.Refresh)
+                                1 -> shelterViewModel.onEvent(ShelterListEvent.Refresh)
+                                2 -> eventViewModel.onEvent(EventListEvent.Refresh)
+                            }
+                        } else {
+                            ToastHandler.showToast(context, R.string.no_internet)
+                        }
+                    }
+                ) {
+                    when (selectedList) {
+                        0 -> AnimalList(animalViewModel.state.animals)
+                        1 -> ShelterList(shelterViewModel.state.shelters)
+                        2 -> EventList(eventViewModel.state.events)
+                    }
                 }
             }
         }
