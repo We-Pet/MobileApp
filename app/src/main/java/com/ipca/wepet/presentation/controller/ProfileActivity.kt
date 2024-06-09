@@ -8,6 +8,8 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -41,6 +43,8 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var ibAddress: ImageButton
     private lateinit var ibPassword: ImageButton
     private lateinit var ibPhone: ImageButton
+
+    private lateinit var ibShowOrHidePassword: ImageButton
 
     private val userViewModel: UserViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,6 +100,7 @@ class ProfileActivity : AppCompatActivity() {
         ibAddress = findViewById(R.id.IBTN_clear_button_address)
         ibPassword = findViewById(R.id.IBTN_clear_button_password)
         ibPhone = findViewById(R.id.IBTN_clear_button_phone)
+        ibShowOrHidePassword = findViewById(R.id.IBTN_show_or_hide_password)
     }
 
     private fun startNewActivities() {
@@ -110,6 +115,17 @@ class ProfileActivity : AppCompatActivity() {
         ibEmail.setOnClickListener{ etEmail.text.clear() }
         ibAddress.setOnClickListener{ etAddress.text.clear() }
         ibPassword.setOnClickListener{ etPassword.text.clear() }
+
+        ibShowOrHidePassword.setOnClickListener {
+            // Toggle password visibility
+            if (etPassword.transformationMethod == PasswordTransformationMethod.getInstance()) {
+                etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                ibShowOrHidePassword.setImageResource(R.drawable.hide_password)
+            } else {
+                etPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                ibShowOrHidePassword.setImageResource(R.drawable.show_password)
+            }
+        }
 
         // Back action
         btnBack.setOnClickListener {

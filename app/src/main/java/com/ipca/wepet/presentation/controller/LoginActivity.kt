@@ -9,6 +9,8 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
@@ -39,6 +41,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var btnClearTextEmail: ImageButton
     private lateinit var btnClearTextPassword: ImageButton
+
+    private lateinit var btnShowOrHidePassword: ImageButton
 
     private lateinit var badLoginWarning: TextView
 
@@ -80,6 +84,8 @@ class LoginActivity : AppCompatActivity() {
         btnClearTextEmail.setOnClickListener { emailTextField.text.clear() }
         btnClearTextPassword.setOnClickListener { passwordTextField.text.clear() }
 
+        btnShowOrHidePassword = findViewById(R.id.IBTN_show_or_hide_password)
+
         auth = Firebase.auth
         fireBaseUtils = FirebaseUtils(auth)
 
@@ -91,6 +97,17 @@ class LoginActivity : AppCompatActivity() {
         //Login action
         btnLogin.setOnClickListener {
             checkLoginFieldsAndValidate()
+        }
+
+        btnShowOrHidePassword.setOnClickListener {
+            // Toggle password visibility
+            if (passwordTextField.transformationMethod == PasswordTransformationMethod.getInstance()) {
+                passwordTextField.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                btnShowOrHidePassword.setImageResource(R.drawable.hide_password)
+            } else {
+                passwordTextField.transformationMethod = PasswordTransformationMethod.getInstance()
+                btnShowOrHidePassword.setImageResource(R.drawable.show_password)
+            }
         }
 
         //Create account action
