@@ -75,7 +75,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".presentation.controller.ProfilActivity"
+            android:name=".presentation.controller.ProfileActivity"
             android:label="ProfilActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />

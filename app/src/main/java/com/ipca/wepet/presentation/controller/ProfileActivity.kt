@@ -1,7 +1,9 @@
 package com.ipca.wepet.presentation.controller
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -18,22 +20,28 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.ipca.wepet.R
-import com.ipca.wepet.domain.model.UserModel
-import com.ipca.wepet.presentation.fragment.user.UserEvent
-import com.ipca.wepet.presentation.fragment.user.UserState
 import com.ipca.wepet.presentation.fragment.user.UserViewModel
 
-class ProfilActivity : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
     private val CAMERA_REQUEST = 1888
     private lateinit var ivMainPhoto: ImageView
     private lateinit var tvMainName: TextView
+
     private lateinit var etName: EditText
     private lateinit var etEmail: EditText
     private lateinit var etAddress: EditText
     private lateinit var etPassword: EditText
     private lateinit var etPhone: EditText
+
     private lateinit var btnSave: Button
     private lateinit var btnBack: ImageButton
+
+    private lateinit var ibName: ImageButton
+    private lateinit var ibEmail: ImageButton
+    private lateinit var ibAddress: ImageButton
+    private lateinit var ibPassword: ImageButton
+    private lateinit var ibPhone: ImageButton
+
     private val userViewModel: UserViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,11 +61,10 @@ class ProfilActivity : AppCompatActivity() {
                 CAMERA_REQUEST
             )
         }
-
-
-        userViewModel.onEvent(UserEvent.GetUser("a16951@alunos.ipca.pt"));
-        val user = userViewModel.state.user;
+        fillWithSharedPreferences()
     }
+
+
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -84,6 +91,11 @@ class ProfilActivity : AppCompatActivity() {
         etPhone = findViewById(R.id.ET_phone)
         btnSave = findViewById(R.id.BTN_save)
         btnBack = findViewById(R.id.IB_back)
+        ibName = findViewById(R.id.IBTN_clear_button_name)
+        ibEmail = findViewById(R.id.IBTN_clear_button_email)
+        ibAddress = findViewById(R.id.IBTN_clear_button_address)
+        ibPassword = findViewById(R.id.IBTN_clear_button_password)
+        ibPhone = findViewById(R.id.IBTN_clear_button_phone)
     }
 
     private fun startNewActivities() {
@@ -92,6 +104,12 @@ class ProfilActivity : AppCompatActivity() {
             //Call database
             Toast.makeText(this, "Data saved successfully!", Toast.LENGTH_SHORT).show()
         }
+
+        ibName.setOnClickListener{ etName.text.clear() }
+        ibPhone.setOnClickListener{ etPhone.text.clear() }
+        ibEmail.setOnClickListener{ etEmail.text.clear() }
+        ibAddress.setOnClickListener{ etAddress.text.clear() }
+        ibPassword.setOnClickListener{ etPassword.text.clear() }
 
         // Back action
         btnBack.setOnClickListener {
@@ -102,6 +120,12 @@ class ProfilActivity : AppCompatActivity() {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             cameraLauncher.launch(cameraIntent)
         }
+    }
+
+    private fun fillWithSharedPreferences(){
+        val sharedPreferences: SharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE )
+        etEmail.setText(sharedPreferences.getString("EMAIL", "" ))
+        etPassword.setText(sharedPreferences.getString("PASSWORD", ""))
     }
 
     private var cameraLauncher =

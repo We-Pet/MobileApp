@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,7 +24,7 @@
         android:autofillHints="@string/name"
         android:backgroundTint="@color/light_gray"
         android:fontFamily="@font/comfortaa_regular"
-        android:hint="@string/name"
+        android:hint="@string/edit_profile"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -57,20 +58,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TV_main_name">
 
-        <TextView
-            android:id="@+id/TV_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="@string/name"
-            android:backgroundTint="@color/light_gray"
-            android:fontFamily="@font/comfortaa_regular"
-            android:hint="@string/name"
-            android:paddingStart="10dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <EditText
             android:id="@+id/ET_name"
             android:layout_width="0dp"
@@ -80,12 +67,24 @@
             android:fontFamily="@font/comfortaa_regular"
             android:hint="@string/name"
             android:inputType="textPersonName"
-            android:paddingStart="10dp"
-            android:paddingTop="5dp"
+            android:paddingStart="15dp"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TV_name" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/IBTN_clear_button_name"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_input_text"
+            app:layout_constraintBottom_toBottomOf="@id/ET_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ET_name" />
 
         <View
             android:layout_width="match_parent"
@@ -108,20 +107,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CTL_name">
 
-        <TextView
-            android:id="@+id/TV_email"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="@string/name"
-            android:backgroundTint="@color/light_gray"
-            android:fontFamily="@font/comfortaa_regular"
-            android:hint="@string/email"
-            android:paddingStart="10dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <EditText
             android:id="@+id/ET_email"
             android:layout_width="0dp"
@@ -131,12 +116,25 @@
             android:fontFamily="@font/comfortaa_regular"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            android:paddingStart="10dp"
-            android:paddingTop="5dp"
+            android:paddingStart="15dp"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_email"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TV_email" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/IBTN_clear_button_email"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_input_text"
+            app:layout_constraintBottom_toBottomOf="@id/ET_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ET_email" />
 
         <View
             android:layout_width="match_parent"
@@ -158,20 +156,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CTL_email">
 
-        <TextView
-            android:id="@+id/TV_address"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="@string/name"
-            android:backgroundTint="@color/light_gray"
-            android:fontFamily="@font/comfortaa_regular"
-            android:hint="@string/address"
-            android:paddingStart="10dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <EditText
             android:id="@+id/ET_address"
             android:layout_width="0dp"
@@ -181,12 +165,24 @@
             android:fontFamily="@font/comfortaa_regular"
             android:hint="@string/address"
             android:inputType="textPostalAddress"
-            android:paddingStart="10dp"
-            android:paddingTop="5dp"
+            android:paddingStart="15dp"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_address"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TV_address" />
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/IBTN_clear_button_address"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_input_text"
+            app:layout_constraintBottom_toBottomOf="@id/ET_address"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ET_address" />
 
         <View
             android:layout_width="match_parent"
@@ -208,20 +204,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CTL_address">
 
-        <TextView
-            android:id="@+id/TV_password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="@string/name"
-            android:backgroundTint="@color/light_gray"
-            android:fontFamily="@font/comfortaa_regular"
-            android:hint="@string/password"
-            android:paddingStart="10dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <EditText
             android:id="@+id/ET_password"
             android:layout_width="0dp"
@@ -232,11 +214,24 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             android:paddingStart="10dp"
-            android:paddingTop="5dp"
             android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_password"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TV_password" />
+            tools:ignore="MissingConstraints" />
+
+        <ImageButton
+            android:id="@+id/IBTN_clear_button_password"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/clear_password"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_input_text"
+            app:layout_constraintBottom_toBottomOf="@id/ET_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ET_password" />
 
         <View
             android:layout_width="match_parent"
@@ -258,20 +253,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CTL_password">
 
-        <TextView
-            android:id="@+id/TV_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:autofillHints="@string/name"
-            android:backgroundTint="@color/light_gray"
-            android:fontFamily="@font/comfortaa_regular"
-            android:hint="@string/phone"
-            android:paddingStart="10dp"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <EditText
             android:id="@+id/ET_phone"
             android:layout_width="0dp"
@@ -282,11 +263,23 @@
             android:hint="@string/phone"
             android:inputType="phone|number"
             android:paddingStart="10dp"
-            android:paddingTop="5dp"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TV_phone" />
+            app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_phone"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageButton
+            android:id="@+id/IBTN_clear_button_phone"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/clear_email"
+            android:scaleType="fitCenter"
+            android:src="@drawable/delete_input_text"
+            app:layout_constraintBottom_toBottomOf="@id/ET_phone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/ET_phone" />
 
         <View
             android:layout_width="match_parent"

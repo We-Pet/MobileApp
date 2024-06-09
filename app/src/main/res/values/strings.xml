@@ -11,6 +11,7 @@
     <string name="create_account">Create account</string>
     <string name="forgot_password"><u>Forgot password?</u></string>
     <string name="name">Name</string>
+    <string name="edit_profile">Edit Profile</string>
     <string name="clear_name">Clear name</string>
     <string name="confirm_password">Confirm password</string>
     <string name="submit">Submit</string>

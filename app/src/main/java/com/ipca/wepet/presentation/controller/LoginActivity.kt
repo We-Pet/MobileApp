@@ -1,7 +1,9 @@
 package com.ipca.wepet.presentation.controller
 
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -46,6 +48,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var fireBaseUtils: FirebaseUtils
 
+    private lateinit var sharedPreferences: SharedPreferences
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +82,8 @@ class LoginActivity : AppCompatActivity() {
 
         auth = Firebase.auth
         fireBaseUtils = FirebaseUtils(auth)
+
+        sharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE )
     }
 
     private fun startNewActivities() {
@@ -145,7 +151,7 @@ class LoginActivity : AppCompatActivity() {
                         "Authentication successful.",
                         Toast.LENGTH_SHORT,
                     ).show()
-
+                    setSharedPreferences(email, password)
                     val intent = Intent(this, HomePageActivity::class.java)
                     startActivity(intent)
                 } else {
@@ -163,6 +169,13 @@ class LoginActivity : AppCompatActivity() {
     private val onBackPressedCallback = object : OnBackPressedCallback(true) {
         override fun handleOnBackPressed() {
         }
+    }
+
+    private fun setSharedPreferences(email: String, password: String){
+        val editor = sharedPreferences.edit()
+        editor.putString("EMAIL", email)
+        editor.putString("PASSWORD", password)
+        editor.apply()
     }
 
     private fun showBottomDialogForgotPassword() {

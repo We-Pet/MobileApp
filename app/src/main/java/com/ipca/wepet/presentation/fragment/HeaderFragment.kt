@@ -20,7 +20,7 @@ import com.ipca.wepet.R
 import com.ipca.wepet.presentation.controller.AboutUsActivity
 import com.ipca.wepet.presentation.controller.ContactUsActivity
 import com.ipca.wepet.presentation.controller.LoginActivity
-import com.ipca.wepet.presentation.controller.ProfilActivity
+import com.ipca.wepet.presentation.controller.ProfileActivity
 import com.ipca.wepet.util.ToastHandler
 
 class HeaderFragment : Fragment() {
@@ -61,8 +61,8 @@ class HeaderFragment : Fragment() {
                 }
 
                 R.id.IT_edit_profil -> {
-                    // Handle menu edit profil click
-                    val intent = Intent(context, ProfilActivity::class.java)
+                    // Handle menu edit profile click
+                    val intent = Intent(context, ProfileActivity::class.java)
                     startActivity(intent)
                     true
                 }
