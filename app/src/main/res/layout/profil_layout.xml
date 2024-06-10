@@ -119,6 +119,7 @@
             android:paddingStart="15dp"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:enabled="false"
             app:layout_constraintEnd_toStartOf="@id/IBTN_clear_button_email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

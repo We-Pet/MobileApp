@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -21,6 +22,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.ipca.wepet.R
 import com.ipca.wepet.presentation.fragment.user.UserViewModel
 
@@ -66,8 +69,8 @@ class ProfileActivity : AppCompatActivity() {
             )
         }
         fillWithSharedPreferences()
+        checkNameAvailability()
     }
-
 
 
     override fun onRequestPermissionsResult(
@@ -103,21 +106,27 @@ class ProfileActivity : AppCompatActivity() {
         ibShowOrHidePassword = findViewById(R.id.IBTN_show_or_hide_password)
     }
 
+    private fun checkNameAvailability() {
+        if (etName.text.toString().isNotEmpty()) {
+            tvMainName.text = etName.text.toString()
+        }
+    }
+
     private fun startNewActivities() {
         // Login action
         btnSave.setOnClickListener {
             //Call database
             Toast.makeText(this, "Data saved successfully!", Toast.LENGTH_SHORT).show()
+            storeInSharedPreferences()
         }
 
         ibName.setOnClickListener{ etName.text.clear() }
         ibPhone.setOnClickListener{ etPhone.text.clear() }
-        ibEmail.setOnClickListener{ etEmail.text.clear() }
         ibAddress.setOnClickListener{ etAddress.text.clear() }
         ibPassword.setOnClickListener{ etPassword.text.clear() }
 
+        // button to show password
         ibShowOrHidePassword.setOnClickListener {
-            // Toggle password visibility
             if (etPassword.transformationMethod == PasswordTransformationMethod.getInstance()) {
                 etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
                 ibShowOrHidePassword.setImageResource(R.drawable.hide_password)
@@ -138,10 +147,59 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun storeInSharedPreferences() {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE )
+        val editor = sharedPreferences.edit()
+        val oldPassword: String = sharedPreferences.getString("PASSWORD", "").toString()
+        val textFieldMap: MutableMap<String, EditText> = mutableMapOf(
+            "NAME" to etName,
+            "ADDRESS" to etAddress,
+            "PASSWORD" to etPassword,
+            "PHONE" to etPhone,
+        )
+
+        for (( key, editText ) in textFieldMap){
+            editor.putString(key, editText.text.toString())
+        }
+        editor.apply()
+        val newPassword: String = sharedPreferences.getString("PASSWORD", "").toString()
+        val email: String = sharedPreferences.getString("EMAIL", "").toString()
+
+        updatePasswordFirebase(email, newPassword, oldPassword)
+    }
+
     private fun fillWithSharedPreferences(){
         val sharedPreferences: SharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE )
+
+        etName.setText(sharedPreferences.getString("NAME", ""))
         etEmail.setText(sharedPreferences.getString("EMAIL", "" ))
+        etAddress.setText(sharedPreferences.getString("ADDRESS", ""))
         etPassword.setText(sharedPreferences.getString("PASSWORD", ""))
+        etPhone.setText(sharedPreferences.getString("PHONE", ""))
+    }
+
+    // After saving data, update password into firebase
+    private fun updatePasswordFirebase(email: String, password: String, oldPassword: String){
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val credential = EmailAuthProvider.getCredential(email, oldPassword)
+            user.reauthenticate(credential).addOnCompleteListener {
+                authTask ->
+                if (authTask.isSuccessful) {
+                    user.updatePassword(password)
+                        .addOnCompleteListener {
+                            updateTask ->
+                                if (updateTask.isSuccessful) {
+                                    Log.d("AUTH", "Password updated successfully")
+                                } else {
+                                    Log.e("AUTH", "Password update failed", updateTask.exception)
+                                }
+                        }
+                } else {
+                    Log.e("AUTH", "Re-authentication failed", authTask.exception)
+                }
+            }
+        }
     }
 
     private var cameraLauncher =

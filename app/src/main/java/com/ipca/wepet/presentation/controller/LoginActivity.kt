@@ -100,7 +100,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnShowOrHidePassword.setOnClickListener {
-            // Toggle password visibility
             if (passwordTextField.transformationMethod == PasswordTransformationMethod.getInstance()) {
                 passwordTextField.transformationMethod = HideReturnsTransformationMethod.getInstance()
                 btnShowOrHidePassword.setImageResource(R.drawable.hide_password)
