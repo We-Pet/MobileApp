@@ -4,27 +4,33 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.ipca.wepet.R
 import com.ipca.wepet.presentation.controller.AboutUsActivity
 import com.ipca.wepet.presentation.controller.ContactUsActivity
 import com.ipca.wepet.presentation.controller.LoginActivity
 import com.ipca.wepet.presentation.controller.ProfileActivity
+import com.ipca.wepet.util.EmailUtils
 import com.ipca.wepet.util.ToastHandler
 
 class HeaderFragment : Fragment() {
     private lateinit var ibHamburger: ImageButton
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +47,7 @@ class HeaderFragment : Fragment() {
 
     private fun initializeElements(view: View) {
         ibHamburger = view.findViewById(R.id.IB_hamburger)
+        sharedPreferences = requireActivity().getSharedPreferences("AUTH", Context.MODE_PRIVATE )
     }
 
     private fun setListeners() {
@@ -68,7 +75,7 @@ class HeaderFragment : Fragment() {
                 }
 
                 R.id.IT_desative_account -> {
-                    // Handle menu desative account click
+                    // Handle menu deactivate account click
                     showBottomDialogDeleteAccount()
                     true
                 }
@@ -117,10 +124,14 @@ class HeaderFragment : Fragment() {
         dialog.setContentView(R.layout.bottom_sheet_layout_delete_account)
 
         val btnContinue = dialog.findViewById<Button>(R.id.BTN_continue)
+        val emailEditText: EditText = dialog.findViewById(R.id.ET_email)
+        val passwordEditText: EditText = dialog.findViewById(R.id.ET_password)
 
         btnContinue.setOnClickListener {
-            showConfirmationDialog()
-            dialog.dismiss()
+            if (checkEmailAndPasswordFields(emailEditText, passwordEditText)) {
+                showConfirmationDialog()
+                dialog.dismiss()
+            }
         }
 
         dialog.show()
@@ -130,6 +141,29 @@ class HeaderFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
         dialog.window?.setGravity(Gravity.BOTTOM)
+    }
+
+    private fun checkEmailAndPasswordFields(emailEditText: EditText, passwordEditText: EditText): Boolean {
+        val email = emailEditText.text.toString()
+        val password = passwordEditText.text.toString()
+
+        val sharedPreferenceEMAIL = sharedPreferences.getString("EMAIL", "")
+        val sharedPreferencesPASSWORD = sharedPreferences.getString("PASSWORD", "")
+
+        if (email.isBlank()) {
+            ToastHandler.showToast(requireContext(), R.string.error_empty_email)
+            return false
+        } else if (!EmailUtils.isEmailValid(email) || email != sharedPreferenceEMAIL) {
+            ToastHandler.showToast(requireContext(), R.string.error_invalid_email)
+            return false
+        } else if (password.isBlank()){
+            ToastHandler.showToast(requireContext(), R.string.error_empty_password)
+            return false
+        } else if (password != sharedPreferencesPASSWORD){
+            ToastHandler.showToast(requireContext(), R.string.error_invalid_password)
+            return false
+        }
+        return true
     }
 
     private fun showConfirmationDialog() {
@@ -150,10 +184,18 @@ class HeaderFragment : Fragment() {
     }
 
     private fun deleteAccount() {
-        // TODO: Implement account deletion logic
+        deleteAccountFromFirebase()
         val intent = Intent(context, LoginActivity::class.java)
         startActivity(intent)
     }
 
+    private fun deleteAccountFromFirebase(){
+        val user = FirebaseAuth.getInstance().currentUser
+        user?.delete()?.addOnSuccessListener{
+            Log.d("DELETE ACCOUNT", "User account deleted.")
+        }?.addOnFailureListener {
+            e -> Log.e("DELETE ACCOUNT", "Error deleting user account", e)
+        }
+    }
 
 }

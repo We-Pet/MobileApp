@@ -1,6 +1,8 @@
 package com.ipca.wepet.presentation.controller
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -29,6 +31,8 @@ class CreateAccountActivity : AppCompatActivity() {
     private lateinit var clearPasswordButton: ImageButton
     private lateinit var clearConfirmPasswordButton: ImageButton
     private lateinit var backToLoginButton: ImageButton
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +65,8 @@ class CreateAccountActivity : AppCompatActivity() {
             findViewById(R.id.IBTN_clear_button_confirm_password_create_account)
 
         backToLoginButton = findViewById(R.id.BTN_back_to_login_create_account)
+
+        sharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE )
     }
 
     private fun setupOnClickListeners() {
@@ -97,15 +103,21 @@ class CreateAccountActivity : AppCompatActivity() {
             }
             signInUserToFirebase(email, password)
             ToastHandler.showToast(this, R.string.account_created_successfully)
-            goToLoginActivity()
-            //auth.createUserWithEmailAndPassword()
-
+            goToHomePage(email, password)
         }
     }
 
-    private fun goToLoginActivity() {
-        val intent = Intent(this, LoginActivity::class.java)
+    private fun goToHomePage(email: String, password: String) {
+        val intent = Intent(this, HomePageActivity::class.java)
+        setSharedPreferences(email,password)
         startActivity(intent)
+    }
+
+    private fun setSharedPreferences(email: String, password: String){
+        val editor = sharedPreferences.edit()
+        editor.putString("EMAIL", email)
+        editor.putString("PASSWORD", password)
+        editor.apply()
     }
 
     private fun clearText(editText: EditText) {
