@@ -14,12 +14,16 @@ class FirebaseUtils(auth: FirebaseAuth) {
         }
     }
 
-    fun sendEmailResetPassword(emailAddress: String, callBack: () -> Unit) {
+    fun sendEmailResetPassword(emailAddress: String, callBack: (Boolean) -> Unit) {
         if(checkIfUserExists(emailAddress)){
             _auth.sendPasswordResetEmail(emailAddress)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
+                        callBack(true)
                         Log.d("EMAIL", "Email sent.")
+                    } else {
+                        callBack(false)
+                        Log.d("EMAIL", "Failed to send email: ${task.exception?.message}")
                     }
                 }
         }

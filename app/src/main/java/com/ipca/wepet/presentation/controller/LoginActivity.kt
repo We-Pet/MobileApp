@@ -191,6 +191,7 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             } else {
                 fireBaseUtils.sendEmailResetPassword(email) {
+                    dialog.dismiss()
                     showPasswordResetDialog(this, email, dialog)
                 }
             }
