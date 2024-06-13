@@ -9,6 +9,8 @@ import retrofit2.http.Part
 import retrofit2.http.Path
 
 interface WePetApi {
+
+    /**  Users endPoints **/
     @GET("users/getUserIDByEmail/{email}")
     suspend fun getUserByEmail(
         @Path("email") email: String
@@ -21,20 +23,25 @@ interface WePetApi {
         @Part image: MultipartBody.Part
     ): ResponseBody
 
+
+    /**  Animals endPoints **/
     @GET("animals")
     suspend fun getAllAnimals(
     ): ResponseBody
 
+
+    /**  Shelters endPoints **/
     @GET("shelters")
     suspend fun getAllShelters(
     ): ResponseBody
 
+
+    /**  Events endPoints **/
     @GET("events")
     suspend fun getAllEvents(
     ): ResponseBody
 
-
     companion object {
-        const val BASE_URL = "http://ec2-13-60-88-160.eu-north-1.compute.amazonaws.com:3000"
+        const val BASE_URL = "http://ec2-16-170-243-240.eu-north-1.compute.amazonaws.com:3000"
     }
 }
