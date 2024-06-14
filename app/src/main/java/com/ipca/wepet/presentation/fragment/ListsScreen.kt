@@ -78,9 +78,13 @@ fun ListScreen(
 
     LaunchedEffect(isConnected) {
         // Initial load when the screen is first composed and connectivity is available
-        if (isConnected && !hasLoadedInitially) {
+        if (isConnected && !hasLoadedInitially && !isRefreshing) {
             hasLoadedInitially = true
-            animalViewModel.onEvent(AnimalListEvent.Refresh)
+            when (selectedList) {
+                0 -> animalViewModel.onEvent(AnimalListEvent.Refresh)
+                1 -> shelterViewModel.onEvent(ShelterListEvent.Refresh)
+                else -> eventViewModel.onEvent(EventListEvent.Refresh)
+            }
         } else if (!isConnected) {
             ToastHandler.showToast(context, R.string.no_internet)
         }
@@ -229,20 +233,9 @@ fun ListScreen(
                     }
                 ) {
                     when (selectedList) {
-                        0 -> {
-                            animalViewModel.onEvent(AnimalListEvent.Refresh)
-                            AnimalList(animalViewModel.state.animals)
-                        }
-
-                        1 -> {
-                            shelterViewModel.onEvent(ShelterListEvent.Refresh)
-                            ShelterList(shelterViewModel.state.shelters)
-                        }
-
-                        2 -> {
-                            eventViewModel.onEvent(EventListEvent.Refresh)
-                            EventList(eventViewModel.state.events)
-                        }
+                        0 -> AnimalList(animalViewModel.state.animals)
+                        1 -> ShelterList(shelterViewModel.state.shelters)
+                        2 -> EventList(eventViewModel.state.events)
                     }
                 }
             }

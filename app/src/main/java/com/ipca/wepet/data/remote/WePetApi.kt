@@ -42,6 +42,6 @@ interface WePetApi {
     ): ResponseBody
 
     companion object {
-        const val BASE_URL = "http://ec2-16-170-243-240.eu-north-1.compute.amazonaws.com:3000"
+        const val BASE_URL = "http://ec2-13-48-1-181.eu-north-1.compute.amazonaws.com:3000"
     }
 }

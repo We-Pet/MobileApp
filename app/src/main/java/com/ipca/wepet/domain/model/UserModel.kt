@@ -34,5 +34,5 @@ data class UserModel(
 
 data class UserResponse(
     @SerializedName("data")
-    val data: List<UserModel>
+    val data: UserModel
 )

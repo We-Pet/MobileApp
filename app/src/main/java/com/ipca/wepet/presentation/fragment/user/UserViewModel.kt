@@ -1,8 +1,8 @@
 package com.ipca.wepet.presentation.fragment.user
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ipca.wepet.domain.repository.UserRepository
@@ -17,73 +17,55 @@ class UserViewModel @Inject constructor(
     private val userRepository: UserRepository
 ) : ViewModel() {
 
-    var state by mutableStateOf(UserState())
+    private val _userState = MutableLiveData<UserState>()
+    val userState: LiveData<UserState> get() = _userState
 
     init {
-        getUserByEmail()
+        _userState.value = UserState() // Initialize with default state
     }
 
-    fun onEvent(event: UserEvent) {
-        when (event) {
-            is UserEvent.GetUser -> {
-                getUserByEmail(state.email)
-            }
-
-            is UserEvent.UpdateUser -> {
-                state.image?.let { changeUserByEmail(state.userId, it) }
-            }
-        }
-    }
-
-    private fun getUserByEmail(
-        email: String = state.email.lowercase()
-    ) {
+    fun getUserByEmail(email: String = _userState.value?.user?.email ?: "") {
         viewModelScope.launch {
             userRepository.getUser(email).collect { result ->
                 when (result) {
                     is Resource.Success -> {
                         result.data?.let { user ->
-                            state = state.copy(
-                                user = user
-                            )
+                            _userState.value = _userState.value?.copy(user = user)
+                            Log.d("UserViewModel", "User fetched successfully: $user")
                         }
                     }
 
-                    is Resource.Error -> Unit
+                    is Resource.Error -> {
+                        Log.e("UserViewModel", "Failed to fetch user: ${result.message}")
+                        _userState.value =
+                            _userState.value?.copy(error = result.message ?: "Unknown error")
+                        // Optionally, you can handle the error case further if needed
+                    }
 
                     is Resource.Loading -> {
-                        state = state.copy(isLoading = result.isLoading)
+                        _userState.value = _userState.value?.copy(isLoading = result.isLoading)
                     }
                 }
             }
         }
     }
 
-    private fun changeUserByEmail(
-        user: String = state.userId,
-        image: MultipartBody.Part? = state.image
-    ) {
+    fun changeUserByEmail(userId: String, image: MultipartBody.Part) {
         viewModelScope.launch {
-            if (image != null) {
-                userRepository.changeUser(user, image).collect { result ->
-                    when (result) {
-                        is Resource.Success -> {
-                            result.data?.let { user ->
-                                state = state.copy(
-                                    user = user
-                                )
-                            }
+            userRepository.changeUser(userId, image).collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        result.data?.let { user ->
+                            _userState.value = _userState.value?.copy(user = user)
                         }
+                    }
 
-                        is Resource.Error -> Unit
-
-                        is Resource.Loading -> {
-                            state = state.copy(isLoading = result.isLoading)
-                        }
+                    is Resource.Error -> Unit // Handle error case
+                    is Resource.Loading -> {
+                        _userState.value = _userState.value?.copy(isLoading = result.isLoading)
                     }
                 }
             }
         }
     }
-
 }

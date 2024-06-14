@@ -22,11 +22,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.ipca.wepet.R
+import com.ipca.wepet.domain.model.UserModel
 import com.ipca.wepet.presentation.fragment.user.UserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
     private val CAMERA_REQUEST = 1888
     private lateinit var ivMainPhoto: ImageView
@@ -50,6 +55,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var ibShowOrHidePassword: ImageButton
 
     private val userViewModel: UserViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profil_layout)
@@ -68,8 +74,55 @@ class ProfileActivity : AppCompatActivity() {
                 CAMERA_REQUEST
             )
         }
-        fillWithSharedPreferences()
-        checkNameAvailability()
+        observeUserData()
+        extracted()
+    }
+
+    private fun extracted() {
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("AUTH", MODE_PRIVATE)
+
+        // To get user by email
+        sharedPreferences.getString("EMAIL", "")?.let { userViewModel.getUserByEmail(it) }
+    }
+
+    private fun observeUserData() {
+        userViewModel.userState.observe(this, Observer { userState ->
+            // Handle changes in user state here
+            userState.user?.let { user ->
+                // User data is not null, update UI or perform actions
+                Log.d("ProfileActivity", "User loaded: $user")
+                updateUI(user)
+            }
+
+            // Handle loading and error states if needed
+            userState.error?.let { errorMessage ->
+                // Show error message to the user
+                onBackPressedDispatcher.onBackPressed()
+                Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                Log.e("ProfileActivity", errorMessage)
+            }
+        })
+    }
+
+    private fun updateUI(user: UserModel) {
+        // Assuming you have UI elements like TextViews to display user information
+        tvMainName.text = user.name
+        etEmail.hint = user.email
+        etName.hint = user.name
+
+        user.phoneNumber?.let { phoneNumber ->
+            etPhone.hint = phoneNumber
+        }
+
+        user.address?.let { address ->
+            etAddress.hint = address
+        }
+
+        // Load profile image using Glide or another image loading library
+        Glide.with(this)
+            .load(user.profileImageUrl)
+            .into(ivMainPhoto)
     }
 
 
@@ -106,12 +159,6 @@ class ProfileActivity : AppCompatActivity() {
         ibShowOrHidePassword = findViewById(R.id.IBTN_show_or_hide_password)
     }
 
-    private fun checkNameAvailability() {
-        if (etName.text.toString().isNotEmpty()) {
-            tvMainName.text = etName.text.toString()
-        }
-    }
-
     private fun startNewActivities() {
         // Login action
         btnSave.setOnClickListener {
@@ -120,10 +167,10 @@ class ProfileActivity : AppCompatActivity() {
             storeInSharedPreferences()
         }
 
-        ibName.setOnClickListener{ etName.text.clear() }
-        ibPhone.setOnClickListener{ etPhone.text.clear() }
-        ibAddress.setOnClickListener{ etAddress.text.clear() }
-        ibPassword.setOnClickListener{ etPassword.text.clear() }
+        ibName.setOnClickListener { etName.text.clear() }
+        ibPhone.setOnClickListener { etPhone.text.clear() }
+        ibAddress.setOnClickListener { etAddress.text.clear() }
+        ibPassword.setOnClickListener { etPassword.text.clear() }
 
         // button to show password
         ibShowOrHidePassword.setOnClickListener {
@@ -148,7 +195,8 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun storeInSharedPreferences() {
-        val sharedPreferences: SharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE )
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("AUTH", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val oldPassword: String = sharedPreferences.getString("PASSWORD", "").toString()
         val textFieldMap: MutableMap<String, EditText> = mutableMapOf(
@@ -158,7 +206,7 @@ class ProfileActivity : AppCompatActivity() {
             "PHONE" to etPhone,
         )
 
-        for (( key, editText ) in textFieldMap){
+        for ((key, editText) in textFieldMap) {
             editor.putString(key, editText.text.toString())
         }
         editor.apply()
@@ -168,32 +216,31 @@ class ProfileActivity : AppCompatActivity() {
         updatePasswordFirebase(email, newPassword, oldPassword)
     }
 
-    private fun fillWithSharedPreferences(){
-        val sharedPreferences: SharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE )
+    private fun fillWithSharedPreferences() {
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("AUTH", Context.MODE_PRIVATE)
 
         etName.setText(sharedPreferences.getString("NAME", ""))
-        etEmail.setText(sharedPreferences.getString("EMAIL", "" ))
+        etEmail.setText(sharedPreferences.getString("EMAIL", ""))
         etAddress.setText(sharedPreferences.getString("ADDRESS", ""))
         etPassword.setText(sharedPreferences.getString("PASSWORD", ""))
         etPhone.setText(sharedPreferences.getString("PHONE", ""))
     }
 
     // After saving data, update password into firebase
-    private fun updatePasswordFirebase(email: String, password: String, oldPassword: String){
+    private fun updatePasswordFirebase(email: String, password: String, oldPassword: String) {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
             val credential = EmailAuthProvider.getCredential(email, oldPassword)
-            user.reauthenticate(credential).addOnCompleteListener {
-                authTask ->
+            user.reauthenticate(credential).addOnCompleteListener { authTask ->
                 if (authTask.isSuccessful) {
                     user.updatePassword(password)
-                        .addOnCompleteListener {
-                            updateTask ->
-                                if (updateTask.isSuccessful) {
-                                    Log.d("AUTH", "Password updated successfully")
-                                } else {
-                                    Log.e("AUTH", "Password update failed", updateTask.exception)
-                                }
+                        .addOnCompleteListener { updateTask ->
+                            if (updateTask.isSuccessful) {
+                                Log.d("AUTH", "Password updated successfully")
+                            } else {
+                                Log.e("AUTH", "Password update failed", updateTask.exception)
+                            }
                         }
                 } else {
                     Log.e("AUTH", "Re-authentication failed", authTask.exception)
