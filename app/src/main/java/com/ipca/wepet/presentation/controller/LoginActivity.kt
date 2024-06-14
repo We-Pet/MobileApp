@@ -89,7 +89,7 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
         fireBaseUtils = FirebaseUtils(auth)
 
-        sharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE )
+        sharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE)
     }
 
     private fun startNewActivities() {
@@ -101,7 +101,8 @@ class LoginActivity : AppCompatActivity() {
 
         btnShowOrHidePassword.setOnClickListener {
             if (passwordTextField.transformationMethod == PasswordTransformationMethod.getInstance()) {
-                passwordTextField.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                passwordTextField.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
                 btnShowOrHidePassword.setImageResource(R.drawable.hide_password)
             } else {
                 passwordTextField.transformationMethod = PasswordTransformationMethod.getInstance()
@@ -187,7 +188,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun setSharedPreferences(email: String, password: String){
+    private fun setSharedPreferences(email: String, password: String) {
         val editor = sharedPreferences.edit()
         editor.putString("EMAIL", email)
         editor.putString("PASSWORD", password)

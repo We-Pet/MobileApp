@@ -21,11 +21,11 @@ import com.ipca.wepet.util.ToastHandler
 
 class SetUpPinActivity : AppCompatActivity() {
     private lateinit var btnLogin: Button
+    private lateinit var btnCreateAccount: Button
 
     private lateinit var btnClearTextEmail: ImageButton
     private lateinit var btnClearTextPassword: ImageButton
     private lateinit var btnClearTextPin: ImageButton
-
 
     private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
@@ -50,6 +50,7 @@ class SetUpPinActivity : AppCompatActivity() {
 
     private fun initializeElements() {
         btnLogin = findViewById(R.id.BTN_login)
+        btnCreateAccount = findViewById(R.id.BTN_create_account)
 
         btnClearTextEmail = findViewById(R.id.IBTN_clear_button_email)
         btnClearTextPassword = findViewById(R.id.IBTN_clear_button_password)
@@ -78,6 +79,11 @@ class SetUpPinActivity : AppCompatActivity() {
         // Back action
         btnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+        // Create account action
+        btnCreateAccount.setOnClickListener {
+            val intent = Intent(this, CreateAccountActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -18,7 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.ipca.wepet.R
 import com.ipca.wepet.domain.model.AnimalModel
 import com.ipca.wepet.presentation.controller.AnimalActivity
@@ -40,7 +40,7 @@ fun AnimalListItem(animal: AnimalModel, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val painter = if (animal.profileImageUrl != null) {
-            rememberImagePainter(animal.profileImageUrl)
+            rememberAsyncImagePainter(animal.profileImageUrl)
         } else {
             painterResource(id = R.drawable.unknown_gender)
         }

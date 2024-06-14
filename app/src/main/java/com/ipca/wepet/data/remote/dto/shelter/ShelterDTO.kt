@@ -18,7 +18,7 @@ data class ShelterDTO(
     @field:Json(name = "user_id") val userId: String?,
     @field:Json(name = "latitude") val latitude: String?,
     @field:Json(name = "longitude") val longitude: String?,
-    @field:Json(name = "profileImage")  val profileImage: String?,
+    @field:Json(name = "profileImage") val profileImage: String?,
     @field:Json(name = "profileImageUrl") val profileImageUrl: String?,
     @field:Json(name = "__v") val deleted: Int?
 )

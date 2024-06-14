@@ -3,26 +3,18 @@ package com.ipca.wepet.presentation.pushnotifications
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import androidx.test.core.app.ApplicationProvider
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.ipca.wepet.R
 import com.ipca.wepet.presentation.controller.HomePageActivity
-import com.ipca.wepet.presentation.views.WePetSplashScreenActivity
 
 class PushNotificationService : FirebaseMessagingService() {
 
-
-    // Override onNewToken to get new token
-    override fun onNewToken(token: String) {
-        super.onNewToken(token)
-    }
 
     // Override onMessageReceived() method to extract the title body from the message passed in FCM
     override fun onMessageReceived(remoteMessage: RemoteMessage) {

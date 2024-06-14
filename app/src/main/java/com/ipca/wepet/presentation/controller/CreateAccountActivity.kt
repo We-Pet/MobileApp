@@ -66,7 +66,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
         backToLoginButton = findViewById(R.id.BTN_back_to_login_create_account)
 
-        sharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE )
+        sharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE)
     }
 
     private fun setupOnClickListeners() {
@@ -109,11 +109,11 @@ class CreateAccountActivity : AppCompatActivity() {
 
     private fun goToHomePage(email: String, password: String) {
         val intent = Intent(this, HomePageActivity::class.java)
-        setSharedPreferences(email,password)
+        setSharedPreferences(email, password)
         startActivity(intent)
     }
 
-    private fun setSharedPreferences(email: String, password: String){
+    private fun setSharedPreferences(email: String, password: String) {
         val editor = sharedPreferences.edit()
         editor.putString("EMAIL", email)
         editor.putString("PASSWORD", password)
