@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -118,11 +117,7 @@ class SetUpPinActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("AUTH", "signInWithEmail:success")
                     //val user = auth.currentUser
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication successful.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    ToastHandler.showToast(baseContext, R.string.authentication_successful)
 
                     // Save shared preferences
                     clearOldPin()
@@ -133,11 +128,8 @@ class SetUpPinActivity : AppCompatActivity() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("AUTH", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    ToastHandler.showToast(baseContext, R.string.authentication_failed)
+
                 }
             }
     }

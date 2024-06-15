@@ -90,5 +90,32 @@ class UserViewModel @Inject constructor(
         }
     }
 
+    fun createUser(name: String, email: String, phoneNumber: String?, city: String?) {
+        viewModelScope.launch {
+            userRepository.createUser(name, email, phoneNumber, city).collect { result ->
+                when (result) {
+                    is Resource.Success -> {
+                        result.data?.let { user ->
+                            _userState.value =
+                                _userState.value?.copy(user = user, isLoading = false, error = null)
+                            Log.d("UserViewModel", "User created successfully: $user")
+                        }
+                    }
+
+                    is Resource.Error -> {
+                        Log.e("UserViewModel", "Failed to create user: ${result.message}")
+                        _userState.value = _userState.value?.copy(
+                            error = result.message ?: "Unknown error",
+                            isLoading = false
+                        )
+                    }
+
+                    is Resource.Loading -> {
+                        _userState.value = _userState.value?.copy(isLoading = result.isLoading)
+                    }
+                }
+            }
+        }
+    }
 
 }

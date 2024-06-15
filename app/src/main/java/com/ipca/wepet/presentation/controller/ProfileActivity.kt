@@ -7,6 +7,9 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.method.HideReturnsTransformationMethod
@@ -83,8 +86,13 @@ class ProfileActivity : AppCompatActivity() {
                 CAMERA_REQUEST
             )
         }
-        observeUserData()
-        extracted()
+
+        if (isInternetAvailable()) {
+            extracted()
+            observeUserData()
+        } else {
+            ToastHandler.showToast(this, R.string.no_internet)
+        }
     }
 
     // Function to get user data using shared preferences
@@ -117,6 +125,21 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
+    private fun isInternetAvailable(): Boolean {
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val networkCapabilities =
+                connectivityManager.getNetworkCapabilities(network) ?: return false
+            return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        } else {
+            val networkInfo = connectivityManager.activeNetworkInfo
+            return networkInfo?.isConnected ?: false
+        }
+    }
+
+
     // Function to update UI elements with user data
     private fun updateUI(user: UserModel) {
         tvMainName.text = user.name
@@ -146,9 +169,9 @@ class ProfileActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_REQUEST) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Camera permission granted", Toast.LENGTH_SHORT).show()
+                ToastHandler.showToast(baseContext, R.string.camera_permission_granted)
             } else {
-                Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show()
+                ToastHandler.showToast(baseContext, R.string.camera_permission_denied)
             }
         }
     }
@@ -176,11 +199,16 @@ class ProfileActivity : AppCompatActivity() {
     private fun startNewActivities() {
         // Login action
         btnSave.setOnClickListener {
+
             //Call database
-            updateUser()
-            storeInSharedPreferences()
-            pressAllClearButtons()
-            Toast.makeText(this, "Data saved successfully!", Toast.LENGTH_SHORT).show()
+            if (isInternetAvailable()) {
+                updateUser()
+                storeInSharedPreferences()
+                pressAllClearButtons()
+                ToastHandler.showToast(baseContext, R.string.data_saved_successfully)
+            } else {
+                ToastHandler.showToast(this, R.string.no_internet)
+            }
         }
 
         clearButtons()
@@ -297,7 +325,7 @@ class ProfileActivity : AppCompatActivity() {
     // Function to upload image to server
     private fun updateUser() {
         if (user == null || user!!.id == null) {
-            Toast.makeText(this, R.string.error_upload_image, Toast.LENGTH_SHORT).show()
+            ToastHandler.showToast(this, R.string.error_upload_image)
             return
         }
 
@@ -312,13 +340,16 @@ class ProfileActivity : AppCompatActivity() {
         val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
         val multipartBody = MultipartBody.Part.createFormData("image", file.name, requestBody)
 
-        // Call the ViewModel's method to upload the image
+        val userName = if (etName.text.isBlank()) user!!.name else etName.text.toString()
+        val userPhone = if (etPhone.text.isBlank()) user!!.phoneNumber else etPhone.text.toString()
+        val userAddress = if (etAddress.text.isBlank()) user!!.city else etAddress.text.toString()
+
         userViewModel.updateUser(
             user!!.id!!,
             multipartBody,
-            etName.text.toString(),
-            etPhone.text.toString(),
-            etAddress.text.toString()
+            userName,
+            userPhone,
+            userAddress
         )
     }
 

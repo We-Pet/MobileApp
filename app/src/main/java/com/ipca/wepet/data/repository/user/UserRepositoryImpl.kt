@@ -116,4 +116,53 @@ class UserRepositoryImpl @Inject constructor(
             emit(Resource.Loading(false))
         }
     }
+
+    override suspend fun createUser(
+        name: String,
+        email: String,
+        phoneNumber: String?,
+        city: String?
+    ): Flow<Resource<UserModel>> {
+        return flow {
+            emit(Resource.Loading(true))
+
+            val remoteUser = try {
+                val jsonObject = JSONObject().apply {
+                    put("name", name)
+                    put("email", email)
+                    put("phoneNumber", phoneNumber)
+                    put("city", city)
+                }
+                val requestBody =
+                    jsonObject.toString().toRequestBody("application/json".toMediaTypeOrNull())
+
+                val response = api.createUser(requestBody)
+                val jsonString = response.string()
+                val jsonResponse = JSONObject(jsonString)
+
+                val userData = jsonResponse.optJSONObject("data")
+                Log.i("UserModel from API", userData.toString())
+
+                if (userData == null) {
+                    emit(Resource.Error("User data not found"))
+                    null
+                } else {
+                    val user = Gson().fromJson(userData.toString(), UserModel::class.java)
+                    emit(Resource.Success(data = user))
+                    user
+                }
+            } catch (e: HttpException) {
+                emit(Resource.Error("HTTP error: ${e.message()}"))
+                null
+            } catch (e: IOException) {
+                emit(Resource.Error("Network error: ${e.message}"))
+                null
+            } catch (e: Exception) {
+                emit(Resource.Error("Couldn't load data: ${e.message}"))
+                null
+            }
+
+            emit(Resource.Loading(false))
+        }
+    }
 }

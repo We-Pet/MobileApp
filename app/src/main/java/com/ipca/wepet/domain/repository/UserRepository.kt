@@ -17,4 +17,11 @@ interface UserRepository {
         phoneNumber: String?,
         city: String?
     ): Flow<Resource<UserModel>>
+
+    suspend fun createUser(
+        name: String,
+        email: String,
+        phoneNumber: String?,
+        city: String?
+    ): Flow<Resource<UserModel>>
 }

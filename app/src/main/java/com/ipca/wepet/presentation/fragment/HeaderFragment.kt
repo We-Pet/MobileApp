@@ -108,11 +108,8 @@ class HeaderFragment : Fragment() {
 
                 R.id.IT_notification_settings -> {
                     // Handle menu log out click
-                    clearAuthPreferences()
-
                     val intent = Intent(context, NotificationSettingsActivity::class.java)
                     startActivity(intent)
-                    context?.let { ToastHandler.showToast(it, R.string.logged_out) }
 
                     true
                 }
