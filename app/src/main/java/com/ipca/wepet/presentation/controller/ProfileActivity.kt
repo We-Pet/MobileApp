@@ -9,7 +9,6 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.method.HideReturnsTransformationMethod
@@ -26,7 +25,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -42,7 +40,10 @@ import java.io.File
 
 @AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
-    private val CAMERA_REQUEST = 1888
+    companion object {
+        const val CAMERA_REQUEST = 1888
+    }
+
     private lateinit var ivMainPhoto: ImageView
     private lateinit var tvMainName: TextView
 
@@ -106,7 +107,7 @@ class ProfileActivity : AppCompatActivity() {
 
     // Function to observe user data changes
     private fun observeUserData() {
-        userViewModel.userState.observe(this, Observer { userState ->
+        userViewModel.userState.observe(this) { userState ->
             // Handle changes in user state here
             userState.user?.let { user ->
                 // User data is not null, update UI or perform actions
@@ -122,21 +123,17 @@ class ProfileActivity : AppCompatActivity() {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                 Log.e("ProfileActivity", errorMessage)
             }
-        })
+        }
     }
 
     private fun isInternetAvailable(): Boolean {
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val network = connectivityManager.activeNetwork ?: return false
-            val networkCapabilities =
-                connectivityManager.getNetworkCapabilities(network) ?: return false
-            return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
-        } else {
-            val networkInfo = connectivityManager.activeNetworkInfo
-            return networkInfo?.isConnected ?: false
-        }
+        val network = connectivityManager.activeNetwork ?: return false
+        val networkCapabilities =
+            connectivityManager.getNetworkCapabilities(network) ?: return false
+        return networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+
     }
 
 

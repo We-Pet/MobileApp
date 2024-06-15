@@ -70,6 +70,4 @@ class NotificationSettingsActivity : AppCompatActivity() {
             onBackPressedDispatcher.onBackPressed()
         }
     }
-
-
 }

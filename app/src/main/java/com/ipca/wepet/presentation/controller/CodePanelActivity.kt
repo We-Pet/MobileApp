@@ -100,7 +100,7 @@ class CodePanelActivity : AppCompatActivity() {
         }
     }
 
-    fun setCodeSelected(number: Int) {
+    private fun setCodeSelected(number: Int) {
         when (number) {
             1 -> setTextViewSelected(tvCode1)
             2 -> setTextViewSelected(tvCode2)

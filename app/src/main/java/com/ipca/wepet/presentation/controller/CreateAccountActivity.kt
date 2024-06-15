@@ -11,7 +11,6 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -58,13 +57,12 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun observeUserData() {
-        userViewModel.userState.observe(this, Observer { userState ->
+        userViewModel.userState.observe(this) { userState ->
             // Handle changes in user state here
             userState.user?.let { user ->
                 // User data is not null, update UI or perform actions
                 Log.d("CreateAccountActivity", "User loaded: $user")
                 goToHomePage(emailEditText.text.toString(), passwordEditText.text.toString())
-
             }
 
             // Handle loading and error states if needed
@@ -73,7 +71,7 @@ class CreateAccountActivity : AppCompatActivity() {
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
                 Log.e("CreateAccountActivity", errorMessage)
             }
-        })
+        }
     }
 
     private fun initializeElements() {
@@ -124,7 +122,7 @@ class CreateAccountActivity : AppCompatActivity() {
             } else if (!EmailUtils.isEmailValid(email)) {
                 ToastHandler.showToast(this, R.string.error_invalid_email)
                 return@setOnClickListener
-            } else if (!password.equals(repeatPassword)) {
+            } else if (password != repeatPassword) {
                 ToastHandler.showToast(this, R.string.passwords_do_not_match)
 
                 return@setOnClickListener

@@ -2,7 +2,6 @@ package com.ipca.wepet.util
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.liveData
@@ -20,5 +19,5 @@ fun <T> Flow<T>.asLiveData(lifecycleOwner: LifecycleOwner): LiveData<T> = liveDa
 }
 
 fun <T> LiveData<T>.observe(lifecycleOwner: LifecycleOwner, observer: (T) -> Unit) {
-    observe(lifecycleOwner, Observer { observer(it) })
+    observe(lifecycleOwner) { observer(it) }
 }

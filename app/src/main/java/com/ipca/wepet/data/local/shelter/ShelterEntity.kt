@@ -1,12 +1,11 @@
 package com.ipca.wepet.data.local.shelter
 
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
 data class ShelterEntity(
-    @PrimaryKey @NonNull val id: String,
+    @PrimaryKey val id: String,
     val name: String?,
     val description: String?,
     val email: String?,

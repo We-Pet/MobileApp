@@ -1,3 +1,5 @@
+package com.ipca.wepet.presentation.fragment.event
+
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
