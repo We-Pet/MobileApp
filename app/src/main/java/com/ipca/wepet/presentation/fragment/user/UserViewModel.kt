@@ -50,17 +50,38 @@ class UserViewModel @Inject constructor(
         }
     }
 
-    fun changeUserByEmail(userId: String, image: MultipartBody.Part) {
+    fun updateUser(
+        userId: String,
+        image: MultipartBody.Part,
+        name: String?,
+        phoneNumber: String?,
+        city: String?
+    ) {
+        Log.d("UserViewModel", "Updating user:")
+        Log.d("UserViewModel", "userId: $userId")
+        Log.d("UserViewModel", "name: $name")
+        Log.d("UserViewModel", "phoneNumber: $phoneNumber")
+        Log.d("UserViewModel", "city: $city")
+
         viewModelScope.launch {
-            userRepository.changeUser(userId, image).collect { result ->
+            userRepository.updateUser(userId, image, name, phoneNumber, city).collect { result ->
                 when (result) {
                     is Resource.Success -> {
                         result.data?.let { user ->
-                            _userState.value = _userState.value?.copy(user = user)
+                            _userState.value =
+                                _userState.value?.copy(user = user, isLoading = false, error = null)
+                            Log.d("UserViewModel", "User updated successfully: $user")
                         }
                     }
 
-                    is Resource.Error -> Unit // Handle error case
+                    is Resource.Error -> {
+                        Log.e("UserViewModel", "Failed to update user: ${result.message}")
+                        _userState.value = _userState.value?.copy(
+                            error = result.message ?: "Unknown error",
+                            isLoading = false
+                        )
+                    }
+
                     is Resource.Loading -> {
                         _userState.value = _userState.value?.copy(isLoading = result.isLoading)
                     }
@@ -68,4 +89,6 @@ class UserViewModel @Inject constructor(
             }
         }
     }
+
+
 }

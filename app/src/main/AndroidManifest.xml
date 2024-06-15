@@ -103,6 +103,12 @@
             android:label="AboutUsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".presentation.controller.NotificationSettingsActivity"
+            android:label="AboutUsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.pushnotifications.PushNotificationService"
             android:exported="false">

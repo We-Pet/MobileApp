@@ -24,6 +24,7 @@ import com.ipca.wepet.R
 import com.ipca.wepet.presentation.controller.AboutUsActivity
 import com.ipca.wepet.presentation.controller.ContactUsActivity
 import com.ipca.wepet.presentation.controller.LoginActivity
+import com.ipca.wepet.presentation.controller.NotificationSettingsActivity
 import com.ipca.wepet.presentation.controller.ProfileActivity
 import com.ipca.wepet.util.EmailUtils
 import com.ipca.wepet.util.ToastHandler
@@ -99,6 +100,17 @@ class HeaderFragment : Fragment() {
                     clearAuthPreferences()
 
                     val intent = Intent(context, LoginActivity::class.java)
+                    startActivity(intent)
+                    context?.let { ToastHandler.showToast(it, R.string.logged_out) }
+
+                    true
+                }
+
+                R.id.IT_notification_settings -> {
+                    // Handle menu log out click
+                    clearAuthPreferences()
+
+                    val intent = Intent(context, NotificationSettingsActivity::class.java)
                     startActivity(intent)
                     context?.let { ToastHandler.showToast(it, R.string.logged_out) }
 

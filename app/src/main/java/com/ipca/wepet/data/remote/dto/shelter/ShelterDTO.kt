@@ -8,7 +8,7 @@ data class ShelterDTO(
     @field:Json(name = "description") val description: String?,
     @field:Json(name = "email") val email: String?,
     @field:Json(name = "birth_date") val birthDate: String?,
-    @field:Json(name = "phone_number") val phoneNumber: String?,
+    @field:Json(name = "phoneNumber") val phoneNumber: String?,
     @field:Json(name = "country") val country: String?,
     @field:Json(name = "city") val city: String?,
     @field:Json(name = "postal_code") val postalCode: String?,

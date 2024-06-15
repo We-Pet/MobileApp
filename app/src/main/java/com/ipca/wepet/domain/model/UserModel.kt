@@ -12,7 +12,7 @@ data class UserModel(
     val email: String? = null,
     @SerializedName("birth_date")
     val birthDate: String? = null,
-    @SerializedName("phone_number")
+    @SerializedName("phoneNumber")
     val phoneNumber: String? = null,
     @SerializedName("city")
     val city: String? = null,

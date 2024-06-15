@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.method.HideReturnsTransformationMethod
@@ -29,7 +30,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.ipca.wepet.R
 import com.ipca.wepet.domain.model.UserModel
 import com.ipca.wepet.presentation.fragment.user.UserViewModel
+import com.ipca.wepet.util.ToastHandler
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 
 @AndroidEntryPoint
 class ProfileActivity : AppCompatActivity() {
@@ -52,6 +58,8 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var ibPassword: ImageButton
     private lateinit var ibPhone: ImageButton
 
+    private var user: UserModel? = null
+
     private lateinit var ibShowOrHidePassword: ImageButton
 
     private val userViewModel: UserViewModel by viewModels()
@@ -63,6 +71,7 @@ class ProfileActivity : AppCompatActivity() {
         initializeElements()
         startNewActivities()
 
+        // Request camera permission if not already granted
         if (ContextCompat.checkSelfPermission(
                 this,
                 Manifest.permission.CAMERA
@@ -78,6 +87,7 @@ class ProfileActivity : AppCompatActivity() {
         extracted()
     }
 
+    // Function to get user data using shared preferences
     private fun extracted() {
         val sharedPreferences: SharedPreferences =
             getSharedPreferences("AUTH", MODE_PRIVATE)
@@ -86,6 +96,7 @@ class ProfileActivity : AppCompatActivity() {
         sharedPreferences.getString("EMAIL", "")?.let { userViewModel.getUserByEmail(it) }
     }
 
+    // Function to observe user data changes
     private fun observeUserData() {
         userViewModel.userState.observe(this, Observer { userState ->
             // Handle changes in user state here
@@ -93,6 +104,7 @@ class ProfileActivity : AppCompatActivity() {
                 // User data is not null, update UI or perform actions
                 Log.d("ProfileActivity", "User loaded: $user")
                 updateUI(user)
+                this.user = user
             }
 
             // Handle loading and error states if needed
@@ -105,8 +117,8 @@ class ProfileActivity : AppCompatActivity() {
         })
     }
 
+    // Function to update UI elements with user data
     private fun updateUI(user: UserModel) {
-        // Assuming you have UI elements like TextViews to display user information
         tvMainName.text = user.name
         etEmail.hint = user.email
         etName.hint = user.name
@@ -115,7 +127,7 @@ class ProfileActivity : AppCompatActivity() {
             etPhone.hint = phoneNumber
         }
 
-        user.address?.let { address ->
+        user.city?.let { address ->
             etAddress.hint = address
         }
 
@@ -125,7 +137,7 @@ class ProfileActivity : AppCompatActivity() {
             .into(ivMainPhoto)
     }
 
-
+    // Handle the result of permission requests
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -141,6 +153,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    // Function to initialize UI elements
     private fun initializeElements() {
         ivMainPhoto = findViewById(R.id.IV_main_photo)
         tvMainName = findViewById(R.id.TV_main_name)
@@ -159,20 +172,20 @@ class ProfileActivity : AppCompatActivity() {
         ibShowOrHidePassword = findViewById(R.id.IBTN_show_or_hide_password)
     }
 
+    // Function to set up button click listeners and other UI interactions
     private fun startNewActivities() {
         // Login action
         btnSave.setOnClickListener {
             //Call database
-            Toast.makeText(this, "Data saved successfully!", Toast.LENGTH_SHORT).show()
+            updateUser()
             storeInSharedPreferences()
+            pressAllClearButtons()
+            Toast.makeText(this, "Data saved successfully!", Toast.LENGTH_SHORT).show()
         }
 
-        ibName.setOnClickListener { etName.text.clear() }
-        ibPhone.setOnClickListener { etPhone.text.clear() }
-        ibAddress.setOnClickListener { etAddress.text.clear() }
-        ibPassword.setOnClickListener { etPassword.text.clear() }
+        clearButtons()
 
-        // button to show password
+        // Button to show or hide password
         ibShowOrHidePassword.setOnClickListener {
             if (etPassword.transformationMethod == PasswordTransformationMethod.getInstance()) {
                 etPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
@@ -189,45 +202,64 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         ivMainPhoto.setOnClickListener {
-            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            cameraLauncher.launch(cameraIntent)
+            openCamera()
         }
     }
 
+    private fun clearButtons() {
+        ibName.setOnClickListener { etName.text.clear() }
+        ibPhone.setOnClickListener { etPhone.text.clear() }
+        ibAddress.setOnClickListener { etAddress.text.clear() }
+        ibPassword.setOnClickListener { etPassword.text.clear() }
+    }
+
+    private fun pressAllClearButtons() {
+        val buttons = listOf(ibName, ibPhone, ibAddress, ibPassword)
+        buttons.forEach { button ->
+            button.performClick()
+        }
+    }
+
+
+    // Function to store user data in shared preferences
     private fun storeInSharedPreferences() {
         val sharedPreferences: SharedPreferences =
             getSharedPreferences("AUTH", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         val oldPassword: String = sharedPreferences.getString("PASSWORD", "").toString()
-        val textFieldMap: MutableMap<String, EditText> = mutableMapOf(
-            "NAME" to etName,
-            "ADDRESS" to etAddress,
-            "PASSWORD" to etPassword,
-            "PHONE" to etPhone,
-        )
 
-        for ((key, editText) in textFieldMap) {
-            editor.putString(key, editText.text.toString())
+        // Define the fields you want to save
+        val fieldsToSave = listOf("NAME", "PASSWORD")
+
+        for (field in fieldsToSave) {
+            val editText = when (field) {
+                "NAME" -> etName
+                "PASSWORD" -> etPassword
+                else -> null
+            }
+
+            // Check if editText is null or empty to skip saving
+            editText?.let {
+                val text = it.text.toString().trim()  // Trim whitespace
+                if (text.isNotEmpty()) {
+                    editor.putString(field, text)
+                }
+            }
         }
+
         editor.apply()
-        val newPassword: String = sharedPreferences.getString("PASSWORD", "").toString()
-        val email: String = sharedPreferences.getString("EMAIL", "").toString()
 
-        updatePasswordFirebase(email, newPassword, oldPassword)
+        // Check if the new password is not empty before updating Firebase
+        val newPassword: String = etPassword.text.toString().trim()
+        if (newPassword.isNotEmpty()) {
+            val email: String = sharedPreferences.getString("EMAIL", "").toString()
+            // Call the function to update the password in Firebase
+            updatePasswordFirebase(email, newPassword, oldPassword)
+        }
     }
 
-    private fun fillWithSharedPreferences() {
-        val sharedPreferences: SharedPreferences =
-            getSharedPreferences("AUTH", Context.MODE_PRIVATE)
 
-        etName.setText(sharedPreferences.getString("NAME", ""))
-        etEmail.setText(sharedPreferences.getString("EMAIL", ""))
-        etAddress.setText(sharedPreferences.getString("ADDRESS", ""))
-        etPassword.setText(sharedPreferences.getString("PASSWORD", ""))
-        etPhone.setText(sharedPreferences.getString("PHONE", ""))
-    }
-
-    // After saving data, update password into firebase
+    // After saving data, update password in Firebase
     private fun updatePasswordFirebase(email: String, password: String, oldPassword: String) {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
@@ -249,13 +281,59 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
+    // Launcher to handle camera activity result
     private var cameraLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 val photo = result.data?.extras?.get("data") as Bitmap?
-                ivMainPhoto.setImageBitmap(photo)
+                photo?.let { bitmap ->
+                    ivMainPhoto.setImageBitmap(bitmap)
+                }
             } else if (result.resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, R.string.camera_cancel, Toast.LENGTH_SHORT).show()
+                ToastHandler.showToast(this, R.string.camera_cancel)
             }
         }
+
+    // Function to upload image to server
+    private fun updateUser() {
+        if (user == null || user!!.id == null) {
+            Toast.makeText(this, R.string.error_upload_image, Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Get the bitmap from ImageView
+        val defaultBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+
+        // Get the bitmap from ImageView
+        val bitmap = (ivMainPhoto.drawable as? BitmapDrawable)?.bitmap ?: defaultBitmap
+
+        // Convert bitmap to file
+        val file = convertBitmapToFile(bitmap, "profile_image.jpg")
+        val requestBody = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+        val multipartBody = MultipartBody.Part.createFormData("image", file.name, requestBody)
+
+        // Call the ViewModel's method to upload the image
+        userViewModel.updateUser(
+            user!!.id!!,
+            multipartBody,
+            etName.text.toString(),
+            etPhone.text.toString(),
+            etAddress.text.toString()
+        )
+    }
+
+    private fun convertBitmapToFile(bitmap: Bitmap, fileName: String): File {
+        // Create a file to write the bitmap data
+        val file = File(cacheDir, fileName)
+        file.outputStream().use { outputStream ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        }
+        return file
+    }
+
+    // Function to open the camera
+    private fun openCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraLauncher.launch(cameraIntent)
+    }
 }
