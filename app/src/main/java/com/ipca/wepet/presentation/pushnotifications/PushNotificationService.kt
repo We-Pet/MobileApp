@@ -2,70 +2,51 @@ package com.ipca.wepet.presentation.pushnotifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
-import android.content.Intent
 import android.os.Build
-import android.widget.RemoteViews
+import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.ipca.wepet.R
-import com.ipca.wepet.presentation.controller.HomePageActivity
 
 class PushNotificationService : FirebaseMessagingService() {
 
-
     // Override onMessageReceived() method to extract the title body from the message passed in FCM
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        if (remoteMessage.getNotification() != null) {
-            remoteMessage.getNotification()!!.title?.let {
-                remoteMessage.getNotification()!!.body?.let { it1 ->
-                    showNotification(
-                        it, it1
-                    )
-                }
-            }
+        super.onMessageReceived(remoteMessage)
+
+        Log.d("MyFirebaseMsgService", "From: ${remoteMessage.from}")
+
+        remoteMessage.notification?.let {
+            Log.d("MyFirebaseMsgService", "Notification Message Body: ${it.body}")
         }
     }
 
-    private fun getCustomDesign(title: String, message: String): RemoteViews {
-        val remoteViews = RemoteViews(packageName, R.layout.notification)
-        remoteViews.setTextViewText(R.id.tittle, title)
-        remoteViews.setTextViewText(R.id.description, message)
-        remoteViews.setImageViewResource(R.id.app_logo, R.drawable.main_logo)
-        return remoteViews
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        Log.d("MyFirebaseMsgService", "Refreshed token: $token")
     }
 
-    private fun showNotification(title: String, message: String) {
-        val intent = Intent(this, HomePageActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        }
-
-        val channelId = "notification_channel"
-        val pendingIntent = PendingIntent.getActivity(
-            this, 0, intent, PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        val builder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.main_icon)
+    private fun showNotification(title: String?, message: String?) {
+        val notificationBuilder = NotificationCompat.Builder(this, "channel_id")
+            .setSmallIcon(R.drawable.main_logo)
+            .setContentTitle(title)
+            .setContentText(message)
             .setAutoCancel(true)
-            .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
-            .setOnlyAlertOnce(true)
-            .setContentIntent(pendingIntent)
-            .setContent(getCustomDesign(title, message))
 
-        val notificationManager = ContextCompat.getSystemService(
-            this, NotificationManager::class.java
-        ) as NotificationManager
+        val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationChannel = NotificationChannel(
-                channelId, "web_app", NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(
+                "channel_id",
+                "Channel Name",
+                NotificationManager.IMPORTANCE_DEFAULT
             )
-            notificationManager.createNotificationChannel(notificationChannel)
+            notificationManager.createNotificationChannel(channel)
         }
 
-        notificationManager.notify(0, builder.build())
+        var notificationId = 0
+
+        notificationManager.notify(notificationId++, notificationBuilder.build())
     }
 }
