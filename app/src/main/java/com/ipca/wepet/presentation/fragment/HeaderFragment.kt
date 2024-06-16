@@ -24,6 +24,7 @@ import com.ipca.wepet.R
 import com.ipca.wepet.presentation.controller.AboutUsActivity
 import com.ipca.wepet.presentation.controller.ContactUsActivity
 import com.ipca.wepet.presentation.controller.LoginActivity
+import com.ipca.wepet.presentation.controller.NotificationSettingsActivity
 import com.ipca.wepet.presentation.controller.ProfileActivity
 import com.ipca.wepet.util.EmailUtils
 import com.ipca.wepet.util.ToastHandler
@@ -47,7 +48,7 @@ class HeaderFragment : Fragment() {
 
     private fun initializeElements(view: View) {
         ibHamburger = view.findViewById(R.id.IB_hamburger)
-        sharedPreferences = requireActivity().getSharedPreferences("AUTH", Context.MODE_PRIVATE )
+        sharedPreferences = requireActivity().getSharedPreferences("AUTH", Context.MODE_PRIVATE)
     }
 
     private fun setListeners() {
@@ -105,6 +106,14 @@ class HeaderFragment : Fragment() {
                     true
                 }
 
+                R.id.IT_notification_settings -> {
+                    // Handle menu log out click
+                    val intent = Intent(context, NotificationSettingsActivity::class.java)
+                    startActivity(intent)
+
+                    true
+                }
+
                 else -> false
             }
         }
@@ -143,7 +152,10 @@ class HeaderFragment : Fragment() {
         dialog.window?.setGravity(Gravity.BOTTOM)
     }
 
-    private fun checkEmailAndPasswordFields(emailEditText: EditText, passwordEditText: EditText): Boolean {
+    private fun checkEmailAndPasswordFields(
+        emailEditText: EditText,
+        passwordEditText: EditText
+    ): Boolean {
         val email = emailEditText.text.toString()
         val password = passwordEditText.text.toString()
 
@@ -156,10 +168,10 @@ class HeaderFragment : Fragment() {
         } else if (!EmailUtils.isEmailValid(email) || email != sharedPreferenceEMAIL) {
             ToastHandler.showToast(requireContext(), R.string.error_invalid_email)
             return false
-        } else if (password.isBlank()){
+        } else if (password.isBlank()) {
             ToastHandler.showToast(requireContext(), R.string.error_empty_password)
             return false
-        } else if (password != sharedPreferencesPASSWORD){
+        } else if (password != sharedPreferencesPASSWORD) {
             ToastHandler.showToast(requireContext(), R.string.error_invalid_password)
             return false
         }
@@ -189,12 +201,12 @@ class HeaderFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun deleteAccountFromFirebase(){
+    private fun deleteAccountFromFirebase() {
         val user = FirebaseAuth.getInstance().currentUser
-        user?.delete()?.addOnSuccessListener{
+        user?.delete()?.addOnSuccessListener {
             Log.d("DELETE ACCOUNT", "User account deleted.")
-        }?.addOnFailureListener {
-            e -> Log.e("DELETE ACCOUNT", "Error deleting user account", e)
+        }?.addOnFailureListener { e ->
+            Log.e("DELETE ACCOUNT", "Error deleting user account", e)
         }
     }
 

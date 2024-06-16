@@ -1,6 +1,5 @@
 package com.ipca.wepet.presentation.fragment.event
 
-import EventListItem
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn

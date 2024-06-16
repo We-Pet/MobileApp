@@ -24,6 +24,11 @@
         android:title="@string/support" />
 
     <item
+        android:id="@+id/IT_notification_settings"
+        android:fontFamily="@font/comfortaa_light"
+        android:title="@string/settings" />
+
+    <item
         android:id="@+id/IT_log_out"
         android:fontFamily="@font/comfortaa_light"
         android:title="@string/log_out" />

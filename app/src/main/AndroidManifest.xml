@@ -33,6 +33,10 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/black" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDM9lbjkATmlMpH4socA7CyLJxzCXeZ_xg" />
+
         <activity
             android:name=".presentation.controller.GoogleMapsActivity"
             android:exported="false"
@@ -96,6 +100,12 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".presentation.controller.CodePanelActivity"
+            android:label="AboutUsActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".presentation.controller.NotificationSettingsActivity"
             android:label="AboutUsActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />

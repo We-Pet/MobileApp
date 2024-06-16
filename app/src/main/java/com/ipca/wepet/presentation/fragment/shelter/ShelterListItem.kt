@@ -1,3 +1,5 @@
+package com.ipca.wepet.presentation.fragment.shelter
+
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -15,7 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberImagePainter
+import coil.compose.rememberAsyncImagePainter
 import com.ipca.wepet.R
 import com.ipca.wepet.domain.model.ShelterModel
 import com.ipca.wepet.presentation.controller.ShelterActivity
@@ -37,7 +39,7 @@ fun ShelterListItem(shelter: ShelterModel, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val painter = if (shelter.profileImageUrl != null) {
-            rememberImagePainter(shelter.profileImageUrl)
+            rememberAsyncImagePainter(shelter.profileImageUrl)
         } else {
             painterResource(id = R.drawable.unknown_gender)
         }

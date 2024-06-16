@@ -6,10 +6,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.ipca.wepet.R
+import com.ipca.wepet.util.ToastHandler
 
 private const val MAX_DIGITS = 6
 
@@ -89,18 +89,18 @@ class CodePanelActivity : AppCompatActivity() {
         if (enteredCode.length == MAX_DIGITS) {
             if (pin == enteredCode.toString()) {
                 // Correct PIN entered
-                Toast.makeText(this, "Correct PIN entered", Toast.LENGTH_SHORT).show()
+                ToastHandler.showToast(this, R.string.correct_pin_entered)
                 val intent = Intent(this, HomePageActivity::class.java)
                 startActivity(intent)
             } else {
                 // Incorrect PIN entered
-                Toast.makeText(this, "Incorrect PIN entered", Toast.LENGTH_SHORT).show()
+                ToastHandler.showToast(this, R.string.incorrect_pin_entered)
                 ibClearCode.callOnClick()
             }
         }
     }
 
-    fun setCodeSelected(number: Int) {
+    private fun setCodeSelected(number: Int) {
         when (number) {
             1 -> setTextViewSelected(tvCode1)
             2 -> setTextViewSelected(tvCode2)

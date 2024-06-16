@@ -192,7 +192,7 @@
         android:id="@+id/BTN_login"
         android:layout_width="190dp"
         android:layout_height="50dp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/main_rounded_button"
         android:fontFamily="@font/comfortaa_regular"
         android:text="@string/login_button"
@@ -200,6 +200,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CTL_pin" />
+
+
+    <Button
+        android:id="@+id/BTN_create_account"
+        android:layout_width="190dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/main_rounded_button"
+        android:fontFamily="@font/comfortaa_regular"
+        android:text="@string/create_account"
+        android:textColor="@color/light_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BTN_login" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

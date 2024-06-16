@@ -17,7 +17,7 @@ data class AnimalDTO(
     @field:Json(name = "createdAt") val createdAt: String,
     @field:Json(name = "latitude") val latitude: String?,
     @field:Json(name = "longitude") val longitude: String?,
-    @field:Json(name = "profileImage")  val profileImage: String?,
+    @field:Json(name = "profileImage") val profileImage: String?,
     @field:Json(name = "profileImageUrl") val profileImageUrl: String?,
     @field:Json(name = "status") val status: String?,
     @field:Json(name = "__v") val deleted: Int

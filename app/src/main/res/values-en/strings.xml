@@ -20,6 +20,7 @@
     <string name="code">Code</string>
     <string name="animals">Animals</string>
     <string name="camera_cancel">Camera operation canceled.</string>
+    <string name="error_upload_image">Error uploading image</string>
     <string name="shelter">Shelter</string>
     <string name="events">Events</string>
     <string name="search">Search</string>
@@ -74,4 +75,27 @@
     <string name="no_internet">No internet connection</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="error_invalid_password">Invalid Password</string>
+    <string name="city">City</string>
+    <string name="settings">Settings</string>
+    <string name="security">Security</string>
+    <string name="social">Social</string>
+    <string name="market">Market</string>
+    <string name="security_alerts_such_as_logging_into_other_devices">Security alerts such as logging into other devices.</string>
+    <string name="someone_followed_her_someone_responded_to_the_post_etc">Someone followed her, someone responded to the post, etc.</string>
+    <string name="alerts_about_ads_that_interest_you">Alerts about ads that interest you..</string>
+    <string name="alerts_about_new_events_events_you_have_signed_up_for">Alerts about new events, events you have signed up for.</string>
+    <string name="alerts_about_your_animals_such_as_alerts_about_the_next_vaccination">Alerts about your animals, such as alerts about the next vaccination.</string>
+    <string name="visit_saved">Visit saved successfully!</string>
+    <string name="shelter_saved">Shelter saved successfully!</string>
+    <string name="contacted_successfully">Contacted successfully!</string>
+    <string name="correct_pin_entered">Correct PIN entered!</string>
+    <string name="liked_successfully">Liked successfully!</string>
+    <string name="animal_successfully">Animal successfully!</string>
+    <string name="password_reset">Password reset.</string>
+    <string name="incorrect_pin_entered">Incorrect PIN entered</string>
+    <string name="authentication_failed">Authentication failed.</string>
+    <string name="authentication_successful">Authentication successful.</string>
+    <string name="camera_permission_granted">Camera permission granted</string>
+    <string name="camera_permission_denied">Camera permission denied</string>
+    <string name="data_saved_successfully">Data saved successfully!</string>
 </resources>

@@ -1,12 +1,11 @@
 package com.ipca.wepet.data.local.animal
 
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
 data class AnimalEntity(
-    @PrimaryKey @NonNull val id: String,
+    @PrimaryKey val id: String,
     val name: String?,
     val birthDate: String?,
     val description: String?,

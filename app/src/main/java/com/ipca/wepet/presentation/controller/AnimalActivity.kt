@@ -1,12 +1,10 @@
 package com.ipca.wepet.presentation.controller
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
@@ -14,7 +12,6 @@ import com.ipca.wepet.R
 import com.ipca.wepet.domain.model.AnimalModel
 import com.ipca.wepet.presentation.fragment.FooterFragment
 import com.ipca.wepet.util.ToastHandler
-import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -56,20 +53,6 @@ class AnimalActivity : AppCompatActivity() {
             showAnimalDetails(animal)
         }
 
-    }
-
-    inline fun <reified T : Serializable> Bundle.serializable(key: String): T? = when {
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> getSerializable(key, T::class.java)
-        else -> @Suppress("DEPRECATION") getSerializable(key) as? T
-    }
-
-    inline fun <reified T : Serializable> Intent.serializable(key: String): T? = when {
-        Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> getSerializableExtra(
-            key,
-            T::class.java
-        )
-
-        else -> @Suppress("DEPRECATION") getSerializableExtra(key) as? T
     }
 
     private fun initializeElements() {
@@ -129,17 +112,17 @@ class AnimalActivity : AppCompatActivity() {
 
         visitCard.setOnClickListener {
             //Call visit
-            Toast.makeText(this, "Visit saved successfully!", Toast.LENGTH_SHORT).show()
+            ToastHandler.showToast(this, R.string.visit_saved)
         }
 
         shelterCard.setOnClickListener {
             //Call shelter
-            Toast.makeText(this, "Shelter saved successfully!", Toast.LENGTH_SHORT).show()
+            ToastHandler.showToast(this, R.string.shelter_saved)
         }
 
         ibLike.setOnClickListener {
             //Call action for like
-            Toast.makeText(this, "Liked successfully!", Toast.LENGTH_SHORT).show()
+            ToastHandler.showToast(this, R.string.liked_successfully)
         }
 
         // Back action

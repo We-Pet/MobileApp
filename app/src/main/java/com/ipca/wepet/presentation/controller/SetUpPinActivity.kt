@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -21,11 +20,11 @@ import com.ipca.wepet.util.ToastHandler
 
 class SetUpPinActivity : AppCompatActivity() {
     private lateinit var btnLogin: Button
+    private lateinit var btnCreateAccount: Button
 
     private lateinit var btnClearTextEmail: ImageButton
     private lateinit var btnClearTextPassword: ImageButton
     private lateinit var btnClearTextPin: ImageButton
-
 
     private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
@@ -50,6 +49,7 @@ class SetUpPinActivity : AppCompatActivity() {
 
     private fun initializeElements() {
         btnLogin = findViewById(R.id.BTN_login)
+        btnCreateAccount = findViewById(R.id.BTN_create_account)
 
         btnClearTextEmail = findViewById(R.id.IBTN_clear_button_email)
         btnClearTextPassword = findViewById(R.id.IBTN_clear_button_password)
@@ -78,6 +78,11 @@ class SetUpPinActivity : AppCompatActivity() {
         // Back action
         btnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+        // Create account action
+        btnCreateAccount.setOnClickListener {
+            val intent = Intent(this, CreateAccountActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -112,11 +117,7 @@ class SetUpPinActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("AUTH", "signInWithEmail:success")
                     //val user = auth.currentUser
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication successful.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    ToastHandler.showToast(baseContext, R.string.authentication_successful)
 
                     // Save shared preferences
                     clearOldPin()
@@ -127,11 +128,8 @@ class SetUpPinActivity : AppCompatActivity() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("AUTH", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    ToastHandler.showToast(baseContext, R.string.authentication_failed)
+
                 }
             }
     }

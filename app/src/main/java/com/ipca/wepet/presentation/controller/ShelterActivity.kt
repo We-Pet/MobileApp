@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.bumptech.glide.Glide
@@ -102,17 +101,17 @@ class ShelterActivity : AppCompatActivity() {
 
         contactCard.setOnClickListener {
             //Call contact
-            Toast.makeText(this, "Contacted successfully!", Toast.LENGTH_SHORT).show()
+            ToastHandler.showToast(this, R.string.correct_pin_entered)
         }
 
         animalCard.setOnClickListener {
             //Call animal list with filters
-            Toast.makeText(this, "Animal successfully!", Toast.LENGTH_SHORT).show()
+            ToastHandler.showToast(this, R.string.animal_successfully)
         }
 
         ibLike.setOnClickListener {
             //Call action for like
-            Toast.makeText(this, "Liked successfully!", Toast.LENGTH_SHORT).show()
+            ToastHandler.showToast(this, R.string.liked_successfully)
         }
 
         // Back action

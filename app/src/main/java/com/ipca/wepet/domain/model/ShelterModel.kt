@@ -14,7 +14,7 @@ data class ShelterModel(
     val email: String?,
     @SerializedName("birth_date")
     val birthDate: String?,
-    @SerializedName("phone_number")
+    @SerializedName("phoneNumber")
     val phoneNumber: String?,
     @SerializedName("country")
     val country: String?,

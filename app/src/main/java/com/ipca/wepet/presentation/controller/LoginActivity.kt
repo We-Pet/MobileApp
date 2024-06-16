@@ -20,7 +20,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
@@ -89,7 +88,7 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth
         fireBaseUtils = FirebaseUtils(auth)
 
-        sharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE )
+        sharedPreferences = getSharedPreferences("AUTH", Context.MODE_PRIVATE)
     }
 
     private fun startNewActivities() {
@@ -101,7 +100,8 @@ class LoginActivity : AppCompatActivity() {
 
         btnShowOrHidePassword.setOnClickListener {
             if (passwordTextField.transformationMethod == PasswordTransformationMethod.getInstance()) {
-                passwordTextField.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                passwordTextField.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
                 btnShowOrHidePassword.setImageResource(R.drawable.hide_password)
             } else {
                 passwordTextField.transformationMethod = PasswordTransformationMethod.getInstance()
@@ -162,22 +162,14 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d("AUTH", "signInWithEmail:success")
                     //val user = auth.currentUser
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication successful.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    ToastHandler.showToast(baseContext, R.string.authentication_successful)
                     setSharedPreferences(email, password)
                     val intent = Intent(this, HomePageActivity::class.java)
                     startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("AUTH", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext,
-                        "Authentication failed.",
-                        Toast.LENGTH_SHORT,
-                    ).show()
+                    ToastHandler.showToast(baseContext, R.string.authentication_failed)
                 }
             }
     }
@@ -187,7 +179,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun setSharedPreferences(email: String, password: String){
+    private fun setSharedPreferences(email: String, password: String) {
         val editor = sharedPreferences.edit()
         editor.putString("EMAIL", email)
         editor.putString("PASSWORD", password)
@@ -285,7 +277,7 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             } else {
                 dialog.dismiss()
-                Toast.makeText(this, "Password reset", Toast.LENGTH_SHORT).show()
+                ToastHandler.showToast(this, R.string.password_reset)
             }
         }
 

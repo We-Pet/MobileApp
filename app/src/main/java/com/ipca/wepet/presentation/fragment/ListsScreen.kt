@@ -18,9 +18,9 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -61,6 +61,8 @@ fun ListScreen(
     val isConnected by rememberConnectivityState()
     val context = LocalContext.current
 
+    // Track if the list has been initially loaded
+    var hasLoadedInitially by remember { mutableStateOf(false) }
 
     val isRefreshing = if (isConnected) {
         when (selectedList) {
@@ -74,22 +76,17 @@ fun ListScreen(
 
     val swipeRefreshState = rememberSwipeRefreshState(isRefreshing)
 
-    LaunchedEffect(Unit) {
-        // Initial load when the screen is first composed
-        if (isConnected) {
-
-            animalViewModel.onEvent(AnimalListEvent.Refresh)
-        } else {
+    LaunchedEffect(isConnected) {
+        // Initial load when the screen is first composed and connectivity is available
+        if (isConnected && !hasLoadedInitially && !isRefreshing) {
+            hasLoadedInitially = true
+            when (selectedList) {
+                0 -> animalViewModel.onEvent(AnimalListEvent.Refresh)
+                1 -> shelterViewModel.onEvent(ShelterListEvent.Refresh)
+                else -> eventViewModel.onEvent(EventListEvent.Refresh)
+            }
+        } else if (!isConnected) {
             ToastHandler.showToast(context, R.string.no_internet)
-        }
-    }
-
-    SideEffect {
-        // Reload the list whenever selectedList changes
-        when (selectedList) {
-            0 -> animalViewModel.onEvent(AnimalListEvent.Refresh)
-            1 -> shelterViewModel.onEvent(ShelterListEvent.Refresh)
-            2 -> eventViewModel.onEvent(EventListEvent.Refresh)
         }
     }
 
@@ -173,7 +170,7 @@ fun ListScreen(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Image(
-                                painter = painterResource(id = if (selectedList == 2) R.drawable.tab_animals_icon_blue else R.drawable.tab_animal_icon_black),
+                                painter = painterResource(id = if (selectedList == 2) R.drawable.tab_events_icon_blue else R.drawable.tab_events_icon_black),
                                 contentDescription = stringResource(id = R.string.tab_for_events),
                                 modifier = Modifier.size(24.dp)
                             )
@@ -245,8 +242,3 @@ fun ListScreen(
         }
     }
 }
-
-
-
-
-

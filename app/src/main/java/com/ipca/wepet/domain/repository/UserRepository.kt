@@ -10,8 +10,18 @@ interface UserRepository {
         email: String
     ): Flow<Resource<UserModel>>
 
-    suspend fun changeUser(
+    suspend fun updateUser(
         userId: String,
-        image: MultipartBody.Part
+        image: MultipartBody.Part,
+        name: String?,
+        phoneNumber: String?,
+        city: String?
+    ): Flow<Resource<UserModel>>
+
+    suspend fun createUser(
+        name: String,
+        email: String,
+        phoneNumber: String?,
+        city: String?
     ): Flow<Resource<UserModel>>
 }

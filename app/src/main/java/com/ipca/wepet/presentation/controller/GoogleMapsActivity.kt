@@ -33,7 +33,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
-            title = "$name"
+            title = name
             setDisplayHomeAsUpEnabled(true)
         }
 
